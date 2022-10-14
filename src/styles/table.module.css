@@ -1,5 +1,9 @@
 /* 잘못함. 간섭 일어나지 않게 css에 apply하는 것은 맨 상위 css에서 했어야 했다. */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .studentsTableContainer {
     @apply overflow-x-auto shadow rounded;
 }
@@ -27,9 +31,7 @@ tr:not(:last-child) {
 
 button {
     @apply text-sm px-3 py-4 bg-violet-500 rounded cursor-pointer border border-violet-500 shadow text-white hover:bg-violet-600 active:shadow-none outline-none disabled:opacity-80 cursor-not-allowed;
-    background: #656cce !important;
-    padding: 0.75rem 1rem !important;
-    color: white !important;
+
 }
 
 td {
@@ -61,6 +63,6 @@ td {
 }
 
 .layoutSwitchContainer {
-    @apply flex items-center justify-end mb-5;
+    @apply flex items-center justify-end mb-5 w-20;
 
 }

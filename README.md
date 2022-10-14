@@ -4,6 +4,20 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 10/06 작성
 
+10/14 test용 테이블 작성
+
+
+# 실행법
+
+yarn 혹은 npm i
+
+이후 
+
+yarn dev 혹은 npm dev로 실행합니다.
+
+기본 주소는 localhost:5173입니다.
+
+
 ```
 # npm 6.x
 npm create vite@latest my-vue-app --template react
