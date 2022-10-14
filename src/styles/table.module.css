@@ -1,0 +1,66 @@
+/* 잘못함. 간섭 일어나지 않게 css에 apply하는 것은 맨 상위 css에서 했어야 했다. */
+
+.studentsTableContainer {
+    @apply overflow-x-auto shadow rounded;
+}
+
+.studentsTable {
+    @apply border-spacing-0 capitalize border-collapse bg-white w-full min-w-full;
+}
+
+.studentTableHead {
+    @apply bg-blue-300;
+}
+
+.studentTableTR .studentTableTD {
+    @apply text-left align-baseline p-4;
+}
+
+.studentTableBody {
+    @apply border border-gray-700;
+}
+
+tr:not(:last-child) {
+    border-bottom-style: groove;
+    @apply border-gray-700 border;
+}
+
+button {
+    @apply text-sm px-3 py-4 bg-violet-500 rounded cursor-pointer border border-violet-500 shadow text-white hover:bg-violet-600 active:shadow-none outline-none disabled:opacity-80 cursor-not-allowed;
+    background: #656cce !important;
+    padding: 0.75rem 1rem !important;
+    color: white !important;
+}
+
+td {
+    @apply p-4;
+}
+
+.studentGridContainer {
+}
+
+.studentCardList {
+    @apply grid gap-1;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+.studentCard {
+    @apply flex flex-col items-center justify-center mb-4 bg-white shadow px-3 py-4 border;
+}
+
+
+
+.studentName {
+    @apply w-56;
+}
+
+@media only screen and (max-width: 400px) {
+    .studentName {
+        @apply w-48;
+    }
+}
+
+.layoutSwitchContainer {
+    @apply flex items-center justify-end mb-5;
+
+}

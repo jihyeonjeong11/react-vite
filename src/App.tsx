@@ -2,12 +2,14 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
+import TableRoot from "@/components/common/table/container/TableRoot";
+
 function App() {
     const [count, setCount] = useState(0);
-
     return (
         <div className="App">
-            <div>
+            <main>
+                {/* <div>
                 <a href="https://vitejs.dev" target="_blank">
                     <img src="/vite.svg" className="logo" alt="Vite logo" />
                 </a>
@@ -23,7 +25,9 @@ function App() {
                 </p>
             </div>
             <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-            <h1 className="text-3xl font-bold underline">Hello world!</h1>
+            <h1 className="text-3xl font-bold underline">My shamelessly pirated hooks</h1> */}
+                <TableRoot />
+            </main>
         </div>
     );
 }
