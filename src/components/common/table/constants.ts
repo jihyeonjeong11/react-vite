@@ -1,6 +1,6 @@
 interface staticProps {
     [key: string]: string[];
-}
+};
 
 export const staticState: staticProps = {
     test: [

@@ -1,14 +1,10 @@
 import React from "react";
 
-import { BsTable, BsGridFill } from "react-icons/bs";
-
 import { staticState } from "../constants";
 import { Table } from "../components/TableCompound";
 
 import { useFetch } from "@/components/common/hooks/useFetch";
 import { useCheckBoxes } from "../hooks/useCheckboxes";
-
-import styles from "@/styles/table.module.css";
 
 const staticHead = "test";
 
