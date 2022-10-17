@@ -1,9 +1,6 @@
 /* 잘못함. 간섭 일어나지 않게 css에 apply하는 것은 맨 상위 css에서 했어야 했다. */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+/* 
 .studentsTableContainer {
     @apply overflow-x-auto shadow rounded;
 }
@@ -65,4 +62,4 @@ td {
 .layoutSwitchContainer {
     @apply flex items-center justify-end mb-5 w-20;
 
-}
+} */

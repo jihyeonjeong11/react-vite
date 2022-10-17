@@ -1,34 +1,19 @@
-import type { ReactNode } from "react";
 import React from "react";
 
 import { BsTable, BsGridFill } from "react-icons/bs";
 
+import { staticState } from "../constants";
+import { Table } from "../components/TableCompound";
+
 import { useFetch } from "@/components/common/hooks/useFetch";
+import { useCheckBoxes } from "../hooks/useCheckboxes";
 
-import LayoutSwitch from "../components/LayoutSwitch";
-import StudentsTable from "../components/StudentTable";
-import StudentsGrid from "../components/StudentGrid";
+import styles from "@/styles/table.module.css";
 
-interface LayoutOptions {
-    table: string;
-    grid: string;
-}
-
-export const LAYOUT_OPTIONS: Readonly<LayoutOptions> = {
-    table: "table",
-    grid: "grid",
-};
+const staticHead = "test";
 
 export interface UserData {
-    id: number;
-    name: string;
-    username: string;
-    company: Company;
-}
-
-interface Company {
-    id: number;
-    name: string;
+    [key: string]: string;
 }
 
 export interface UserListProps {
@@ -43,31 +28,73 @@ const TableWrapper = () => {
         loading,
     } = useFetch<UserData[]>("/users");
 
+    const checkboxes = useCheckBoxes(users && users.length ? users.length : 0);
     if (error) {
         return <h2>{error}</h2>;
     }
 
-
-
     return (
         <React.Fragment>
-            <h1>학생</h1>
             {loading && <h3>학생 정보 불러오는 중</h3>}
-            {users !== null ? (
-                <LayoutSwitch defaultLayout={LAYOUT_OPTIONS.grid}>
-                    <LayoutSwitch.Options>
-                        <LayoutSwitch.Button layoutPreference={LAYOUT_OPTIONS.table} title="Table Layout">
-                            <BsTable />
-                        </LayoutSwitch.Button>
-                        <LayoutSwitch.Button layoutPreference={LAYOUT_OPTIONS.grid} title="Grid Layout">
-                            <BsGridFill />
-                        </LayoutSwitch.Button>
-                    </LayoutSwitch.Options>
-                    <LayoutSwitch.Content>
-                        <StudentsGrid activeLayout={LAYOUT_OPTIONS.table} users={users} />
-                        <StudentsTable activeLayout={LAYOUT_OPTIONS.grid} users={users} />
-                    </LayoutSwitch.Content>
-                </LayoutSwitch>
+            {users !== null && checkboxes.checkArr.length ? (
+                <div className="h-100 mx-auto container ">
+                    <h1 className="text-3xl py-4 border-b mb-10">학생</h1>
+                    <div className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
+                        <Table>
+                            <Table.Head>
+                                <Table.TR>
+                                    <Table.TH>
+                                        <label className="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+                                            <input
+                                                readOnly
+                                                checked={checkboxes.isAllChecked}
+                                                type="checkbox"
+                                                className="form-checkbox focus:outline-none focus:shadow-outline"
+                                                name=""
+                                                id="all"
+                                                onClick={checkboxes.onClickAll}
+                                            />
+                                        </label>
+                                    </Table.TH>
+                                    {staticState[staticHead].map((t, i) => (
+                                        <Table.TH key={"th" + i}>{t}</Table.TH>
+                                    ))}
+                                </Table.TR>
+                            </Table.Head>
+                            <Table.TB>
+                                {users.map((u, i) => {
+                                    const val = checkboxes.checkArr[i];
+                                    return (
+                                        <Table.TR key={"user" + i} style={{ background: val ? "antiquewhite" : "white" }}>
+                                            <Table.TD>
+                                                <label className="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        value={val.toString()}
+                                                        onChange={(e) => checkboxes.onCheck(e, i)}
+                                                        checked={val}
+                                                        className="form-checkbox focus:outline-none focus:shadow-outline"
+                                                        name=""
+                                                    />
+                                                </label>
+                                            </Table.TD>
+                                            <Table.TD>{u.id}</Table.TD>
+                                            <Table.TD>{u.name}</Table.TD>
+                                            <Table.TD>{u.phone}</Table.TD>
+                                            <Table.TD>{u.email}</Table.TD>
+                                            <Table.TD>{u.username}</Table.TD>
+                                            <Table.TD>{u.website}</Table.TD>
+                                            <Table.TD>{u.website}</Table.TD>
+                                            <Table.TD>{u.website}</Table.TD>
+                                            <Table.TD>{u.website}</Table.TD>
+                                            <Table.TD>{u.website}</Table.TD>
+                                        </Table.TR>
+                                    );
+                                })}
+                            </Table.TB>
+                        </Table>
+                    </div>
+                </div>
             ) : (
                 <h3>학생 정보가 없습니다.</h3>
             )}
@@ -76,19 +103,3 @@ const TableWrapper = () => {
 };
 
 export default TableWrapper;
-{
-    /* <div className="flex flex-col">
-        //     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        //         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        //             <div className="overflow-hidden">
-        //                 <table className="min-w-full">
-        //                     {/* headComp */
-}
-//                     <TableHead />
-//                     {/* bodyComp */}
-//                     <TableBody />
-//                 </table>
-//             </div>
-//         </div>
-//     </div>
-// </div> */}
