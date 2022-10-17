@@ -47,6 +47,8 @@ const TableWrapper = () => {
         return <h2>{error}</h2>;
     }
 
+
+
     return (
         <React.Fragment>
             <h1>학생</h1>
