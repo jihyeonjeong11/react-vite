@@ -23,7 +23,7 @@ const TableWrapper = () => {
         error,
         loading,
     } = useFetch<UserData[]>("/users");
-
+    
     const checkboxes = useCheckBoxes(users && users.length ? users.length : 0);
     if (error) {
         return <h2>{error}</h2>;
