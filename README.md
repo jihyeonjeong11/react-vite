@@ -34,8 +34,32 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 ### 해야할것
 
-테이블 전체를 components compounds 패턴으로 바꿀 것. 스위치는 그냥 지워도됨.
+
 
 ### 잘못한것
 
+
+
+### 작업한 것 
+
+10/17
+테이블 전체를 components compounds 패턴으로 바꿀 것. 스위치는 그냥 지워도됨. 
+
+1/12
 module.css 에서 tailwind apply하여 css 간섭일어남. 나중에 인라인으로 쓰도록 바꿀 것.
+
+10/06 yarnv2로 이전하기
+
+https://yarnpkg.com/getting-started/migration#switching-to-plugnplay
+
+여기서 보고 ts 세팅까지를 하면 되겠다.
+
+Run npm install -g yarn to update the global yarn version to latest v1
+Go into your project directory
+Run yarn set version berry to enable v2 (cf Install for more details)
+If you used .npmrc or .yarnrc, you'll need to turn them into the new format (see also 1, 2)
+Add nodeLinker: node-modules in your .yarnrc.yml file
+Commit the changes so far (yarn-X.Y.Z.js, .yarnrc.yml, ...)
+Run yarn install to migrate the lockfile
+Take a look at this article to see what should be gitignored
+Commit everything remaining
