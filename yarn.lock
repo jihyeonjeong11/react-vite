@@ -1872,6 +1872,7 @@ __metadata:
     react-dom: ^18.2.0
     react-icons: ^4.4.0
     react-router-dom: ^6.4.2
+    rollup-plugin-analyzer: ^4.0.0
     sort-by: ^1.2.0
     tailwindcss: ^3.1.8
     typescript: ^4.6.4
@@ -3413,6 +3414,13 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-analyzer@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "rollup-plugin-analyzer@npm:4.0.0"
+  checksum: 72f794f79efe4f620674a48949be9f64dc3cbf601c52ff90ae7cbeaacb604b86bb34321695d0f8f320e5c0b47880022849d92c51d231e1b32c6757a2c627be5e
   languageName: node
   linkType: hard
 

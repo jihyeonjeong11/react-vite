@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 8000"
   },
   "dependencies": {
     "immer": "^9.0.15",
@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.2",
+    "rollup-plugin-analyzer": "^4.0.0",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
