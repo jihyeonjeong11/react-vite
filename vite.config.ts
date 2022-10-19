@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import * as path from "path";
 
 import analyze from "rollup-plugin-analyzer";
+import { visualizer } from "rollup-plugin-visualizer";
 
 //https://vitejs.dev/config/shared-options.html
 //https://github.com/vitejs/vite/tree/main/packages/plugin-react
@@ -34,7 +35,7 @@ export default defineConfig({
       babel: {
         
       }
-    })],
+    }), visualizer()],
     resolve: {
         alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
     },
