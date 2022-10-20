@@ -1,15 +1,20 @@
 import "./App.css";
-
-import TableRoot from "@/components/common/table/container/TableRoot";
-import ErrorBoundary from "./components/error/ErrorBoundary";
+import { Link } from "react-router-dom";
 
 function App() {
     return (
-        <div className="App">
-            <main>
-                <ErrorBoundary>
-                    <TableRoot />
-                </ErrorBoundary>
+        <div className="App flex h-screen items-center justify-center">
+            <main className="flex flex-col items-center">
+                <h1>multi-step registration form</h1>
+                <div className="mb-10">로그인 화면 작성예정</div>
+
+                <button>
+                    <Link className="border rounded" to={"register"}>시험 등록</Link>
+                </button>
+                <div className="m-3" />
+                <button>
+                    <Link className="border rounded" to={"table"}>예시 테이블</Link>
+                </button>
             </main>
         </div>
     );
