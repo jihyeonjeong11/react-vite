@@ -43,9 +43,10 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 ### 해야할것
 
-[]react router dom v6 사용
+[x]react router dom v6 사용
 []react multi step form(시험 등록) 페이지
 []formik vs react-hooks-form 둘 중 하나 사용
+[]sidebar component 코드 뺴기, tree structure 생성
 
 []rollup-bundle-anlyzer 사용 및 anlyze.html 생성
 
