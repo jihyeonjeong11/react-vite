@@ -3,7 +3,7 @@ import React from "react";
 import { staticState } from "../constants";
 import { Table } from "../components/TableCompound";
 
-import { useFetch } from "@/components/common/hooks/useFetch";
+import { useFetch } from "@/routes/common/hooks/useFetch";
 import { useCheckBoxes } from "../hooks/useCheckboxes";
 
 const staticHead = "test";

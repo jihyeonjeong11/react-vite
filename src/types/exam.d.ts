@@ -11,7 +11,29 @@
  *~ Otherwise, delete this declaration.
  */
 
+export as namespace testLib;
 
+export const enum ZeroOrOne {
+    "no" = 0,
+    "yes" = 1,
+}
+
+export const enum ExamTypes {
+    "CPX" = 1,
+    "OSCE" = 2,
+    "한CPX" = 3,
+    "4한OSCE" = 4,
+}
+
+// http://133.186.228.26:7070/api/exam/examBasicInfo
+export interface BasicTestProps {
+    ec_cd?: string; // 시험코드
+    ec_name?: string; // 시험명
+    e_student_collocate_kind?: ZeroOrOne; // 시험학생배치종류
+    e_type?: ExamTypes; // 시험종류
+    e_pa_use?: ZeroOrOne; // 시험방송사용
+    e_desc?: string; // 시험수업설명
+}
 
 // api 별로 따로 끊어서, 후에 extends하여 사용할 것임.
 // module 먼저 localforage 사용, 후 작성 예정.
