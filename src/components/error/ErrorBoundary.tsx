@@ -16,8 +16,6 @@ class ErrorBoundary extends React.Component<Props, State> {
     };
 
     public static getDerivedStateFromError(_: Error): State {
-        
-        console.log(_, 'aspdoifj[oeitjyh[otiuj[otikj');
         return { hasError: true };
     }
 
