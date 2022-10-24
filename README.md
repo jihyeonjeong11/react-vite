@@ -10,6 +10,10 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 10/18 시험 작성 페이지 작성시작
 
+10/22 작성 페이지 multi-step-stepper 작성
+
+10/24 작성 페이지 form 작성을 위한 라이브러리 스터디 중(formik or React-Hook-Form)
+
 
 # 실행법
 
@@ -55,6 +59,12 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 
 ### 작업한 것 
+
+10/24
+FormIK example 추가.
+다만 전체 form 을 rerender 하는 부분때문에
+
+useRef 기반으로 작성된 react-hook-form 을 사용하는 것이 좋아 보임.
 
 10/18
 ErrorBoundary Wrapper 추가

@@ -99,6 +99,6 @@ const Stepper = ({ steps, currentStep }: { steps: string[]; currentStep: number 
         );
     });
 
-    return <div className=" p-4 flex justify-between items-center ">{stepsDisplay}</div>;
+    return <div className=" p-4 flex justify-between items-center container">{stepsDisplay}</div>;
 };
 export default Stepper;
