@@ -21,9 +21,28 @@ yarn 혹은 npm i
 
 이후 
 
+yarn dlx @yarnpkg/sdks vscode
+
+기존 node_modules 체계와 달리, typescript 디펜던시를 vscode에서 관리하게 합니다.
+
+이후 tsx or ts 파일에서 
+
+ctrl + shift + p 로 커맨드 팔레트 오픈
+
+select typescript version 선택 후 
+
+use workspace version을 선택해 줍니다.
+
+에러가 사라졌다면,
+
 yarn dev 혹은 npm dev로 실행합니다.
 
+
 기본 주소는 localhost:5173입니다.
+
+env파일은 따로 부탁드리면 전달 드립니다. -> docker 세팅 이전까지
+
+**10/25 현재 powershell에서 env 파일 인식이 안되는 오류 있습니다.**
 
 
 ```
@@ -52,7 +71,7 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 []formik vs react-hooks-form 둘 중 하나 사용
 []sidebar component 코드 뺴기, tree structure 생성
 
-[]rollup-bundle-anlyzer 사용 및 anlyze.html 생성
+[x]rollup-bundle-anlyzer 사용 및 anlyze.html 생성
 
 ### 잘못한것
 

@@ -15,7 +15,7 @@ import RoomSelection from "@/routes/registration/components/roomSelection";
 import IkTest from '@/routes/registration/components/ikTest';
 import HookFormTest from '@/routes/registration/components/hookformTest';
 
-const router: BrowserRouterProps = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
