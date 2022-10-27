@@ -8,11 +8,13 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 10/17 테이블 템플릿 작성(Compound Components 패턴)
 
-10/18 시험 작성 페이지 작성시작
+10/18 데이터 등록 폼 작성 시작
 
 10/22 작성 페이지 multi-step-stepper 작성
 
 10/24 작성 페이지 form 작성을 위한 라이브러리 스터디 중(formik or React-Hook-Form)
+
+10/25 testing library 추가, bundle visualizer 추가, 
 
 
 # 실행법
@@ -66,12 +68,16 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 ### 해야할것
 
-[x]react router dom v6 사용
-[]react multi step form(시험 등록) 페이지
-[]formik vs react-hooks-form 둘 중 하나 사용
+[]draggable ui 스터디
+[]react-hooks-form 둘 중 하나 사용
+[]react multi step form 페이지
+
+[] vs react-hooks-form 둘 중 하나 사용
 []sidebar component 코드 뺴기, tree structure 생성
 
-[x]rollup-bundle-anlyzer 사용 및 anlyze.html 생성
+[x]react router dom v6 사용
+[x]formik 예시
+[x]rollup-bundle-visualizer 사용 및 stats.html 생성
 
 ### 잘못한것
 

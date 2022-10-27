@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useSearchParams, useOutletContext, Outlet } from "react-router-dom";
-import Stepper from "../components/stepper";
+import Stepper from "../stepper";
 
 const steps = ["basic", "hobbys", "social", "else", "someping", "stubs"];
 

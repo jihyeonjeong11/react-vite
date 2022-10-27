@@ -5,15 +5,17 @@ import "@/styles/index.css";
 
 import { createBrowserRouter, RouterProvider, Route, RouterProviderProps, BrowserRouterProps } from "react-router-dom";
 
-import TableRoot from "@/routes/common/table/container/TableRoot";
-import ErrorBoundary from "./routes/error/ErrorBoundary";
-import CrashErrorScreen from "./routes/error/CrashErrorScreen";
-import RegistrationRoot from "./routes/registration/container/registrationRoot";
-import BasicExamInfo from "@/routes/registration/components/basicExamInfo";
-import RoomSelection from "@/routes/registration/components/roomSelection";
+import TableScreen from "@/routes/table/TableScreen";
+import RegistrationScreen from "./routes/registration/RegistrationScreen";
+import DraggableScreen from "./routes/draggable/DraggableScreen";
 
-import IkTest from '@/routes/registration/components/ikTest';
-import HookFormTest from '@/routes/registration/components/hookformTest';
+import CrashErrorScreen from "./routes/error/CrashErrorScreen";
+import RegistrationRoot from "./components/registration/container/registrationRoot";
+import BasicExamInfo from "@/components/registration/basicExamInfo";
+import RoomSelection from "@/components/registration/roomSelection";
+
+import IkTest from '@/components/registration/ikTest';
+import HookFormTest from '@/components/registration/hookformTest';
 
 const router = createBrowserRouter([
     {
@@ -23,11 +25,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "table",
-                element: <TableRoot />,
+                element: <TableScreen />,
             },
             {
                 path: "register",
-                element: <RegistrationRoot />,
+                element: <RegistrationScreen />,
                 children: [
                     {
                         path: "basic",
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: "draggable",
+                element: <DraggableScreen />
+            }
         ],
     },
 ]);
