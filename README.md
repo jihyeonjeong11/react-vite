@@ -16,6 +16,17 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 10/25 testing library 추가, bundle visualizer 추가, 
 
+10/27 폴더 스트럭쳐 변경, React.lazy 세팅을 위한 components, routes 이원화
+
+draggable components
+
+1. 카메라
+2. 메모
+3. 리모콘?(오른쪽 끝)
+4. 문제 리스트
+5. 맨 아래 아이콘 리스트?? 
+6. ekg 변경 셀렉트??
+
 
 # 실행법
 
@@ -69,6 +80,7 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 ### 해야할것
 
 []draggable ui 스터디
+[]SafeComponent 작성(errorboundary wrapper)
 []react-hooks-form 둘 중 하나 사용
 []react multi step form 페이지
 

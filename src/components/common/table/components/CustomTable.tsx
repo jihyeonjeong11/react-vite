@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '@/styles/table.module.css';
 
 function CustomTable({children, ...rest}: ComponentWithChildrenProps) {
@@ -7,4 +8,7 @@ function CustomTable({children, ...rest}: ComponentWithChildrenProps) {
         </table>
     );
   }
-  export default CustomTable;
+
+const memoized = React.memo(CustomTable) as React.NamedExoticComponent<ComponentWithChildrenProps>;
+
+export default memoized;

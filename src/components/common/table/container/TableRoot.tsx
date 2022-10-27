@@ -26,8 +26,9 @@ const TableWrapper = () => {
 
     const checkboxes = useCheckBoxes(users && users.length ? users.length : 0);
     if (error) {
-        return <h2>{error}</h2>;
+        return <h2>{'페칭에 실패했습니다'}</h2>;
     }
+
 
     return (
         <React.Fragment>

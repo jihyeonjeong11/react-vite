@@ -1,9 +1,14 @@
 import React from "react";
 
+import DraggableRoot from "@/components/draggable/container/draggableRoot";
+import { ProcessProvider } from "@/components/common/contexts/process";
+
 const DraggableScreen = () => {
     return (
         <React.Fragment>
-            <div>draggable</div>
+            <ProcessProvider>
+                <DraggableRoot />
+            </ProcessProvider>
         </React.Fragment>
     );
 };
