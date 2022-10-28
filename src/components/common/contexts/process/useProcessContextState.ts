@@ -3,7 +3,7 @@ import TestComp from "@/components/draggable/components/testComp";
 
 export interface Process {
     id?: string;
-    component?: React.FC;
+    component: React.FunctionComponent;
 }
 
 export type Processes = Record<string, Process>;

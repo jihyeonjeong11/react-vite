@@ -5,7 +5,6 @@ import { useProcesses } from "@/components/common/contexts/process/index";
 
 const Remote = ({}) => {
     const { processes, open } = useProcesses();
-
     const memoRef = React.useRef(0);
     const videoRef = React.useRef(0);
 

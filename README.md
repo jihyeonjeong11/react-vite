@@ -18,6 +18,8 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 10/27 폴더 스트럭쳐 변경, React.lazy 세팅을 위한 components, routes 이원화
 
+10/27 
+
 draggable components
 
 1. 카메라

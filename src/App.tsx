@@ -6,9 +6,9 @@ import { Link, Outlet } from "react-router-dom";
 function App() {
     return (
         <>
-            <div className="flex">
+            <div className="flex overflow-y-hidden">
                 <aside className="w-64" aria-label="Sidebar">
-                    <div className="overflow-y-scroll h-screen py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                    <div className=" h-screen py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
                         <ul className="space-y-2">
                             <li>
                                 <a

@@ -13,7 +13,7 @@ const RegistrationRoot = () => {
 
     return (
         <React.Fragment>
-            <div className="w-[calc(100vw_-_16rem)]">
+            <main className="w-[calc(100vw_-_16rem)]">
                 <div className="container flex flex-col items-center">
                     <Stepper steps={steps} currentStep={idx} />
                     <div className="mb-10" />
@@ -34,7 +34,7 @@ const RegistrationRoot = () => {
                     </div>
                     <Outlet />
                 </div>
-            </div>
+            </main>
         </React.Fragment>
     );
 };
