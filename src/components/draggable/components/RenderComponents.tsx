@@ -7,7 +7,7 @@ export type ComponentProcessProps = {
 };
 
 type RenderComponentProps = {
-    Component: React.FunctionComponent<ComponentProcessProps>;
+    Component: React.FunctionComponent<ComponentProcessProps >;
     id: string;
 };
 
