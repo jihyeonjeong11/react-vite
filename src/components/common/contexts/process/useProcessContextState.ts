@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import TestComp from "@/components/draggable/components/testComp";
 
 export interface Process {
     id?: string;
@@ -11,17 +10,23 @@ export type Processes = Record<string, Process>;
 export type ProcessContextState = {
     processes: Processes;
     open: (id: string, component: React.FC) => void;
+    close: (id: string) => void;
 };
 
 const useProcessContextState = (): ProcessContextState => {
-    const [processes, setProcesses] = useState<Processes>(Object.create(null) as Processes);
+    const [processes, setProcesses] = useState<Processes>({} as Processes);
     const open = ((id: string, component: React.FC) => {
         return setProcesses({ [id]: { id: id, component: component }, ...processes });
     });
 
+    const close = ((id: string) => {
+        return setProcesses(Object.fromEntries(Object.entries(processes).filter(([key]) => !key.includes(id))))
+    })
+
     return {
         processes,
         open,
+        close
     };
 };
 

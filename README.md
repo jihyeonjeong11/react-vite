@@ -22,6 +22,10 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 이제부터 스타일링 + 드래그 리사이징 작업 시작.
 
+themeProvider부터 작업할 것인지???(테마를 만드는게 나을 것인지???)
+
+
+
 draggable components
 
 1. 카메라

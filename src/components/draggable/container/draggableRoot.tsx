@@ -8,7 +8,7 @@ import Remote from "../components/remote";
 const DraggableRoot = () => {
     return (
         <>
-            <main className="bg-background w-[calc(100vw_-_16rem)] h-full">
+            <main className="bg-background w-[calc(100vw_-_16rem)] h-full relative overflow-hidden">
                 <ProcessConsumer>
                     {({ processes = {} }) => {
                         return (
@@ -51,8 +51,8 @@ export default DraggableRoot;
 
 const TaskBar = () => {
     return (
-        <nav className="backdrop-blur bg-taskbarBackground sticky top-[100vh]">
-            taskbar
+        <nav className="backdrop-blur bg-taskbar-background sticky top-[100vh] ">
+            <p className="text-white">taskbar</p>
             <Remote />
         </nav>
     );

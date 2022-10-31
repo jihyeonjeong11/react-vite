@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
 
-const TestComp = () => {
+import Window from "./Window";
+import { Rnd } from "react-rnd";
+
+const MemoComp = () => {
     return (
-        <div>
-            testComponent
-        </div>
-    )
-}
+        <Rnd>
+            <Window>
+                <textarea />
+            </Window>
+        </Rnd>
+    );
+};
 
-export default TestComp;
+export default MemoComp;
