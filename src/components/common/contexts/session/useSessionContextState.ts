@@ -44,9 +44,6 @@ const useSessionContextState = (): SessionContextState => {
     const { processes } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
 
-    useEffect(() => {
-    }, [processes])
-
     return {
         windowStates,
         setWindowStates,
