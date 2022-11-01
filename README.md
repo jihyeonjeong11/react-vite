@@ -27,7 +27,10 @@ themeProvider부터 작업할 것인지???(테마를 만드는게 나을 것인�
 10/31 processContext(instance), sessionContext(state) 작성시작(memoComponent만) react-rnd 기초예제 적용
 
 11/01 sessionContext(instance state) 훅 작성중 react-rnd custom hook 작성중 
+yarn zero-install의 설명 대로라면, cache 폴더를 gitignore에 넣지 않아도 아무 문제 없음.
 
+node-modules -> normally over 1.0 gb 
+.yarn/cache -> 100mb가 되기 떄문에, 그대로 올려도 문제 없다고 하여씅므로, gitignore 수정함.
 
 draggable components
 
