@@ -1,34 +1,36 @@
-import React from "react";
+import React, {useRef} from "react";
 
 import { ProcessConsumer } from "@/components/common/contexts/process/index";
+import { SessionConsumer } from "@/components/common/contexts/session";
 import RenderComponent from "../components/RenderComponents";
 
 import Remote from "../components/remote";
 
 const DraggableRoot = () => {
+    
     return (
         <>
             <main className="bg-background w-[calc(100vw_-_16rem)] h-full relative overflow-hidden">
                 <ProcessConsumer>
-                    {({ processes = {} }) => {
-                        return (
-                            <div>
-                                {Object.entries(processes).map(
-                                    ([id, { component }]) => {
-                                        return (
-                                            id && (
-                                                <RenderComponent
-                                                    key={id}
-                                                    id={id}
-                                                    Component={component}
-                                                />
-                                            )
-                                        );
-                                    }
-                                )}
-                            </div>
-                        );
-                    }}
+                        {({ processes = {} }) => {
+                            return (
+                                <div>
+                                    {Object.entries(processes).map(
+                                        ([id, { component }]) => {
+                                            return (
+                                                id && (
+                                                    <RenderComponent
+                                                        key={id}
+                                                        id={id}
+                                                        Component={component}
+                                                    />
+                                                )
+                                            );
+                                        }
+                                    )}
+                                </div>
+                            );
+                        }}
                 </ProcessConsumer>
                 <TaskBar />
             </main>

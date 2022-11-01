@@ -24,6 +24,9 @@ CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝�
 
 themeProvider부터 작업할 것인지???(테마를 만드는게 나을 것인지???)
 
+10/31 processContext(instance), sessionContext(state) 작성시작(memoComponent만) react-rnd 기초예제 적용
+
+11/01 sessionContext(instance state) 훅 작성중 react-rnd custom hook 작성중 
 
 
 draggable components
@@ -87,8 +90,8 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 ### 해야할것
 
-[]draggable ui 스터디
-[]SafeComponent 작성(errorboundary wrapper)
+[x]draggable ui 스터디
+[x]SafeComponent 작성(errorboundary wrapper)
 []react-hooks-form 둘 중 하나 사용
 []react multi step form 페이지
 
@@ -104,6 +107,8 @@ vite.config.ts 및 tsconfig.json에서 absolute path src/ => @/으로 변경한 
 
 
 ### 작업한 것 
+
+11/1 minimize, maximize 생략(foreground zindex 구현필요)
 
 10/24
 FormIK example 추가.

@@ -2,19 +2,23 @@ import React from "react";
 
 import MemoComp from "./MemoComp";
 import { useProcesses } from "@/components/common/contexts/process/index";
+import {useSession} from "@/components/common/contexts/session/index";
+
+import {constants} from "@/components/common/contexts/constants";
 
 const Remote = ({}) => {
+    const {windowStates, setWindowStates} = useSession();
     const { processes, open } = useProcesses();
     const memoRef = React.useRef(0);
     const videoRef = React.useRef(0);
 
     const addMemo = () => {
-        open(`memo_${memoRef.current}`, MemoComp);
+        open(constants.MEMO, MemoComp);
         memoRef.current = memoRef.current + 1;
     };
 
     const addVideo = () => {
-        open(`video_${videoRef.current}`, MemoComp);
+        open(constants.VIDEO, MemoComp);
         videoRef.current = videoRef.current + 1;
     };
 

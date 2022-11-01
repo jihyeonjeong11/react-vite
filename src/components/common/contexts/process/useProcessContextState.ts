@@ -13,9 +13,21 @@ export type ProcessContextState = {
     close: (id: string) => void;
 };
 
+/**
+ * @param {string} type - memo or video currenyly
+ * @param {Processes} processes - 프로세스 오브젝트  
+ * @return {string} id
+ */
+
+const createUniquePID = (type: string, processes: Processes) => {
+    const existingProcess = Object.keys(processes).filter(([key]) => type.includes(key));
+    return `${type}__${existingProcess.length}`
+}
+
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
-    const open = ((id: string, component: React.FC) => {
+    const open = ((type: string, component: React.FC) => {
+        const id = createUniquePID(type, processes)
         return setProcesses({ [id]: { id: id, component: component }, ...processes });
     });
 
