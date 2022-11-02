@@ -15,30 +15,39 @@ export type ProcessContextState = {
 
 /**
  * @param {string} type - memo or video currenyly
- * @param {Processes} processes - 프로세스 오브젝트  
+ * @param {Processes} processes - 프로세스 오브젝트
  * @return {string} id
  */
 
 const createUniquePID = (type: string, processes: Processes) => {
-    const existingProcess = Object.keys(processes).filter(([key]) => type.includes(key));
-    return `${type}__${existingProcess.length}`
-}
+    const existingProcess = Object.keys(processes).filter(([key]) =>
+        type.includes(key)
+    );
+    return `${type}__${existingProcess.length}`;
+};
 
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
-    const open = ((type: string, component: React.FC) => {
-        const id = createUniquePID(type, processes)
-        return setProcesses({ [id]: { id: id, component: component }, ...processes });
-    });
+    const open = (type: string, component: React.FC) => {
+        const id = createUniquePID(type, processes);
+        return setProcesses({
+            [id]: { id: id, component: component },
+            ...processes,
+        });
+    };
 
-    const close = ((id: string) => {
-        return setProcesses(Object.fromEntries(Object.entries(processes).filter(([key]) => !key.includes(id))))
-    })
+    const close = (id: string) => {
+        return setProcesses(
+            Object.fromEntries(
+                Object.entries(processes).filter(([key]) => !key.includes(id))
+            )
+        );
+    };
 
     return {
         processes,
         open,
-        close
+        close,
     };
 };
 

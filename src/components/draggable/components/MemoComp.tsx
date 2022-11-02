@@ -3,43 +3,70 @@ import React from "react";
 import Window from "./Window";
 import { Rnd } from "react-rnd";
 import { useProcesses } from "@/components/common/contexts/process";
+import { useSession } from "@/components/common/contexts/session";
 
 const MemoComp = ({ id }: { id: string }) => {
     const {
         processes: { [id]: process },
     } = useProcesses();
-    const [position, setPosition] = React.useState({});
-    const [size, setSize] = React.useState({});
 
-    const textareaRef = React.useRef(null)
+    const {
+        windowStates: { [id]: windowState },
+        setWindowStates,
+        addToWindow,
+        removeFromWindow,
+    } = useSession();
 
+    const rndRef = React.useRef(null);
+
+    React.useEffect(() => {
+        if (windowState) return;
+        if (rndRef.current) {
+            console.log("initial register");
+            const { width, height } =
+                rndRef.current.resizableElement.current.style;
+            addToWindow(id, {
+                position: { x: 0, y: 0 },
+                size: { width: "250px", height: "250px" },
+            });
+        }
+        return removeFromWindow(id);
+    }, []);
+
+    const textareaRef = React.useRef(null);
     return (
         <Rnd
+            enableUserSelectHack={false}
+            ref={rndRef}
             onResizeStop={(e, direction, ref, delta, position) => {
-                setSize({
-                    width: ref.style.width,
-                    height: ref.style.height,
-                });
+                const { width, height } = ref.style;
+                addToWindow(id, { size: { width, height } });
             }}
             onDragStop={({ x, y }) => {
-                setPosition({ x, y });
+                addToWindow(id, { position: { x, y } });
             }}
+            minHeight={282}
+            minWidth={250}
         >
-            <div>{("xCoor " + position?.x)}</div>
-            <div>{("yCoor " + position?.y)}</div>
-            <div>{("width " + size?.width)}</div>
-            <div>{("height " + size?.height)}</div>
-            <div>{("val " + textareaRef ? textareaRef.current?.value : '')}</div>
+            <div>{"xCoor " + windowState?.position?.x}</div>
+            <div>{"yCoor " + windowState?.position?.y}</div>
+            <div>{"width " + windowState?.size?.width}</div>
+            <div>{"height " + windowState?.size?.height}</div>
+            <div>{"val " + textareaRef ? textareaRef.current?.value : ""}</div>
 
             <Window id={id}>
-                <textarea
-                    placeholder="hello"
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
-                    ref={textareaRef}
-                ></textarea>
+                <article style={{width: windowState?.size?.width || 250, height: windowState?.size?.height || 250}} className="flex items-center justify-center h-[calc(100%_-_2rem)]">
+                    <textarea
+                    
+                        placeholder="hello"
+                        name=""
+                        id=""
+                        cols="30"
+                        rows="10"
+                        ref={textareaRef}
+                        className="w-full h-full resize-none"
+                    />
+                </article>
             </Window>
         </Rnd>
     );

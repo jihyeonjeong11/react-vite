@@ -6,7 +6,7 @@ import { useProcesses } from "../process/index";
 export interface WindowState {
     maximized?: boolean;
     position?: Position;
-    size?: any;
+    size?: {width: string, height: string};
 }
 
 export interface MemoState extends WindowState {
@@ -24,14 +24,16 @@ export type SessionData = {
     // iconPositions: IconPositions;
     // runHistory: string[];
     // sortOrders: SortOrders;
-    // themeName: ThemeName;
+    // themeName: ThemeName;\
     // wallpaperFit: WallpaperFit;
     // wallpaperImage: string;
     windowStates: WindowStates;
 };
 
 export type SessionContextState = SessionData & {
-    setWindowStates: React.Dispatch<React.SetStateAction<WindowStates>>;
+    addToWindow: React.Dispatch<React.SetStateAction<{id: string, data: WindowStates}>>;
+    removeFromWindow: React.Dispatch<React.SetStateAction<{id: string}>>;
+
 };
 
 // export type SessionContextState = {
@@ -44,9 +46,27 @@ const useSessionContextState = (): SessionContextState => {
     const { processes } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
 
+    useEffect(() => {}, [processes]);
+
+    const addToWindow = (id: string, data: WindowStates) => {
+        return setWindowStates({ ...windowStates, [id]: {...windowStates[id], ...data} });
+    };
+
+    const removeFromWindow = (id: string) => {
+        return setWindowStates(
+            Object.fromEntries(
+                Object.entries(windowStates).filter(
+                    ([key]) => !key.includes(id)
+                )
+            )
+        );
+    };
+
     return {
         windowStates,
         setWindowStates,
+        addToWindow,
+        removeFromWindow,
     };
 };
 
