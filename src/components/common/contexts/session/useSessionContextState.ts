@@ -6,7 +6,7 @@ import { useProcesses } from "../process/index";
 export interface WindowState {
     maximized?: boolean;
     position?: Position;
-    size?: {width: string, height: string};
+    size: {width: number, height: number};
 }
 
 export interface MemoState extends WindowState {
@@ -46,11 +46,16 @@ const useSessionContextState = (): SessionContextState => {
     const { processes } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
 
-    useEffect(() => {}, [processes]);
-
     const addToWindow = (id: string, data: WindowStates) => {
+        console.log(id, data)
+        console.log({ ...windowStates, [id]: {...windowStates[id], ...data} })
         return setWindowStates({ ...windowStates, [id]: {...windowStates[id], ...data} });
     };
+
+    // setProcesses({
+    //     [id]: { id: id, component: component },
+    //     ...processes,
+    // });
 
     const removeFromWindow = (id: string) => {
         return setWindowStates(

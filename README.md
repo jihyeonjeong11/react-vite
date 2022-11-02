@@ -32,6 +32,17 @@ yarn zero-install의 설명 대로라면, cache 폴더를 gitignore에 넣지 �
 node-modules -> normally over 1.0 gb 
 .yarn/cache -> 100mb가 되기 떄문에, 그대로 올려도 문제 없다고 하여씅므로, gitignore 수정함.
 
+11/02 session 개념을 정확히 이해하기 힘드므로, youtube를 보면서 차근차근 만들어 보기로 함,.
+
+https://www.youtube.com/watch?v=Caa5WKf-Z0c&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=13
+
+useDraggableAndResizable 훅을 아래로 분리함.
+
+1. 여기서는 useDraggable hook을 먼저 만든다.
+2. useResizable, useRnd hook 작성중
+
+이후 RndWindow 훅 작성하여, 위 memoComp를 제외할 예정.
+
 draggable components
 
 1. 카메라

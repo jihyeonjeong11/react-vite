@@ -3,6 +3,11 @@ import { useCallback, useState } from "react";
 export interface Process {
     id?: string;
     component: React.FunctionComponent;
+    minimized: boolean;
+    maximized: boolean;
+    lockAspectRatio: boolean;
+    allowResizing: boolean;
+    autoSizing: boolean;
 }
 
 export type Processes = Record<string, Process>;
@@ -31,7 +36,15 @@ const useProcessContextState = (): ProcessContextState => {
     const open = (type: string, component: React.FC) => {
         const id = createUniquePID(type, processes);
         return setProcesses({
-            [id]: { id: id, component: component },
+            [id]: {
+                id: id,
+                component: component,
+                minimized: false,
+                maximized: false,
+                lockAspectRatio: false,
+                allowResizing: false,
+                autoSizing: false,
+            },
             ...processes,
         });
     };
