@@ -7,7 +7,7 @@ const defaultErrorHandler: ErrorHandler = (e?: Error) => {
     console.error(e);
 }
 
-export function useLocalForage<D>(key: string, initialValue: D, errorHandler?: ErrorHandler) {
+export function  useLocalForage<D>(key: string, initialValue: D, errorHandler?: ErrorHandler) {
     const [ storedValue, setStoredValue ] = useState<D | null>(initialValue);
     const _errorHandler = useRef(
         (typeof errorHandler == undefined || errorHandler == null) ? defaultErrorHandler : errorHandler
@@ -21,6 +21,7 @@ export function useLocalForage<D>(key: string, initialValue: D, errorHandler?: E
         (async function () {
             try {
                 const value: D | null = await localForage.getItem(key);
+                console.log(value)
                 setStoredValue(value == null ? initialValue : value);
             } catch ( e: any ) {
                 error(e);

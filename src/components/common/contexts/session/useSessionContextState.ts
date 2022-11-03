@@ -3,8 +3,6 @@ import type { Position } from "react-rnd";
 import { useNavigate } from "react-router-dom";
 
 import { useProcesses } from "../process/index";
-import { useLocalForage } from "../../hooks/useLocalForage";
-import { pxToNumber } from "@/lib/common/helpers/stringHeplers";
 
 export interface WindowState {
     maximized?: boolean;
@@ -50,12 +48,6 @@ const useSessionContextState = (): SessionContextState => {
     const { processes, setProcesses } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
 
-    let navigate = useNavigate();
-
-    React.useEffect(() => {
-        console.log(navigate);
-    }, [navigate]);
-
     React.useEffect(() => {
         if (processes) {
             const ids = Object.keys(processes);
@@ -92,7 +84,7 @@ const useSessionContextState = (): SessionContextState => {
     };
 
     const save = () => {
-        
+
     }
 
     return {

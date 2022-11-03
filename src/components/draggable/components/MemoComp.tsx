@@ -31,7 +31,6 @@ const MemoComp = ({ id }: { id: string }) => {
     // }, []);
 
     const textareaRef = React.useRef(null);
-    console.log(windowState)
     return (
         <>
             {windowState && (

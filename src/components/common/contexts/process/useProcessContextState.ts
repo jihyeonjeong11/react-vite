@@ -1,4 +1,6 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
+
+import { useLocalForage } from "../../hooks/useLocalForage";
 
 export interface Process {
     id?: string;
@@ -17,6 +19,7 @@ export type ProcessContextState = {
     open: (id: string, component: React.FC) => void;
     close: (id: string) => void;
     setProcesses: React.Dispatch<React.SetStateAction<any>>;
+    
 };
 
 /**
@@ -26,14 +29,23 @@ export type ProcessContextState = {
  */
 
 const createUniquePID = (type: string, processes: Processes) => {
-    const existingProcess = Object.keys(processes).filter(([key]) =>
-        type.includes(key)
-    );
-    return `${type}__${existingProcess.length}`;
+    const arr = Object.keys(processes);
+    if(!arr.length) return `${type}__${1}`;
+    const [first] = arr
+    return `${type}__${Number(first.at(-1)) + 1}`;
 };
 
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
+    const [snapshot, setSnapshot, removeSnapshot] = useLocalForage<any>('snapshot', '');
+
+    // React.useEffect(() => {
+    //     console.log('from process', snapshot)
+    //     if(snapshot.processes){
+    //         setProcesses(snapshot.processes)
+    //     }
+    // }, [])
+
     const open = (type: string, component: React.FC) => {
         const id = createUniquePID(type, processes);
         return setProcesses({
@@ -57,6 +69,8 @@ const useProcessContextState = (): ProcessContextState => {
             )
         );
     };
+
+    
     return {
         processes,
         setProcesses,

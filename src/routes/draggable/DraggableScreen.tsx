@@ -9,7 +9,6 @@ import { SessionProvider } from "@/components/common/contexts/session";
 
 const DraggableScreen = () => {
     const data = useActionData()
-    console.log(data)
     return (
         <React.Fragment>
             <ProcessProvider>
