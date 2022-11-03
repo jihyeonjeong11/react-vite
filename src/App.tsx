@@ -4,7 +4,6 @@ import TableRoot from "@/components/common/table/container/TableRoot";
 import ErrorBoundary from "./components/error/ErrorBoundary";
 
 function App() {
-    
     return (
         <div className="App">
             <main>
