@@ -3,6 +3,7 @@ import type { Position } from "react-rnd";
 import { useNavigate } from "react-router-dom";
 
 import { useProcesses } from "../process/index";
+import { useLocalForage } from "../../hooks/useLocalForage";
 import { pxToNumber } from "@/lib/common/helpers/stringHeplers";
 
 export interface WindowState {
@@ -89,6 +90,10 @@ const useSessionContextState = (): SessionContextState => {
             )
         );
     };
+
+    const save = () => {
+        
+    }
 
     return {
         windowStates,
