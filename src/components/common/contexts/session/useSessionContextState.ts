@@ -1,17 +1,19 @@
 import React, { useCallback, useState, useEffect } from "react";
 import type { Position } from "react-rnd";
+import { useNavigate } from "react-router-dom";
 
 import { useProcesses } from "../process/index";
+import { pxToNumber } from "@/lib/common/helpers/stringHeplers";
 
 export interface WindowState {
     maximized?: boolean;
     position?: Position;
-    size: {width: number, height: number};
+    size: { width: number; height: number };
 }
 
-export interface MemoState extends WindowState {
+export type MemoState = WindowState & {
     value?: string;
-}
+};
 
 export interface VideoState extends WindowState {
     srcUrl?: string;
@@ -31,9 +33,10 @@ export type SessionData = {
 };
 
 export type SessionContextState = SessionData & {
-    addToWindow: React.Dispatch<React.SetStateAction<{id: string, data: WindowStates}>>;
-    removeFromWindow: React.Dispatch<React.SetStateAction<{id: string}>>;
-
+    addToWindow: React.Dispatch<
+        React.SetStateAction<{ id: string; data: WindowStates }>
+    >;
+    removeFromWindow: React.Dispatch<React.SetStateAction<{ id: string }>>;
 };
 
 // export type SessionContextState = {
@@ -43,19 +46,39 @@ export type SessionContextState = SessionData & {
 // };
 
 const useSessionContextState = (): SessionContextState => {
-    const { processes } = useProcesses();
+    const { processes, setProcesses } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
 
-    const addToWindow = (id: string, data: WindowStates) => {
-        console.log(id, data)
-        console.log({ ...windowStates, [id]: {...windowStates[id], ...data} })
-        return setWindowStates({ ...windowStates, [id]: {...windowStates[id], ...data} });
-    };
+    let navigate = useNavigate();
 
-    // setProcesses({
-    //     [id]: { id: id, component: component },
-    //     ...processes,
-    // });
+    React.useEffect(() => {
+        console.log(navigate);
+    }, [navigate]);
+
+    React.useEffect(() => {
+        if (processes) {
+            const ids = Object.keys(processes);
+            ids.forEach((k) => {
+                return processes[k] && !windowStates[k]
+                    ? addToWindow(k, {
+                          position: { x: 0, y: 0 },
+                          size: { width: 250, height: 250 },
+                          value: "",
+                      })
+                    : !processes[k] && windowStates[k]
+                    ? removeFromWindow(k)
+                    : null;
+            });
+        }
+    }, [processes, setProcesses]);
+
+    const addToWindow = (id: string, data: WindowStates) => {
+        //console.log(id, windowStates[id])
+        return setWindowStates({
+            ...windowStates,
+            [id]: { ...windowStates[id], ...data },
+        });
+    };
 
     const removeFromWindow = (id: string) => {
         return setWindowStates(

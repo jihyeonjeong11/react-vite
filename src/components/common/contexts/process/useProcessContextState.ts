@@ -16,6 +16,7 @@ export type ProcessContextState = {
     processes: Processes;
     open: (id: string, component: React.FC) => void;
     close: (id: string) => void;
+    setProcesses: React.Dispatch<React.SetStateAction<any>>;
 };
 
 /**
@@ -56,9 +57,9 @@ const useProcessContextState = (): ProcessContextState => {
             )
         );
     };
-
     return {
         processes,
+        setProcesses,
         open,
         close,
     };

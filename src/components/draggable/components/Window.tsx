@@ -12,9 +12,7 @@ const Window = ({ children, type, id }: ComponentWithChildrenProps) => {
         close,
     } = useProcesses();
 
-    const {windowStates, setWindowStates: {[id]: windowState}} = useSession();
-
-    console.log(windowStates)
+    const {windowStates: {[id]: windowState}, setWindowStates} = useSession();
 
     const click = (event: React.SyntheticEvent) => {
         console.log(event.type);
@@ -22,6 +20,7 @@ const Window = ({ children, type, id }: ComponentWithChildrenProps) => {
     };
 
     return (
+        
         <section className="shadow-window-shadow h-full outline outline-1 outline-window-outline w-full">
             <header className="bg-window-header text-white h-8">
                 <nav className="flex items-center">
@@ -29,7 +28,7 @@ const Window = ({ children, type, id }: ComponentWithChildrenProps) => {
                     <p>메모장</p>
                     <p>{id}</p>
                     {/* <button onClick={()=>close(id)} > */}
-                    <button onClick={click}>
+                    <button onClick={()=>close(id)}>
                         <AiFillCloseCircle />
                     </button>
                 </nav>

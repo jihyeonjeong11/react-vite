@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@/styles/index.css";
 
-import { createBrowserRouter, RouterProvider, Route, RouterProviderProps, BrowserRouterProps } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route, RouterProviderProps, BrowserRouterProps, useActionData } from "react-router-dom";
 
 import TableScreen from "@/routes/table/TableScreen";
 import RegistrationScreen from "./routes/registration/RegistrationScreen";
@@ -16,6 +16,12 @@ import RoomSelection from "@/components/registration/roomSelection";
 
 import IkTest from '@/components/registration/ikTest';
 import HookFormTest from '@/components/registration/hookformTest';
+
+const draggableAction = () => {
+
+    return 'data'
+
+}
 
 const router = createBrowserRouter([
     {
@@ -47,6 +53,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "draggable",
+                action: draggableAction,
                 element: <DraggableScreen />
             }
         ],

@@ -12,14 +12,12 @@ import Aside from "@/routes/aside/Aside";
 function App() {
     return (
         <>
-            <SessionProvider>
                     <div className="flex overflow-y-hidden">
                         <Aside />
                         <div id="detail">
                             <Outlet />
                         </div>
                     </div>
-            </SessionProvider>
         </>
     );
 }
