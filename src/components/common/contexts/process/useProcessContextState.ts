@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from "react";
 
-import localforage from "localforage";
+import type { StoredWindowProps } from "../../hooks/useLocalForage";
 
 import { useLocalForage } from "../../hooks/useLocalForage";
 import MemoComp from "@/components/draggable/components/MemoComp";
-
 
 export interface Process {
     id?: string;
@@ -22,7 +21,7 @@ export type ProcessContextState = {
     processes: Processes;
     open: (id: string, component: React.FC) => void;
     close: (id: string) => void;
-    setProcesses: React.Dispatch<React.SetStateAction<any>>;
+    setProcesses: React.Dispatch<React.SetStateAction<StoredWindowProps>>;
 };
 
 export type Entries<T> = {
@@ -44,26 +43,22 @@ const createUniquePID = (type: string, processes: Processes) => {
 
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
-    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
-        "snapshot",
-        ""
-    );
+    const [snapshot, setSnapshot, removeSnapshot, loaded] =
+    useLocalForage<StoredWindowProps | null>("snapshot", null);
 
     React.useEffect(() => {
-        
-        if(loaded) openStoredProcesses();
+        if (loaded) openStoredProcesses();
     }, [loaded]);
 
-    const openStoredProcesses = async() => {
-        if(snapshot.processes){
+    const openStoredProcesses = async () => {
+        if (snapshot !== null && snapshot.processes) {
             let result = {};
-            for (let [k, v] of Object.entries(snapshot.processes)){
-                result[k] = v
+            for (let [k, v] of Object.entries(snapshot.processes)) {
+                result[k] = v;
             }
-            setProcesses(result)
+            setProcesses(result);
         }
-        
-    }
+    };
 
     const open = (type: string, component: React.FC, isStored: boolean) => {
         const id = isStored ? type : createUniquePID(type, processes);

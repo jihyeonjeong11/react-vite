@@ -1,20 +1,35 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import type { Process } from "../contexts/process/useProcessContextState";
+import type { WindowStates } from "../contexts/session/useSessionContextState";
+
 import localForage from "localforage";
+
+export interface StoredWindowProps {
+    [key: string]: Record<string, Process> | Record<string, WindowStates>;
+    processes: Record<string, Process>;
+    WindowStates: Record<string, WindowStates>;
+}
 
 type ErrorHandler = (e?: Error) => void;
 
 const defaultErrorHandler: ErrorHandler = (e?: Error) => {
     console.error(e);
-}
+};
 
-export function  useLocalForage<D>(key: string, initialValue: D, errorHandler?: ErrorHandler) {
-    const [ storedValue, setStoredValue ] = useState<D | null>(initialValue);
+export function useLocalForage<D>(
+    key: string,
+    initialValue: D,
+    errorHandler?: ErrorHandler
+) {
+    const [storedValue, setStoredValue] = useState<D | null | StoredWindowProps>(initialValue);
     const [loaded, setLoaded] = useState<boolean>(false);
     const _errorHandler = useRef(
-        (typeof errorHandler == undefined || errorHandler == null) ? defaultErrorHandler : errorHandler
+        typeof errorHandler == undefined || errorHandler == null
+            ? defaultErrorHandler
+            : errorHandler
     );
 
-    const error = (e? :Error) => {
+    const error = (e?: Error) => {
         _errorHandler.current(e);
     };
 
@@ -24,37 +39,40 @@ export function  useLocalForage<D>(key: string, initialValue: D, errorHandler?: 
                 const value: D | null = await localForage.getItem(key);
                 setStoredValue(value == null ? initialValue : value);
                 setLoaded(true);
-            } catch ( e: any ) {
+            } catch (e: any) {
                 error(e);
             }
         })();
-    }, [])
+    }, []);
 
-    const setValue = useCallback((value) => {
-        async function set(value: any) {
-            try {
-                setStoredValue(value);
-                await localForage.setItem(key, value);
-            } catch ( e: any ) {
-                error(e);
+    const setValue = useCallback(
+        (value: StoredWindowProps) => {
+            async function set(value: StoredWindowProps) {
+                try {
+                    setStoredValue(value);
+                    await localForage.setItem(key, value);
+                } catch (e: any) {
+                    error(e);
+                }
             }
-        }
 
-        set(value);
-    }, [ key ])
+            set(value);
+        },
+        [key]
+    );
 
     const removeValue = useCallback(() => {
         async function remove() {
             try {
                 setStoredValue(null);
                 await localForage.removeItem(key);
-            } catch ( e: any ) {
+            } catch (e: any) {
                 error(e);
             }
         }
 
         remove();
-    }, [ key ]);
+    }, [key]);
 
-    return [ storedValue, setValue, removeValue, loaded ] as const;
+    return [storedValue, setValue, removeValue, loaded] as const;
 }
