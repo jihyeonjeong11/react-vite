@@ -6,7 +6,7 @@ import { useProcesses } from "@/components/common/contexts/process";
 import { useSession } from "@/components/common/contexts/session";
 import { useLocalForage } from "@/components/common/hooks/useLocalForage";
 
-const MemoComp = ({ id }: { id: string }) => {
+const VideoComp = ({ id }: { id: string }) => {
     const {
         processes: { [id]: process },
     } = useProcesses();
@@ -94,4 +94,4 @@ const MemoComp = ({ id }: { id: string }) => {
     );
 };
 
-export default MemoComp;
+export default VideoComp;

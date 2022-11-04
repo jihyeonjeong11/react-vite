@@ -25,6 +25,10 @@ export type ProcessContextState = {
     setProcesses: React.Dispatch<React.SetStateAction<any>>;
 };
 
+export type Entries<T> = {
+    [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
 /**
  * @param {string} type - memo or video currenyly
  * @param {Processes} processes - 프로세스 오브젝트
@@ -52,9 +56,8 @@ const useProcessContextState = (): ProcessContextState => {
 
     const openStoredProcesses = async() => {
         if(snapshot.processes){
-            console.log(Object.entries(snapshot.processes))
             let result = {};
-            for (let [k, v] of Object.entries(snapshot.processes)){
+            for (let [k, v] of Object.entries(snapshot.processes) as Entries<Process>){
                 result[k] = v
             }
             setProcesses(result)
