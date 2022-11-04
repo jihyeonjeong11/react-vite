@@ -16,6 +16,7 @@ const DraggableRoot = () => {
                         {({ processes = {} }) => {
                             return (
                                 <div>
+                                    {JSON.stringify(processes)}
                                     {Object.entries(processes).map(
                                         ([id, { component }]) => {
                                             return (

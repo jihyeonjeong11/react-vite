@@ -3,6 +3,7 @@ import type { Position } from "react-rnd";
 import { useNavigate } from "react-router-dom";
 
 import { useProcesses } from "../process/index";
+import { useLocalForage } from "../../hooks/useLocalForage";
 
 export interface WindowState {
     maximized?: boolean;
@@ -47,23 +48,30 @@ export type SessionContextState = SessionData & {
 const useSessionContextState = (): SessionContextState => {
     const { processes, setProcesses } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
+    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
+        "snapshot",
+        ""
+    );
 
     React.useEffect(() => {
         if (processes) {
             const ids = Object.keys(processes);
+            let result = {};
             ids.forEach((k) => {
-                return processes[k] && !windowStates[k]
-                    ? addToWindow(k, {
-                          position: { x: 0, y: 0 },
-                          size: { width: 250, height: 250 },
-                          value: "",
-                      })
-                    : !processes[k] && windowStates[k]
-                    ? removeFromWindow(k)
-                    : null;
+                if (processes[k] && !windowStates[k])
+                    if(loaded && snapshot.states[k]) result[k] = snapshot.states[k]
+                    // result[k] = {
+                    //     position: { x: 0, y: 0 },
+                    //     size: { width: 250, height: 250 },
+                    //     value: "",
+                    // };
+                if (!processes[k] && windowStates[k]) delete result[k];
+
+                null;
             });
+            setWindowStates({ ...windowStates, ...result });
         }
-    }, [processes, setProcesses]);
+    }, [processes, setProcesses, loaded]);
 
     const addToWindow = (id: string, data: WindowStates) => {
         //console.log(id, windowStates[id])
@@ -83,9 +91,7 @@ const useSessionContextState = (): SessionContextState => {
         );
     };
 
-    const save = () => {
-
-    }
+    const save = () => {};
 
     return {
         windowStates,

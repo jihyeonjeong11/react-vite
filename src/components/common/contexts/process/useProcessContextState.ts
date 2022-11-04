@@ -1,10 +1,14 @@
 import React, { useCallback, useState } from "react";
 
+import localforage from "localforage";
+
 import { useLocalForage } from "../../hooks/useLocalForage";
+import MemoComp from "@/components/draggable/components/MemoComp";
+
 
 export interface Process {
     id?: string;
-    component: React.FunctionComponent;
+    component: string;
     minimized: boolean;
     maximized: boolean;
     lockAspectRatio: boolean;
@@ -19,7 +23,6 @@ export type ProcessContextState = {
     open: (id: string, component: React.FC) => void;
     close: (id: string) => void;
     setProcesses: React.Dispatch<React.SetStateAction<any>>;
-    
 };
 
 /**
@@ -30,24 +33,37 @@ export type ProcessContextState = {
 
 const createUniquePID = (type: string, processes: Processes) => {
     const arr = Object.keys(processes);
-    if(!arr.length) return `${type}__${1}`;
-    const [first] = arr
+    if (!arr.length) return `${type}__${1}`;
+    const [first] = arr;
     return `${type}__${Number(first.at(-1)) + 1}`;
 };
 
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
-    const [snapshot, setSnapshot, removeSnapshot] = useLocalForage<any>('snapshot', '');
+    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
+        "snapshot",
+        ""
+    );
 
-    // React.useEffect(() => {
-    //     console.log('from process', snapshot)
-    //     if(snapshot.processes){
-    //         setProcesses(snapshot.processes)
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        
+        if(loaded) openStoredProcesses();
+    }, [loaded]);
 
-    const open = (type: string, component: React.FC) => {
-        const id = createUniquePID(type, processes);
+    const openStoredProcesses = async() => {
+        if(snapshot.processes){
+            console.log(Object.entries(snapshot.processes))
+            let result = {};
+            for (let [k, v] of Object.entries(snapshot.processes)){
+                result[k] = v
+            }
+            setProcesses(result)
+        }
+        
+    }
+
+    const open = (type: string, component: React.FC, isStored: boolean) => {
+        const id = isStored ? type : createUniquePID(type, processes);
         return setProcesses({
             [id]: {
                 id: id,
@@ -70,7 +86,6 @@ const useProcessContextState = (): ProcessContextState => {
         );
     };
 
-    
     return {
         processes,
         setProcesses,

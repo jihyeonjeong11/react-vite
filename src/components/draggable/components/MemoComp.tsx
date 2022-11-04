@@ -4,11 +4,18 @@ import Window from "./Window";
 import { Rnd } from "react-rnd";
 import { useProcesses } from "@/components/common/contexts/process";
 import { useSession } from "@/components/common/contexts/session";
+import { useLocalForage } from "@/components/common/hooks/useLocalForage";
 
 const MemoComp = ({ id }: { id: string }) => {
     const {
         processes: { [id]: process },
     } = useProcesses();
+
+    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
+        "snapshot",
+        ""
+    );
+
 
     const {
         windowStates: { [id]: windowState },
@@ -31,18 +38,23 @@ const MemoComp = ({ id }: { id: string }) => {
     // }, []);
 
     const textareaRef = React.useRef(null);
+
     return (
         <>
             {windowState && (
                 <Rnd
                     enableUserSelectHack={false}
                     ref={rndRef}
+                    position={windowState.position}
+                    size={windowState.size}
                     onResizeStop={(e, direction, ref, delta, position) => {
                         const { width, height } = ref.style;
                         addToWindow(id, { size: { width, height } });
                     }}
-                    onDragStop={({ x, y }) => {
+                    onDragStop={(e, { x, y }) => {
                         addToWindow(id, { position: { x, y } });
+                        console.log(windowState)
+
                     }}
                     minHeight={282}
                     minWidth={250}
@@ -54,8 +66,8 @@ const MemoComp = ({ id }: { id: string }) => {
                     <div>
                         {"val " + textareaRef ? textareaRef.current?.value : ""}
                     </div> */}
-
                     <Window id={id}>
+                        <div>{JSON.stringify(windowState.position)}</div>
                         <article
                             style={{
                                 width: windowState?.size?.width || 250,
