@@ -57,7 +57,7 @@ const useProcessContextState = (): ProcessContextState => {
     const openStoredProcesses = async() => {
         if(snapshot.processes){
             let result = {};
-            for (let [k, v] of Object.entries(snapshot.processes) as Entries<Process>){
+            for (let [k, v] of Object.entries(snapshot.processes)){
                 result[k] = v
             }
             setProcesses(result)

@@ -36,7 +36,9 @@ node-modules -> normally over 1.0 gb
 
 https://www.youtube.com/watch?v=Caa5WKf-Z0c&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=13
 
-useDraggableAndResizable 훅을 아래로 분리함.
+11/03 useDraggableAndResizable 훅을 아래로 분리함.
+
+이 부분 현재 사용하지 않음.
 
 1. 여기서는 useDraggable hook을 먼저 만든다.
 2. useResizable, useRnd hook 작성중
@@ -51,6 +53,10 @@ draggable components
 4. 문제 리스트
 5. 맨 아래 아이콘 리스트?? 
 6. ekg 변경 셀렉트??
+
+11/04 localForage를 사용하는 창 위치, 크기, 밸류 저장기능 되었음
+
+이후 타입에러 해결, localforage context작성으로 넘어감.;
 
 
 # 실행법
