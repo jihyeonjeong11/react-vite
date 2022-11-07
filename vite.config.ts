@@ -31,11 +31,7 @@ export default defineConfig({
 
     
 
-    plugins: [react({
-      babel: {
-        
-      }
-    }), visualizer()],
+    plugins: [react(), visualizer()],
     resolve: {
         alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
     },

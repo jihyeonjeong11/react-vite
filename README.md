@@ -59,7 +59,10 @@ draggable components
 이후 타입에러 해결, localforage context작성으로 넘어감.;
 
 11/07 IndexedDB context 작성, typescript 오류 수정.(clean 되지 않은 상태.) gitLab page 먼저 넣고 할 예정.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c1d3a05e7b85201425586f0b1169e19cd9fd626
 
 
 # 실행법
