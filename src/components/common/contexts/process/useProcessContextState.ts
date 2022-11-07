@@ -3,30 +3,26 @@ import React, { useCallback, useState } from "react";
 import type { StoredWindowProps } from "../../hooks/useLocalForage";
 
 import { useLocalForage } from "../../hooks/useLocalForage";
-import MemoComp from "@/components/draggable/components/MemoComp";
+import { useIndexedDb } from "../indexeddb";
 
-export interface Process {
-    id?: string;
+export type ProcessProps = {
+    id: string;
     component: string;
     minimized: boolean;
     maximized: boolean;
     lockAspectRatio: boolean;
     allowResizing: boolean;
     autoSizing: boolean;
-}
+};
 
-export type Processes = Record<string, Process>;
+export type Processes = Record<string, ProcessProps>;
 
 export type ProcessContextState = {
     processes: Processes;
-    open: (id: string, component: React.FC) => void;
+    open: (id: string, component: string, isStored: boolean) => void;
     close: (id: string) => void;
-    setProcesses: React.Dispatch<React.SetStateAction<StoredWindowProps>>;
+    setProcesses: React.Dispatch<React.SetStateAction<Processes>>;
 };
-
-export type Entries<T> = {
-    [K in keyof T]: [K, T[K]];
-}[keyof T][];
 
 /**
  * @param {string} type - memo or video currenyly
@@ -43,24 +39,24 @@ const createUniquePID = (type: string, processes: Processes) => {
 
 const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
-    const [snapshot, setSnapshot, removeSnapshot, loaded] =
-    useLocalForage<StoredWindowProps | null>("snapshot", null);
+    const {dbLoaded, storedValue} = useIndexedDb();
 
     React.useEffect(() => {
-        if (loaded) openStoredProcesses();
-    }, [loaded]);
+        if (dbLoaded) openStoredProcesses();
+    }, [dbLoaded]);
 
     const openStoredProcesses = async () => {
-        if (snapshot !== null && snapshot.processes) {
-            let result = {};
-            for (let [k, v] of Object.entries(snapshot.processes)) {
+        if (storedValue !== null && storedValue.processes) {
+            console.log(storedValue)
+            let result: Processes = {};
+            for (let [k, v] of Object.entries(storedValue.processes)) {
                 result[k] = v;
             }
             setProcesses(result);
         }
     };
 
-    const open = (type: string, component: React.FC, isStored: boolean) => {
+    const open = (type: string, component: string, isStored: boolean) => {
         const id = isStored ? type : createUniquePID(type, processes);
         return setProcesses({
             [id]: {

@@ -24,10 +24,10 @@
 
 
 import contextFactory from "../contextFactory";
-//import type { SessionContextState } from "./useSessionContextState";
+import type { SessionContextState } from "./useSessionContextState";
 import useSessionContextState from "./useSessionContextState";
 
-const { Consumer, Provider, useContext } = contextFactory<any>(
+const { Consumer, Provider, useContext } = contextFactory<SessionContextState>(
     useSessionContextState
 );
 

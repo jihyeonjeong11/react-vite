@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import type { Process } from "../contexts/process/useProcessContextState";
+import type { ProcessProps } from "../contexts/process/useProcessContextState";
 import type { WindowStates } from "../contexts/session/useSessionContextState";
 
 import localForage from "localforage";
 
 export interface StoredWindowProps {
-    [key: string]: Record<string, Process> | Record<string, WindowStates>;
-    processes: Record<string, Process>;
-    WindowStates: Record<string, WindowStates>;
+    [key: string]: Record<string, ProcessProps> | Record<string, WindowStates>;
+    processes: Record<string, ProcessProps>;
+    states: Record<string, WindowStates>;
 }
 
 type ErrorHandler = (e?: Error) => void;

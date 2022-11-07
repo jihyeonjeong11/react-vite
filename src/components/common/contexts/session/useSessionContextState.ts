@@ -1,12 +1,15 @@
 import React, { useCallback, useState, useEffect } from "react";
 import type { Position } from "react-rnd";
+import type { StoredWindowProps } from "../../hooks/useLocalForage";
 import { useNavigate } from "react-router-dom";
 
 import { useProcesses } from "../process/index";
 import { useLocalForage } from "../../hooks/useLocalForage";
+import { useIndexedDb } from "../indexeddb";
+
+// 나중에 Process와 네이밍 맞출것
 
 export interface WindowState {
-    maximized?: boolean;
     position?: Position;
     size: { width: number; height: number };
 }
@@ -15,11 +18,19 @@ export type MemoState = WindowState & {
     value?: string;
 };
 
-export interface VideoState extends WindowState {
-    srcUrl?: string;
-}
+export type WindowProps = {
+    position: Position;
+    size: { width: number; height: number };
+    value: string;
+};
 
-export type WindowStates = Record<string, MemoState | VideoState>;
+// export type Processes = Record<string, ProcessProps>;
+
+// export interface VideoState extends WindowState {
+//     srcUrl?: string;
+// }
+
+export type WindowStates = Record<string, WindowProps>;
 
 export type SessionData = {
     // clockSource: ClockSource;
@@ -33,47 +44,45 @@ export type SessionData = {
 };
 
 export type SessionContextState = SessionData & {
-    addToWindow: React.Dispatch<
-        React.SetStateAction<{ id: string; data: WindowStates }>
-    >;
-    removeFromWindow: React.Dispatch<React.SetStateAction<{ id: string }>>;
+    addToWindow: (id: string, data: Partial<WindowProps>) => void;
+    removeFromWindow: (id: string) => void;
 };
-
-// export type SessionContextState = {
-//     processes: Session;
-//     open: (id: string, component: React.FC) => void;
-//     close: (id: string) => void;
-// };
 
 const useSessionContextState = (): SessionContextState => {
     const { processes, setProcesses } = useProcesses();
     const [windowStates, setWindowStates] = useState<WindowStates>({});
-    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
-        "snapshot",
-        ""
-    );
+
+    const { dbLoaded, storedValue } = useIndexedDb();
 
     React.useEffect(() => {
         if (processes) {
             const ids = Object.keys(processes);
-            let result = {};
+            let result: WindowStates = {};
             ids.forEach((k) => {
                 if (processes[k] && !windowStates[k])
-                    if(loaded && snapshot.states[k]) result[k] = snapshot.states[k]
-                    // result[k] = {
-                    //     position: { x: 0, y: 0 },
-                    //     size: { width: 250, height: 250 },
-                    //     value: "",
-                    // };
+                    if (dbLoaded && storedValue && storedValue.states[k]) {
+                        result[k] = storedValue.states[k];
+                    } else if (
+                        dbLoaded &&
+                        storedValue &&
+                        !storedValue.states[k]
+                    ) {
+                        result[k] = {
+                            position: { x: 0, y: 0 },
+                            size: { width: 250, height: 250 },
+                            value: "",
+                        };
+                    }
+
                 if (!processes[k] && windowStates[k]) delete result[k];
 
-                null;
             });
+
             setWindowStates({ ...windowStates, ...result });
         }
-    }, [processes, setProcesses, loaded]);
+    }, [processes, setProcesses, dbLoaded]);
 
-    const addToWindow = (id: string, data: WindowStates) => {
+    const addToWindow = (id: string, data: Partial<WindowProps>) => {
         //console.log(id, windowStates[id])
         return setWindowStates({
             ...windowStates,
@@ -95,7 +104,6 @@ const useSessionContextState = (): SessionContextState => {
 
     return {
         windowStates,
-        setWindowStates,
         addToWindow,
         removeFromWindow,
     };

@@ -1,8 +1,9 @@
 import React from "react";
 
 import MemoComp from "./MemoComp";
+import type { StoredWindowProps } from "@/components/common/contexts/indexeddb/useIndexedDbContextState";
 
-import { useLocalForage } from "@/components/common/hooks/useLocalForage";
+import { useIndexedDb } from "@/components/common/contexts/indexeddb";
 import { useProcesses } from "@/components/common/contexts/process/index";
 import { useSession } from "@/components/common/contexts/session/index";
 
@@ -10,34 +11,27 @@ import { constants } from "@/components/common/contexts/constants";
 import { mergeTwoObject } from "@/lib/common/helpers/helpers";
 
 const Remote = ({}) => {
-    const { windowStates, setWindowStates } = useSession();
+    const { windowStates } = useSession();
     const { processes, open } = useProcesses();
-    const [snapshot, setSnapshot, removeSnapshot] = useLocalForage<any>(
-        "snapshot",
-        ""
-    );
-    const memoRef = React.useRef(0);
-    const videoRef = React.useRef(0);
+    const { dbLoaded, storedValue, setValue } = useIndexedDb();
 
-    const saveSnapshot = async () => {
+    const saveSnapshot = () => {
         //await removeSnapshot()
         //console.log({...processes, ...windowStates});
-       // console.log([processes,windowStates].flatMap(Object.entries).reduce((o,[k,v])=>({...o,[k]:{...o[k],...v}}),{})
-
-        
-        const merged = {processes: {...processes}, states: {...windowStates}};
-        console.log(merged)
-        setSnapshot(merged);
+        // console.log([processes,windowStates].flatMap(Object.entries).reduce((o,[k,v])=>({...o,[k]:{...o[k],...v}}),{})
+        const merged: StoredWindowProps = {
+            processes: { ...processes },
+            states: { ...windowStates },
+        };
+        setValue(merged);
     };
 
     const addMemo = () => {
-        open(constants.MEMO, 'memo');
-        memoRef.current = memoRef.current + 1;
+        open(constants.MEMO, "memo", false);
     };
 
     const addVideo = () => {
-        open(constants.VIDEO, 'memo');
-        videoRef.current = videoRef.current + 1;
+        open(constants.VIDEO, "memo", false);
     };
 
     return (

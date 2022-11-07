@@ -1,25 +1,20 @@
 import React from "react";
 
+import type { StoredWindowProps } from "@/components/common/hooks/useLocalForage";
+
 import Window from "./Window";
 import { Rnd } from "react-rnd";
 import { useProcesses } from "@/components/common/contexts/process";
 import { useSession } from "@/components/common/contexts/session";
-import { useLocalForage } from "@/components/common/hooks/useLocalForage";
+import { pxToNum } from "@/lib/common/helpers/helpers";
 
-const VideoComp = ({ id }: { id: string }) => {
+const MemoComp = ({ id }: { id: string }) => {
     const {
         processes: { [id]: process },
     } = useProcesses();
 
-    const [snapshot, setSnapshot, removeSnapshot, loaded] = useLocalForage<any>(
-        "snapshot",
-        ""
-    );
-
-
     const {
         windowStates: { [id]: windowState },
-        setWindowStates,
         addToWindow,
         removeFromWindow,
         windowStates,
@@ -27,15 +22,6 @@ const VideoComp = ({ id }: { id: string }) => {
 
     const rndRef = React.useRef(null);
 
-    // React.useEffect(() => {
-    //     //if (windowState) return;
-
-    //         addToWindow(id, {
-    //             position: { x: 0, y: 0 },
-    //             size: { width: "250px", height: "250px" },
-    //         });
-    //     return removeFromWindow(id);
-    // }, []);
 
     const textareaRef = React.useRef(null);
 
@@ -49,7 +35,8 @@ const VideoComp = ({ id }: { id: string }) => {
                     size={windowState.size}
                     onResizeStop={(e, direction, ref, delta, position) => {
                         const { width, height } = ref.style;
-                        addToWindow(id, { size: { width, height } });
+                        
+                        addToWindow(id, { size: { width: pxToNum(width), height:pxToNum(height) } });
                     }}
                     onDragStop={(e, { x, y }) => {
                         addToWindow(id, { position: { x, y } });
@@ -94,4 +81,4 @@ const VideoComp = ({ id }: { id: string }) => {
     );
 };
 
-export default VideoComp;
+export default MemoComp;
