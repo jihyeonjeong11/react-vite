@@ -9,14 +9,7 @@ import { useIndexedDb } from "../indexeddb";
 
 // 나중에 Process와 네이밍 맞출것
 
-export interface WindowState {
-    position?: Position;
-    size: { width: number; height: number };
-}
 
-export type MemoState = WindowState & {
-    value?: string;
-};
 
 export type WindowProps = {
     position: Position;
@@ -24,11 +17,7 @@ export type WindowProps = {
     value: string;
 };
 
-// export type Processes = Record<string, ProcessProps>;
 
-// export interface VideoState extends WindowState {
-//     srcUrl?: string;
-// }
 
 export type WindowStates = Record<string, WindowProps>;
 
@@ -110,3 +99,19 @@ const useSessionContextState = (): SessionContextState => {
 };
 
 export default useSessionContextState;
+
+
+// export interface WindowState {
+//     position?: Position;
+//     size: { width: number; height: number };
+// }
+
+// export type MemoState = WindowState & {
+//     value?: string;
+// };
+
+// // export type Processes = Record<string, ProcessProps>;
+
+// // export interface VideoState extends WindowState {
+// //     srcUrl?: string;
+// // }
