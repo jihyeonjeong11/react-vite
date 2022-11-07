@@ -59,10 +59,8 @@ draggable components
 이후 타입에러 해결, localforage context작성으로 넘어감.;
 
 11/07 IndexedDB context 작성, typescript 오류 수정.(clean 되지 않은 상태.) gitLab page 먼저 넣고 할 예정.
-<<<<<<< HEAD
 
-=======
->>>>>>> 6c1d3a05e7b85201425586f0b1169e19cd9fd626
+11/07 ci/cd 메소드 결정?(gitlab runner) 아직 결정안됨. 빠른 피드백을 위해 일단 gitlab page로 먼저 프로젝트 진행상황을 볼 수 있도록 할 작업.
 
 
 # 실행법

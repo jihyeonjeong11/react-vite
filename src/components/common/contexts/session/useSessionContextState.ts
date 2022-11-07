@@ -39,7 +39,7 @@ export type SessionContextState = SessionData & {
 
 const useSessionContextState = (): SessionContextState => {
     const { processes, setProcesses } = useProcesses();
-    const [windowStates, setWindowStates] = useState<WindowStates>({});
+    const [windowStates, setWindowStates] = useState<WindowStates>({} as WindowStates);
 
     const { dbLoaded, storedValue } = useIndexedDb();
 
@@ -72,7 +72,6 @@ const useSessionContextState = (): SessionContextState => {
     }, [processes, setProcesses, dbLoaded]);
 
     const addToWindow = (id: string, data: Partial<WindowProps>) => {
-        //console.log(id, windowStates[id])
         return setWindowStates({
             ...windowStates,
             [id]: { ...windowStates[id], ...data },
