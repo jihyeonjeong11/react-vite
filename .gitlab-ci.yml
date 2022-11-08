@@ -9,8 +9,13 @@ cache:
       - node_modules/
       - .yarn/
       - yarn.lock
-install:
+pages:
   stage: deploy
   script:
     - yarn install
-
+    - yarn build
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
