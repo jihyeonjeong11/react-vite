@@ -1,20 +1,37 @@
-image: node:9.4.0
+# image: node:9.4.0
 
-before_script:
-  - yarn install
+# before_script:
+#   - yarn install --cache-folder .yarn
 
-pages:
-  stage: test
-  cache:
-      paths:
-        - node_modules/
-        - .yarn/
-  script:
-    - npm install
-    - npm run build
-    - cp -a dist/. public/
-  artifacts:
+# pages:
+#   stage: test
+#   cache:
+#       paths:
+#         - node_modules/
+#         - .yarn/
+#   script:
+#     - npm install
+#     - npm run build
+#     - cp -a dist/. public/
+#   artifacts:
+#     paths:
+#       - public
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+image: node:14-stretch
+
+variables:
+  YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn
+
+cache:
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
-      - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - node_modules/
+      - .yarn/
+      - yarn.lock
+install:
+  stage: install
+  script:
+    - yarn install
+
