@@ -6,10 +6,9 @@ before_script:
 pages:
   stage: test
   cache:
-      prefix: npm
-    paths:
-      - node_modules/
-      - .yarn
+      paths:
+        - node_modules/
+        - .yarn/
   script:
     - npm install
     - npm run build
