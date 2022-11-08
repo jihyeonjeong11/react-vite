@@ -3,12 +3,6 @@ image: node:16-stretch
 variables:
   YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn/cache
 
-cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-      - .yarn/
-      - yarn.lock
 pages: 
   artifacts: 
     paths: 
@@ -18,7 +12,9 @@ pages:
       - .yarn
       - .yarn/
   cache: 
+    key: ${CI_COMMIT_REF_SLUG}
     paths: 
+      - .yarn/
       - .yarn-cache/
   only: 
     - main
