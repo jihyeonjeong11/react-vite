@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 
-import analyze from "rollup-plugin-analyzer";
 import { visualizer } from "rollup-plugin-visualizer";
 
 //https://vitejs.dev/config/shared-options.html

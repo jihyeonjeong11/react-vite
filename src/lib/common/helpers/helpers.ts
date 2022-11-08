@@ -1,6 +1,3 @@
-import type { WindowState } from "@/components/common/contexts/session/useSessionContextState";
-import type { Position } from "react-rnd";
-import { pxToNumber } from "./stringHelpers";
 
 /**
  * @param {Number} l - 배열 길이

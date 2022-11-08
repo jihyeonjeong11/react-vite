@@ -8,12 +8,16 @@ const windowTypes = {
 } as const;
 
 declare global {
-    interface ComponentWithChildrenProps {
+    type ComponentWithChildrenProps =  {
         children: (React.ReactNode & { type: { name: string } })[] | React.ReactNode;
         onCheck?: (e: React.SyntheticEvent, index: number) => void;
         className?: string;
         style?: any;
         type?: windowTypes;
-        id?: string;
+        
     }
+    type ComponentWithId = ComponentWithChildrenProps & {
+        id: string;
+    }
+
 }

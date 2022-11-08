@@ -6,21 +6,17 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { useProcesses } from "@/components/common/contexts/process";
 import { useSession } from "@/components/common/contexts/session";
 
-const Window = ({ children, type, id }: ComponentWithChildrenProps) => {
+const Window = ({ children, type, id }: ComponentWithId) => {
     const {
         processes: { [id]: process },
         close,
     } = useProcesses();
 
-    const {windowStates: {[id]: windowState}, setWindowStates} = useSession();
-
-    const click = (event: React.SyntheticEvent) => {
-        console.log(event.type);
-        console.log(event.detail);
-    };
+    const {
+        windowStates: { [id]: windowState },
+    } = useSession();
 
     return (
-        
         <section className="shadow-window-shadow h-full outline outline-1 outline-window-outline w-full">
             <header className="bg-window-header text-white h-8">
                 <nav className="flex items-center">
@@ -28,7 +24,7 @@ const Window = ({ children, type, id }: ComponentWithChildrenProps) => {
                     <p>메모장</p>
                     <p>{id}</p>
                     {/* <button onClick={()=>close(id)} > */}
-                    <button onClick={()=>close(id)}>
+                    <button onClick={() => close(id)}>
                         <AiFillCloseCircle />
                     </button>
                 </nav>

@@ -1,5 +1,7 @@
+// RND 관련 helpers
+
 import type { Size } from "./hooks/useResizable";
-import type { WindowState } from "../common/contexts/session/useSessionContextState";
+import type { WindowProps } from "../common/contexts/session/useSessionContextState";
 import type { Position } from "react-rnd";
 
 import { TASKBAR_HEIGHT } from "./constants";
@@ -62,7 +64,7 @@ export const maxSize = (size: Size, lockAspectRatio: boolean): Size => {
 };
 
 export const isWindowOutsideBounds = (
-    windowState: WindowState,
+    windowState: WindowProps,
     bounds: Position,
     checkOffscreen = false
 ): boolean => {

@@ -1,13 +1,15 @@
-image: node:16.5.0
+image: node:9.4.0
+
+before_script:
+  - yarn install --cache-folder .yarn
+
 pages:
-  stage: deploy
+  stage: test
   cache:
-    key:
-      files:
-        - package-lock.json
       prefix: npm
     paths:
       - node_modules/
+      - .yarn
   script:
     - npm install
     - npm run build
