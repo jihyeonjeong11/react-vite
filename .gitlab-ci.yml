@@ -16,11 +16,11 @@ pages:
     paths: 
       - .yarn/
       - .yarn-cache/
+      - .yarn
+      - .yarn.lock
   only: 
     - main
   script: 
-    - yarn set version berry      <--- get last version
-    - yarn set version 3.2.4      <--- then downgrade to a specific version
     - yarn install
     - yarn build
   stage: deploy
