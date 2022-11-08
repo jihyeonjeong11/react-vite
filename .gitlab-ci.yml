@@ -12,7 +12,9 @@ cache:
 pages: 
   artifacts: 
     paths: 
-      - dist
+      - builds
+      - build
+      - node_modules/
   cache: 
     paths: 
       - .yarn-cache/
