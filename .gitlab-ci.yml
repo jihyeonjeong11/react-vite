@@ -1,37 +1,8 @@
-# image: node:16-stretch
-
-# variables:
-#   YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn
-
-# cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - node_modules/
-#       - .yarn/
-#       - yarn.lock
-# # pages:
-#   stage: deploy
-#   script:
-#     - yarn install
-#     - yarn build
-#     - cp -a dist/. public/
-#   artifacts:
-#     paths:
-#       - public
-#   only:
-#     - main
-
 image: node:16-stretch
 
 variables:
-  YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn
+  YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn/cache
 
-cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-      - .yarn/
-      - yarn.lock
 pages: 
   artifacts: 
     paths: 
@@ -41,10 +12,15 @@ pages:
       - .yarn
       - .yarn/
   cache: 
+    key: ${CI_COMMIT_REF_SLUG}
     paths: 
+      - .yarn/
       - .yarn-cache/
+      - .yarn
+      - .yarn.lock
   only: 
-    - master
+    - main
   script: 
+    - yarn install
     - yarn build
   stage: deploy
