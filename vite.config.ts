@@ -29,7 +29,9 @@ export default defineConfig({
     // },
 
     
-
+    build: {
+        outDir: "/"
+    },
     plugins: [react(), visualizer()],
     resolve: {
         alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],

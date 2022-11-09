@@ -11,7 +11,7 @@
  *~ Otherwise, delete this declaration.
  */
 
-export as namespace testLib;
+export as namespace examLib;
 
 const ZeroOrOne = {
     no: "0",
@@ -27,7 +27,7 @@ const ExamTypes = {
 } as const;
 
 // http://133.186.228.26:7070/api/exam/examBasicInfo
-export interface BasicTestProps {
+export interface BasicExamProps {
     ec_cd?: string; // 시험코드 // 없음
     ec_name?: string; // 시험명  // input
     e_student_collocate_kind?: ZeroOrOne; // 시험학생배치종류 // 라디오

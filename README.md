@@ -62,6 +62,8 @@ draggable components
 
 11/07 ci/cd 메소드 결정?(gitlab runner) 아직 결정안됨. 빠른 피드백을 위해 일단 gitlab page로 먼저 프로젝트 진행상황을 볼 수 있도록 할 작업.
 
+11/09 11/08까지 gitlab page pipleline 및 docker 작업하였지만, gitlab CE 설정을 위해선 서버의 foundation(dns routing)부터 새롭게 설정을 해야할 필요가 있으므로 일단 보류함.
+
 
 # 실행법
 
