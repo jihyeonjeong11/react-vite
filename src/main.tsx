@@ -42,7 +42,7 @@ const router = createBrowserRouter([
                         element: <BasicExamInfo />,
                     },
                     {
-                        path: "ik",
+                        path: "ik", 
                         element: <IkTest />,
                     },
                     {

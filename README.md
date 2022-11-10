@@ -64,6 +64,9 @@ draggable components
 
 11/09 11/08까지 gitlab page pipleline 및 docker 작업하였지만, gitlab CE 설정을 위해선 서버의 foundation(dns routing)부터 새롭게 설정을 해야할 필요가 있으므로 일단 보류함.
 
+11/10 
+https://xd.adobe.com/view/74fa38c6-69d4-4ff5-bf84-c844dd502fe8-21a9/
+디자인을 보며 작업 중입니다. 먼저 사이드바 메뉴를 먼저 작업합니다.
 
 # 실행법
 
