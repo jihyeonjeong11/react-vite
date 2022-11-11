@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import localforage from "localforage";
 
 import Aside from "@/routes/aside/Aside";
+import AsideRoot from "./components/aside/container/AsideRoot";
 import { IndexedDbProvider } from "@/components/common/contexts/indexeddb/index";
 
 // todo
@@ -18,7 +19,7 @@ function App() {
         <>
             <div className="flex overflow-y-hidden">
                 <IndexedDbProvider>
-                    <Aside />
+                    <AsideRoot />
                     <div id="detail">
                         <Outlet />
                     </div>

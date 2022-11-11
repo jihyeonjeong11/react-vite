@@ -19,6 +19,13 @@ export const viewWidth = (): number => window.innerWidth;
 export const pxToNum = (value: number | string = 0): number =>
     typeof value === "number" ? value : Number.parseFloat(value);
 
+
+/**
+ * @param {isComponentTypeNeeded} boolean - 오브젝트 타입 표시여부
+ * @param {objects} {}[] - 오브젝트 배열
+ * @return {object} merge된 오브젝트
+ */
+
 export const mergeTwoObject = (
     isComponentTypeNeeded: boolean,
     ...objects: any[]
