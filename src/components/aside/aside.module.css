@@ -1,4 +1,4 @@
-.btn {
+.list {
     width: 100%;
     background-color: var(--background-color);
     color: #222;
@@ -12,7 +12,21 @@
     --accent-color: #1cf2d3;
 }
 
-.btn.btn-background-slide::before {
+.list-inactive {
+    width: 100%;
+    background-color: var(--background-color);
+    color: #222;
+    padding: 0.5em 1em;
+    border: none;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+
+    --border-size: 2px;
+    --accent-color: #1cf2d3;
+}
+
+.list.list-background-slide::before {
     content: "";
     position: absolute;
     top: 0;
@@ -27,18 +41,19 @@
     transform-origin: left;
 }
 
-.btn.btn-background-slide:hover::before,
-.btn.btn-background-slide:focus::before {
+.list.list-background-slide:hover::before,
+.list.list-background-slide:focus::before {
     transform: scaleX(0.02);
 }
 
-.btn.btn-background-slide {
+.list.list-background-slide {
     transition: color 300ms ease-in-out;
     z-index: 1;
 }
 
-.btn.btn-background-slide:hover,
-.btn.btn-background-slide:focus {
+.list.list-background-slide:hover,
+.list.list-background-slide:active,
+.list.list-background-slide:focus {
     color: white;
     background-color: #2945a8;
 }
@@ -80,4 +95,10 @@
 .slide-fade-out-dropdown > ul {
     animation: slide-fade-out-dropdown-animation 0.4s ease;
     animation-fill-mode: forwards;
+}
+
+.accordion-collapse {
+    height: 0;
+    overflow: hidden;
+    transition: height 200ms ease-in-out
 }

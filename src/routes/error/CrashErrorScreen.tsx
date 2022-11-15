@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import AsideRoot from "@/components/aside/container/AsideRoot";
 
 export type CrashErrorScreenProps = {
     onResolve: () => void;
@@ -8,19 +9,20 @@ export type CrashErrorScreenProps = {
 function CrashErrorScreen() {
     const navigate = useNavigate();
     const rollback = () => {
-        return navigate('/')
-    }
+        return navigate("/");
+    };
     return (
-        <div>
-            <div>uncaught error found</div>
+        <div className="flex overflow-y-hidden">
+            <AsideRoot />
+            <div id="detail">
+                <div>uncaught error found</div>
 
-            <div className="button-wrapper">
-                <button  onClick={rollback}>
-                    홈으로 이동하기
-                </button>
+                <div className="button-wrapper">
+                    <button onClick={rollback}>홈으로 이동하기</button>
+                </div>
             </div>
         </div>
     );
 }
 
-export default CrashErrorScreen; 
+export default CrashErrorScreen;

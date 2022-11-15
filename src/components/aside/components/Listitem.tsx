@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { MenuProps } from "../constants";
 
 import classes from "../aside.module.css";
@@ -6,6 +7,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { SlCamrecorder, SlNote } from "react-icons/sl";
 import { CgScreen } from "react-icons/cg";
 import { BsEye } from "react-icons/bs";
+import { useAccordion } from "@/components/common/contexts/Accordion";
 
 const iconSorter = (title: string | undefined, size: string, color: string) => {
     switch (title) {
@@ -24,23 +26,41 @@ const iconSorter = (title: string | undefined, size: string, color: string) => {
     }
 };
 
-const ListItem = ({ item: { title, href } }: { item: Partial<MenuProps> }) => (
-    <li className="relative cursor-pointer" id={title}>
-        <a
-            href={!!href ? href : `javascript:void(0)`}
-            className={
-                "flex items-center p-2 px-4 text-base font-normal " +
-                classes["btn"] +
-                " " +
-                classes["btn-background-slide"]
-            }
-        >
-            {iconSorter(title, "1.5rem", "text-sidebar__text")}
-            <span className="ml-3 text-sidebar__text hover:text-white">
-                {title}
-            </span>
-        </a>
-    </li>
-);
+const ListItem = ({
+    item: { title, href },
+    eventKey,
+}: {
+    item: Partial<MenuProps>;
+    eventKey: number;
+}) => {
+    const {activeIndex, toggleClick} = useAccordion();
+    const isFocused = React.useMemo(() => eventKey == activeIndex, [activeIndex, eventKey]);
+    return (
+        <article className="relative cursor-pointer" id={title}>
+            <div
+                className={
+                    "flex items-center p-2 px-4 text-base font-normal " +
+                    classes["list"] +
+                    " " +
+                    classes["list-background-slide"]
+                }
+            >
+                {iconSorter(
+                    title,
+                    "1.5rem",
+                    isFocused ? "text-white" : "text-sidebar__text"
+                )}
+                <span
+                    className={
+                        "ml-3 hover:text-white" +
+                        (isFocused ? " text-white" : " text-sidebar__text")
+                    }
+                >
+                    {title}
+                </span>
+            </div>
+        </article>
+    );
+};
 
-export default ListItem;
+export default React.memo(ListItem);

@@ -1,23 +1,34 @@
-export type MenuProps =   {
+export type MenuProps = {
     title: string;
     hasChildren: boolean;
     href: string;
-    children?: any[];
+    children?: MenuProps[];
 };
 
-export type MenuType = Record<string, MenuProps>;
+export type MenuType = MenuProps[];
 
-const menus: MenuType = {
-    "1": { title: "Home", hasChildren: false, href: "/" },
-    "2": {
+const menus: MenuType = [
+    { title: "Home", hasChildren: false, href: "/" },
+    {
         title: "recording",
         hasChildren: true,
         href: "",
-        children: [1,2,3,4,5],
+        children: [
+            { title: "item_recording1", hasChildren: false, href: "/" },
+            { title: "item_recording2", hasChildren: false, href: "/" },
+        ],
     },
-    "3": { title: "testing", hasChildren: true, href: "", children: [1,2,3,4,5] },
-    "4": { title: "videos", hasChildren: false, href: "video" },
-    "5": { title: "managing", hasChildren: false, href: "managing" },
-};
+    {
+        title: "testing",
+        hasChildren: true,
+        href: "",
+        children: [
+            { title: "item_testing1", hasChildren: false, href: "/" },
+            { title: "item_testing2", hasChildren: false, href: "/" },
+        ],
+    },
+    { title: "videos", hasChildren: false, href: "video" },
+    { title: "managing", hasChildren: false, href: "managing" },
+];
 
 export default menus;

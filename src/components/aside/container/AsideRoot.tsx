@@ -1,68 +1,86 @@
-import React, { useState } from "react";
+import AccordionCompound from "../components/AccordionCompound";
 
-import menus from "../constants";
+import { AccordionConsumer } from "@/components/common/contexts/Accordion";
+
 import ListItem from "../components/Listitem";
-import classes from "../aside.module.css";
-
-export type HighlightEnumProps =
-    | "home"
-    | "recording"
-    | "testing"
-    | "videos"
-    | "managing"
-    | "none";
-
-    // useDebounce 먼저 걸어야겠다.ㅣ
+import React from "react";
 
 const AsideRoot = () => {
-    const [highlight, setHighlight] = useState<HighlightEnumProps>("none");
-
-    const clickEnum = React.useCallback(
-        (e: React.SyntheticEvent) => {
-            const target = (e.target as HTMLLIElement).closest("li");
-            if (target != null) {
-                if (highlight == target.id) return setHighlight("none");
-                if (highlight == "none" || highlight != target.id)
-                    return setHighlight(target.id as HighlightEnumProps);
-            }
-        },
-        [highlight]
-    );
-
     return (
         <>
             <aside className="w-48" aria-label="Sidebar">
                 <nav className=" h-screen py-4 bg-sidebar__background">
-                    <ul className="space-y-2" onClick={clickEnum}>
-                        {Object.keys(menus).map((key) => {
-                            const { title, href, hasChildren, children } =
-                                menus[key];
-                            return (
-                                <>
-                                    <ListItem
-                                        key={key}
-                                        item={{ title, href }}
-                                    />
-                                    {highlight == title && hasChildren && (
-                                        <article
-                                            className={
-                                                classes[
-                                                    highlight == title
-                                                        ? "slide-fade-in-dropdown"
-                                                        : "slide-fade-out-dropdown"
-                                                ]
-                                            }
-                                        >
-                                            <ul>
-                                                {children?.map((e, i) => (
-                                                    <li key={i}>children</li>
-                                                ))}
-                                            </ul>
-                                        </article>
-                                    )}
-                                </>
-                            );
-                        })}
+                    <ul className="space-y-2">
+                        <AccordionCompound>
+                            <AccordionConsumer>
+                                {({ menus }) => {
+                                    return (
+                                        <>
+                                            {menus.map(
+                                                (
+                                                    {
+                                                        title,
+                                                        href,
+                                                        hasChildren,
+                                                        children,
+                                                    },
+                                                    index
+                                                ) => (
+                                                    <React.Fragment
+                                                        key={
+                                                            index + "asidemenu"
+                                                        }
+                                                    >
+                                                        <AccordionCompound.Item>
+                                                            <AccordionCompound.Toggle
+                                                                eventKey={index}
+                                                            >
+                                                                <ListItem
+                                                                    item={{
+                                                                        title,
+                                                                        href,
+                                                                    }}
+                                                                    eventKey={
+                                                                        index
+                                                                    }
+                                                                />
+                                                            </AccordionCompound.Toggle>
+                                                            <AccordionCompound.Collapse
+                                                                eventKey={index}
+                                                            >
+                                                                {hasChildren &&
+                                                                    children?.map(
+                                                                        (
+                                                                            c,
+                                                                            i
+                                                                        ) => {
+                                                                            return (
+                                                                                <ListItem
+                                                                                    key={
+                                                                                        i +
+                                                                                        "childrenmenu"
+                                                                                    }
+                                                                                    item={{
+                                                                                        title: c.title,
+                                                                                        href: c.href,
+                                                                                    }}
+                                                                                    eventKey={
+                                                                                        index
+                                                                                    }
+                                                                                />
+                                                                            );
+                                                                        }
+                                                                    )}
+                                                            </AccordionCompound.Collapse>
+                                                        </AccordionCompound.Item>
+                                                    </React.Fragment>
+                                                )
+                                            )}
+                                        </>
+                                    );
+                                }}
+                            </AccordionConsumer>
+                        </AccordionCompound>
                     </ul>
                 </nav>
             </aside>
@@ -71,3 +89,37 @@ const AsideRoot = () => {
 };
 
 export default AsideRoot;
+
+// <ul>
+// <ListItem
+//     key={key}
+//     item={{ title, href }}
+//     clickEvent={clickEvent}
+//     boolean={boolean}
+// />
+// {boolean && hasChildren && (
+//     <article
+//         className={
+//             classes[
+//                 !closing
+//                     ? "slide-fade-in-dropdown"
+//                     : "slide-fade-out-dropdown"
+//             ]
+//         }
+//     >
+//         <ul>
+//             {children?.map(({ title, href }, i) => (
+//                 <ListItem
+//                     key={i}
+//                     item={{
+//                         title,
+//                         href,
+//                     }}
+//                     clickEvent={clickEvent}
+//                     boolean={boolean}
+//                 />
+//             ))}
+//         </ul>
+//     </article>
+// )}
+// </ul>
