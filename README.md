@@ -73,6 +73,8 @@ draggable components
 
 이후 
 
+리팩토링 작업 필요 + 테스트추가
+
 1. 스트링 로케일
 2. 테마(tailwindcss)
 
