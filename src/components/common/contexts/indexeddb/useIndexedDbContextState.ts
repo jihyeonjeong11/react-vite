@@ -3,8 +3,6 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import type { Processes } from "../process/useProcessContextState";
 import type { WindowStates } from "../session/useSessionContextState";
 
-import { useProcesses } from "../process/index";
-import { useLocalForage } from "../../hooks/useLocalForage";
 import localForage from "localforage";
 
 import { dbKey } from "../constants";
