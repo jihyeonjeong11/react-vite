@@ -2,7 +2,7 @@ import React from "react";
 import {
     AccordionProvider,
     useAccordion,
-} from "@/components/common/contexts/Accordion";
+} from "@/components/common/contexts/accordion";
 
 import styles from "../aside.module.css";
 

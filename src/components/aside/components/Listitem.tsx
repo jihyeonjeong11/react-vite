@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useTranslation } from "react-i18next";
+
 import type { MenuProps } from "../constants";
 
 import classes from "../aside.module.css";
@@ -7,12 +9,12 @@ import { AiOutlineHome } from "react-icons/ai";
 import { SlCamrecorder, SlNote } from "react-icons/sl";
 import { CgScreen } from "react-icons/cg";
 import { BsEye } from "react-icons/bs";
-import { useAccordion } from "@/components/common/contexts/Accordion";
+import { useAccordion } from "@/components/common/contexts/accordion";
 
 const iconSorter = (title: string | undefined, size: string, color: string) => {
     switch (title) {
         default:
-            return <></>;
+            return <div style={{width: 24}} />;
         case "home":
             return <AiOutlineHome size={size} className={color} />;
         case "recording":
@@ -35,6 +37,7 @@ const ListItem = ({
 }) => {
     const {activeIndex, toggleClick} = useAccordion();
     const isFocused = React.useMemo(() => eventKey == activeIndex, [activeIndex, eventKey]);
+    const {t} = useTranslation();
     return (
         <article className="relative cursor-pointer" id={title}>
             <div
@@ -56,7 +59,7 @@ const ListItem = ({
                         (isFocused ? " text-white" : " text-sidebar__text")
                     }
                 >
-                    {title}
+                    {title && t(title)}
                 </span>
             </div>
         </article>

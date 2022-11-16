@@ -1,15 +1,28 @@
 import AccordionCompound from "../components/AccordionCompound";
 
-import { AccordionConsumer } from "@/components/common/contexts/Accordion";
+import { useTranslation } from "react-i18next";
+
+import { AccordionConsumer } from "@/components/common/contexts/accordion";
 
 import ListItem from "../components/Listitem";
 import React from "react";
 
 const AsideRoot = () => {
+    const {i18n} = useTranslation();
+
+    const changeLang = (e: React.MouseEvent) => {
+        const target = (e.target as Element).closest('button')
+        return target && i18n.changeLanguage(target.dataset.lang)
+    }
+    
     return (
         <>
             <aside className="w-48" aria-label="Sidebar">
-                <nav className=" h-screen py-4 bg-sidebar__background">
+                <nav className="h-screen py-4 bg-sidebar__background">
+                    <div onClick={changeLang} className="flex justify-evenly mb-12">
+                        <button data-lang="ko" className="text-white">ko</button>
+                        <button data-lang="en" className="text-white">en</button>
+                    </div>
                     <ul className="space-y-2">
                         <AccordionCompound>
                             <AccordionConsumer>
