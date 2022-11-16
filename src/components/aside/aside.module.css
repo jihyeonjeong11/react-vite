@@ -51,12 +51,12 @@
     z-index: 1;
 }
 
-.list.list-background-slide:hover,
+/* .list.list-background-slide:hover,
 .list.list-background-slide:active,
 .list.list-background-slide:focus {
     color: white;
     background-color: #2945a8;
-}
+} */
 
 @keyframes slide-fade-in-dropdown-animation {
     0% {

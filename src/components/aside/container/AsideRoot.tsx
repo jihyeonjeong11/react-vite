@@ -18,8 +18,9 @@ const AsideRoot = () => {
     return (
         <>
             <aside className="w-48" aria-label="Sidebar">
-                <nav className="h-screen py-4 bg-sidebar__background">
-                    <div onClick={changeLang} className="flex justify-evenly mb-12">
+                    
+                <nav className=" h-screen py-4 bg-brand-100">
+                <div onClick={changeLang} className="flex justify-evenly mb-12">
                         <button data-lang="ko" className="text-white">ko</button>
                         <button data-lang="en" className="text-white">en</button>
                     </div>
