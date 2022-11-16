@@ -17,10 +17,19 @@ localforage.config({
 function App() {
     return (
         <>
-            <div className="flex overflow-y-hidden">
+            <div className="flex overflow-y-hidden bg-white dark:bg-black text-black dark:text-white">
                 <IndexedDbProvider>
                     <AsideRoot />
                     <div id="detail">
+                        <button 
+                            className="bg-black dark:bg-white py-2 px-4 text-white dark:text-black rounded mx-2 my-2"
+                            onClick={() => {document.getElementsByTagName("html")[0].classList.toggle("dark")}}
+                        >
+                            모드 전환
+                        </button>
+                        <p>테스트용 텍스트</p>
+                        <p>테스트용 텍스트</p>
+                        <p>테스트용 텍스트</p>
                         <Outlet />
                     </div>
                 </IndexedDbProvider>

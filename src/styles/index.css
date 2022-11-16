@@ -1,4 +1,14 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --deep-blue-100: 46, 83, 218 /* #2e53da  */;
+    --deep-blue-200: 41, 69, 168 /* #2945a8  */;
+  }
+  :root.dark {
+    --deep-blue-100: 37, 68, 179/* #2544B3 */;
+    --deep-blue-200: 55, 93, 230/* #375DE6 */;
+  }
+}

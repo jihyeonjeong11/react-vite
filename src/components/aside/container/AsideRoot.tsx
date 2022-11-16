@@ -9,7 +9,7 @@ const AsideRoot = () => {
     return (
         <>
             <aside className="w-48" aria-label="Sidebar">
-                <nav className=" h-screen py-4 bg-sidebar__background">
+                <nav className=" h-screen py-4 bg-brand-100">
                     <ul className="space-y-2">
                         <AccordionCompound>
                             <AccordionConsumer>
