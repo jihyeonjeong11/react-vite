@@ -40,6 +40,10 @@ type formProps = {
     applyOption?: applyOption;
     /** 에러 메세지 */
     error?: string | undefined;
+    /** 활성화 여부 */
+    disabled?: boolean;
+    /** 입력된 값 */
+    defaultValue?: string | string[] | number | number[];
 }
 export type labelProps = {
     /** 입력 요소의 종류 */
@@ -48,7 +52,8 @@ export type labelProps = {
 export type fieldProps = {
     /** 입력 요소의 종류 */
     type:  "select" | "radio" | "checkbox";
-    selectOption: { value: string, isDefault?: boolean, isDisable?: boolean }
+    /** 하위 선택 목록 */
+    selectOption: { value: string, isDefault?: boolean, isDisable?: boolean }[]
 } & formProps;
 
 /** react-hook-form: Apply validation */

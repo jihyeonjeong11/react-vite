@@ -1,8 +1,6 @@
+import { labelProps } from "@/types/Global";
 import { ReactElement, ReactNode } from "react";
-import { fieldProps, labelProps } from '../../../types/Global';
 
-const tipClass = "";
-const errorMessageClass = "";
 const LabelRoot = ({
     name,
     children
@@ -17,22 +15,6 @@ const LabelRoot = ({
         </label>
     )
 };
-
-const FieldsetRoot = ({
-    name,
-    children
-}: {
-    children: ReactNode | ReactNode[];
-} & Partial<labelProps>
-): ReactElement => {
-    return (
-        <fieldset>
-            <legend className="pb-2 inline-block font-medium">{name}</legend>
-            {children}
-        </fieldset>
-    )
-}
-
 const InputRoot = ({
     tip,
     placeholder,
@@ -99,43 +81,20 @@ const InputRoot = ({
         <>
             {
                 tip && 
-                <p className={tipClass}>{tip}</p>
-            }
-            {element}
-            {
-                error &&
-                <p className={errorMessageClass}>{error}</p>
-            }
-        </>
-    )
-};
-            element = 
-                <input 
-                    type={"password"}
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
-                />
-    }
-    return (
-        <>
-            {
-                tip && 
                 <p>{tip}</p>
             }
             {element}
             {
                 error &&
-                <p className={messageClass}>{error}</p>
+                <p>{error}</p>
             }
         </>
     )
 };
-
 const FormItem = ({
     name,
     tip,
+    placeholder,
     type,
     dataKey,
     register,
@@ -147,6 +106,7 @@ const FormItem = ({
         <LabelRoot name={name}>
             <InputRoot
                 tip={tip}
+                placeholder={placeholder}
                 type={type}
                 register={register} 
                 dataKey={dataKey}
@@ -157,30 +117,4 @@ const FormItem = ({
     )
 };
 
-const FormOptions = ({
-    name,
-    tip,
-    type,
-    dataKey,
-    register,
-    selectOption,
-    applyOption,
-    error
-}: Partial<fieldProps>
-): ReactElement => {
-    return (
-        <FieldsetRoot name={name}>
-            <SelectRoot 
-                tip={tip}
-                type={type}
-                selectOption={selectOption}
-                register={register}
-                dataKey={dataKey}
-                applyOption={applyOption}
-                error={error}
-            />
-        </FieldsetRoot>
-    )
-}
-
-export { FormItem, FormOptions }
+export default FormItem;
