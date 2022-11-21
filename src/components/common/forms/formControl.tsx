@@ -16,6 +16,21 @@ const LabelRoot = ({
     )
 };
 
+const FieldsetRoot = ({
+    name,
+    children
+}: {
+    children: ReactNode | ReactNode[];
+} & Partial<labelProps>
+): ReactElement => {
+    return (
+        <fieldset>
+            <legend className="pb-2 inline-block font-medium">{name}</legend>
+            {children}
+        </fieldset>
+    )
+}
+
 const InputRoot = ({
     tip,
     type,
@@ -130,10 +145,10 @@ const FormOptions = ({
 } & Partial<labelProps>
 ): ReactElement => {
     return (
-        <fieldset>
-        
-        </fieldset>
+        <FieldsetRoot name={name}>
+            <></>
+        </FieldsetRoot>
     )
 }
 
-export { FormItem }
+export { FormItem, FormOptions }

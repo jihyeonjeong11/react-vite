@@ -8,7 +8,7 @@ import AsideRoot from "./components/aside/container/AsideRoot";
 import { IndexedDbProvider } from "@/components/common/contexts/indexeddb/index";
 import Form from "./components/common/forms/form";
 import { CommonForms } from "./types/Global";
-import { FormItem } from "./components/common/forms/formItem";
+import { FormItem } from "./components/common/forms/formControl";
 import { addRegex, addRequired } from "./components/common/forms/helpers";
 
 // todo
