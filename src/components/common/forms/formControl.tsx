@@ -1,6 +1,8 @@
 import { ReactElement, ReactNode } from "react";
 import { fieldProps, labelProps } from '../../../types/Global';
 
+const tipClass = "";
+const errorMessageClass = "";
 const LabelRoot = ({
     name,
     children
@@ -52,33 +54,29 @@ const InputRoot = ({
         }
         return result.concat(' ', base);
     };
-    const messageClass = "";
 
     let element;
     
     switch(type) {
         case "text":
+        case "password":
+        case "number_string":
             element = 
                 <input 
-                    type={"text"} 
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                />
-            break;
-        case "desc":
-            element = 
-                <textarea 
+                    type={(type === "number_string" ? "tel"
+                        : (type === "password" ? "password"
+                        : "text"
+                        ))
+                    } 
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
                     placeholder={placeholder ? placeholder : ''}
                 />
             break;
-        case "number_string":
+        case "desc":
             element = 
-                <input 
-                    type={"tel"}
+                <textarea 
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
@@ -96,7 +94,21 @@ const InputRoot = ({
                     className={inputClass(error)}
                     placeholder={placeholder ? placeholder : ''}
                 />
-        case "password":
+    }
+    return (
+        <>
+            {
+                tip && 
+                <p className={tipClass}>{tip}</p>
+            }
+            {element}
+            {
+                error &&
+                <p className={errorMessageClass}>{error}</p>
+            }
+        </>
+    )
+};
             element = 
                 <input 
                     type={"password"}
