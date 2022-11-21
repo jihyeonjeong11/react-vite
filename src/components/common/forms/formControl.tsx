@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { labelProps } from '../../../types/Global';
+import { fieldProps, labelProps } from '../../../types/Global';
 
 const LabelRoot = ({
     name,
@@ -133,20 +133,27 @@ const FormItem = ({
 };
 
 const FormOptions = ({
-    value,
     name,
+    tip,
     type,
     dataKey,
     register,
+    selectOption,
     applyOption,
     error
-}: {
-    value: string;
-} & Partial<labelProps>
+}: Partial<fieldProps>
 ): ReactElement => {
     return (
         <FieldsetRoot name={name}>
-            <></>
+            <SelectRoot 
+                tip={tip}
+                type={type}
+                selectOption={selectOption}
+                register={register}
+                dataKey={dataKey}
+                applyOption={applyOption}
+                error={error}
+            />
         </FieldsetRoot>
     )
 }
