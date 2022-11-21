@@ -96,6 +96,15 @@ const InputRoot = ({
                     className={inputClass(error)}
                     placeholder={placeholder ? placeholder : ''}
                 />
+        case "password":
+            element = 
+                <input 
+                    type={"password"}
+                    {...register(dataKey, applyOption)}
+                    aria-invalid={error ? "true" : "false"}
+                    className={inputClass(error)}
+                    placeholder={placeholder ? placeholder : ''}
+                />
     }
     return (
         <>

@@ -43,7 +43,7 @@ type formProps = {
 }
 export type labelProps = {
     /** 입력 요소의 종류 */
-    type: "text" | "desc"| "number" | "number_string";
+    type: "text" | "desc"| "number" | "number_string" | "password";
 } & formProps;
 export type fieldProps = {
     /** 입력 요소의 종류 */
