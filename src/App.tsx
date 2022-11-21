@@ -7,9 +7,10 @@ import { initReactI18next } from "react-i18next";
 
 import Aside from "@/routes/aside/Aside";
 import AsideRoot from "./components/aside/container/AsideRoot";
-import { IndexedDbProvider } from "@/components/common/contexts/indexeddb/index";
-import { DialogsProvider } from "@/components/common/contexts/dialogs/index";
-import DialogRoot from "./components/common/dialog/container/DialogRoot";
+import Form from "./components/common/forms/form";
+import { CommonForms } from "./types/Global";
+import { FormItem } from "./components/common/forms/formControl";
+import { addRegex, addRequired } from "./components/common/forms/helpers";
 
 // todo
 
@@ -52,6 +53,9 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
     });
 
 function App() {
+    const submitTest = (data: CommonForms) => {
+        console.log(data);
+    }
     return (
         <>
             <div className="flex overflow-y-hidden bg-white dark:bg-black text-black dark:text-white">
@@ -68,7 +72,31 @@ function App() {
                         <p>테스트용 텍스트</p> */}
                     <Outlet />
                 </div>
-            </div>
+                        <Form submit={submitTest}>
+                            <FormItem 
+                                key="email" 
+                                dataKey="email" 
+                                name="메일" 
+                                type="text" 
+                                applyOption={{
+                                    required: addRequired,
+                                    pattern: addRegex("email")
+                                }} 
+                            />
+                            <FormItem 
+                                key="desc"
+                                dataKey="desc"
+                                name="설명"
+                                type="desc"
+                                applyOption={{
+                                    required: addRequired
+                                }}
+                            />
+                            <p>그냥 p 태그</p>
+                            <button type="submit">제출 버튼</button>
+                        </Form>
+                        <Outlet />
+                    </div>
         </>
     );
 }
