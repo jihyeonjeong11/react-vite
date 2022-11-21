@@ -1,8 +1,12 @@
+import { Dialogs, DialogTypes } from "../common/contexts/dialogs/useDialogsContextState";
+
 export type MenuProps = {
     title: string;
     hasChildren: boolean;
-    href: string;
+    href?: string;
     children?: MenuProps[];
+    hasDialog?: true;
+    dialogType?: DialogTypes;
 };
 
 export type MenuType = MenuProps[];
@@ -23,8 +27,8 @@ const menus: MenuType = [
         hasChildren: true,
         href: "",
         children: [
-            { title: "item_testing1", hasChildren: false, href: "/" },
-            { title: "item_testing2", hasChildren: false, href: "/" },
+            { title: "시험 작성", hasChildren: false, hasDialog: true, dialogType: Dialogs["MainExam"]},
+            { title: "시험 목록", hasChildren: false, href: "/" },
         ],
     },
     { title: "videos", hasChildren: false, href: "video" },

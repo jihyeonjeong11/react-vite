@@ -1,28 +1,44 @@
 import AccordionCompound from "../components/AccordionCompound";
 
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { AccordionConsumer } from "@/components/common/contexts/accordion";
+import { useDialogsContextState } from "@/components/common/contexts/dialogs";
 
 import ListItem from "../components/Listitem";
 import React from "react";
+import { DialogTypes, Dialogs } from "@/components/common/contexts/dialogs/useDialogsContextState";
 
 const AsideRoot = () => {
-    const {i18n} = useTranslation();
+    const { i18n } = useTranslation();
+    const navigate = useNavigate();
 
-    const changeLang = (e: React.MouseEvent) => {
-        const target = (e.target as Element).closest('button')
-        return target && i18n.changeLanguage(target.dataset.lang)
-    }
-    
+    const { dialogType, setDialogs } = useDialogsContextState();
+
+    const navBubble = React.useCallback((e: React.MouseEvent) => {
+        const target = (e.target as Element).closest("button");
+        if (target && target.dataset.dialog) return setDialogs(target.dataset.dialog as DialogTypes);
+        if (target && target.dataset.lang)
+            return i18n.changeLanguage(target.dataset.lang);
+        if (target && target.dataset.href) return navigate(target.dataset.href);
+    }, [dialogType, i18n, navigate]);
+
     return (
         <>
             <aside className="w-48" aria-label="Sidebar">
-                    
-                <nav className=" h-screen py-4 bg-brand-100">
-                <div onClick={changeLang} className="flex justify-evenly mb-12">
-                        <button data-lang="ko" className="text-white">ko</button>
-                        <button data-lang="en" className="text-white">en</button>
+                <nav
+                    onClick={navBubble}
+                    className=" h-screen py-4 bg-brand-100"
+                >
+                    <>{dialogType}</>
+                    <div className="flex justify-evenly mb-12">
+                        <button data-lang="ko" className="text-white">
+                            ko
+                        </button>
+                        <button data-lang="en" className="text-white">
+                            en
+                        </button>
                     </div>
                     <ul className="space-y-2">
                         <AccordionCompound>
@@ -37,6 +53,8 @@ const AsideRoot = () => {
                                                         href,
                                                         hasChildren,
                                                         children,
+                                                        hasDialog,
+                                                        dialogType,
                                                     },
                                                     index
                                                 ) => (
@@ -77,6 +95,10 @@ const AsideRoot = () => {
                                                                                     item={{
                                                                                         title: c.title,
                                                                                         href: c.href,
+                                                                                        hasDialog:
+                                                                                            c.hasDialog,
+                                                                                        dialogType:
+                                                                                            c.dialogType,
                                                                                     }}
                                                                                     eventKey={
                                                                                         index

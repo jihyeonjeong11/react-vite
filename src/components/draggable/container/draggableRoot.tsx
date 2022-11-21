@@ -55,7 +55,7 @@ export default DraggableRoot;
 
 const TaskBar = () => {
     return (
-        <nav className="backdrop-blur bg-taskbar-background sticky top-[100vh] ">
+        <nav className="backdrop-blur bg-taskbar-background sticky top-[100vh] bg-gray-500">
             <p className="text-white">taskbar</p>
             <Remote />
         </nav>

@@ -7,16 +7,17 @@ import {
 import styles from "../aside.module.css";
 
 const AccordionCompound = ({ children, ...rest }: {children: React.ReactNode}) => {
-    return <AccordionProvider>{children}</AccordionProvider>;
+    return <AccordionProvider {...rest}>{children}</AccordionProvider>;
 };
 
-const AccordionItem = ({ children }: {children: React.ReactNode}) => {
-    return <li className="w-full">{children}</li>;
+const AccordionItem = ({ children, ...rest }: {children: React.ReactNode}) => {
+    return <li className="w-full" {...rest}>{children}</li>;
 };
 
 const AccordionToggle = ({
     children,
     eventKey,
+    ...rest
 }: {
     children: React.ReactNode;
     eventKey: number;
@@ -24,8 +25,8 @@ const AccordionToggle = ({
     const { activeIndex, toggleClick } = useAccordion();
 
     return (
-        <div className="w-full">
-            <button className="w-full" onClick={() => toggleClick(eventKey)}>{children}</button>
+        <div className="w-full" {...rest}>
+            <div className="w-full" onClick={() => toggleClick(eventKey)}>{children}</div>
         </div>
     );
 };
@@ -33,6 +34,7 @@ const AccordionToggle = ({
 const AccordionCollapse = ({
     children,
     eventKey,
+    ...rest
 }: {
     children: React.ReactNode;
     eventKey: number;
@@ -53,7 +55,7 @@ const AccordionCollapse = ({
     }, [eventKey, activeIndex])
 
     return (
-        <div className={"w-full " + styles['accordion-collapse']} id={id} style={style} >
+        <div className={"w-full " + styles['accordion-collapse']} id={id} style={style} {...rest} >
             {children}
         </div>
     );

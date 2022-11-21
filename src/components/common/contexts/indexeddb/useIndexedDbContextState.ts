@@ -46,8 +46,6 @@ const useIndexedDbContextState = (): IndexedDbContextState => {
             try {
                 const value: StoredWindowProps | null =
                     await localForage.getItem(dbKey);
-                    console.log('value', value)
-
                 if (value !== null) setStoredValue(value);
                 setDbLoaded(true);
             } catch (e: any) {

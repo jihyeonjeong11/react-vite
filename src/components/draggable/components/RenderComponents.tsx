@@ -16,9 +16,11 @@ const RenderComponent: React.FunctionComponent<RenderComponentProps> = ({
     Component,
     id,
 }) => {
+    const Comp = React.useMemo(
+        () => (Component == "memo" ? MemoComp : MemoComp),
+        [Component]
+    );
 
-    const Comp = Component == 'memo' ? MemoComp : MemoComp
-    
     const SafeComponent = (
         <ErrorBoundary>
             <Comp id={id} />

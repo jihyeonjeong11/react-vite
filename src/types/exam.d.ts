@@ -36,6 +36,10 @@ export interface BasicExamProps {
     e_desc?: string; // 시험수업설명 //textarea
 }
 
+export type ExamStep2 = BasicExamProps & {
+    
+}
+
 // api 별로 따로 끊어서, 후에 extends하여 사용할 것임.
 // module 먼저 localforage 사용, 후 작성 예정.
 //  export interface ScenarioProps {

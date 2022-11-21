@@ -3,7 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@/styles/index.css";
 
-import { createBrowserRouter, RouterProvider, Route, RouterProviderProps, BrowserRouterProps, useActionData } from "react-router-dom";
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route,
+    RouterProviderProps,
+    BrowserRouterProps,
+    useActionData,
+} from "react-router-dom";
+
+import { IndexedDbProvider } from "./components/common/contexts/indexeddb";
+import { DialogsProvider } from "./components/common/contexts/dialogs";
+import DialogRoot from "./components/common/dialog/container/DialogRoot";
 
 import TableScreen from "@/routes/table/TableScreen";
 import RegistrationScreen from "./routes/registration/RegistrationScreen";
@@ -14,14 +25,12 @@ import RegistrationRoot from "./components/registration/container/registrationRo
 import BasicExamInfo from "@/components/registration/basicExamInfo";
 import RoomSelection from "@/components/registration/roomSelection";
 
-import IkTest from '@/components/registration/ikTest';
-import HookFormTest from '@/components/registration/hookformTest';
+import IkTest from "@/components/registration/ikTest";
+import HookFormTest from "@/components/registration/hookformTest";
 
 const draggableAction = () => {
-
-    return 'data'
-
-}
+    return "data";
+};
 
 const router = createBrowserRouter([
     {
@@ -42,7 +51,7 @@ const router = createBrowserRouter([
                         element: <BasicExamInfo />,
                     },
                     {
-                        path: "ik", 
+                        path: "ik",
                         element: <IkTest />,
                     },
                     {
@@ -54,14 +63,23 @@ const router = createBrowserRouter([
             {
                 path: "draggable",
                 action: draggableAction,
-                element: <DraggableScreen />
-            }
+                element: <DraggableScreen />,
+            },
+            {
+                path: "test",
+                element: <DraggableScreen />,
+            },
         ],
     },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <IndexedDbProvider>
+            <DialogsProvider>
+                <DialogRoot />
+                <RouterProvider router={router} />
+            </DialogsProvider>
+        </IndexedDbProvider>
     </React.StrictMode>
 );

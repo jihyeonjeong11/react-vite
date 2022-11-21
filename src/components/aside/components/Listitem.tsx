@@ -14,7 +14,7 @@ import { useAccordion } from "@/components/common/contexts/accordion";
 const iconSorter = (title: string | undefined, size: string, color: string) => {
     switch (title) {
         default:
-            return <div style={{width: 24}} />;
+            return <div style={{ width: 24 }} />;
         case "home":
             return <AiOutlineHome size={size} className={color} />;
         case "recording":
@@ -29,25 +29,31 @@ const iconSorter = (title: string | undefined, size: string, color: string) => {
 };
 
 const ListItem = ({
-    item: { title, href },
+    item: { title, href, hasDialog, dialogType },
     eventKey,
 }: {
     item: Partial<MenuProps>;
     eventKey: number;
 }) => {
-    const {activeIndex, toggleClick} = useAccordion();
-    const isFocused = React.useMemo(() => eventKey == activeIndex, [activeIndex, eventKey]);
-    const {t} = useTranslation();
+    const { activeIndex, toggleClick } = useAccordion();
+    const isFocused = React.useMemo(
+        () => eventKey == activeIndex,
+        [activeIndex, eventKey]
+    );
+    const { t } = useTranslation();
     return (
-        <article className="relative cursor-pointer" id={title}>
-            <div
+        <article className="relative cursor-pointer" id={title} >
+            <button
                 className={
                     "flex items-center p-2 px-4 text-base font-normal " +
                     classes["list"] +
                     " " +
                     classes["list-background-slide"] +
-                    " hover:bg-brand-200 active:bg-brand-200 focus:bg-brand-200"
+                    "hover:bg-brand-200 active:bg-brand-200 focus:bg-brand-200"
                 }
+                data-href={href && href}
+                data-dialog={hasDialog && dialogType}
+
             >
                 {iconSorter(
                     title,
@@ -62,7 +68,7 @@ const ListItem = ({
                 >
                     {title && t(title)}
                 </span>
-            </div>
+            </button>
         </article>
     );
 };
