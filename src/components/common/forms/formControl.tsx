@@ -33,6 +33,7 @@ const FieldsetRoot = ({
 
 const InputRoot = ({
     tip,
+    placeholder,
     type,
     register,
     dataKey,
@@ -71,6 +72,7 @@ const InputRoot = ({
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
+                    placeholder={placeholder ? placeholder : ''}
                 />
             break;
         case "number_string":
@@ -80,17 +82,19 @@ const InputRoot = ({
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
+                    placeholder={placeholder ? placeholder : ''}
                 />
             break;
         case "number":
             element =
                 <input 
-                    type={"text"}
+                    type={"number"}
                     inputMode={"numeric"}
                     pattern={"[0-9]*"}
-                    {...register(dataKey, applyOption)}
+                    {...register(dataKey, {...applyOption, valueAsNumber: true})}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
+                    placeholder={placeholder ? placeholder : ''}
                 />
     }
     return (
