@@ -67,6 +67,16 @@ const InputRoot = ({
                     className={inputClass(error)}
                 />
             break;
+        case "number":
+            element =
+                <input 
+                    type={"text"}
+                    inputMode={"numeric"}
+                    pattern={"[0-9]*"}
+                    {...register(dataKey, applyOption)}
+                    aria-invalid={error ? "true" : "false"}
+                    className={inputClass(error)}
+                />
     }
     return (
         <>

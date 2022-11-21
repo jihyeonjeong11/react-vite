@@ -34,7 +34,7 @@ export type labelProps = {
     /** 라벨 아래 위치하며 입력에 대한 추가적인 힌트를 제공하는 설명 */
     tip?: string;
     /** 입력 요소의 종류 */
-    type: "text" | "desc" | "select" | "radio" | "date" | "number_string";
+    type: "text" | "desc"| "number" | "select" | "radio" | "date" | "number_string";
     /** 입력값을 전달하는 함수 */
     register?: any;
     /** 해당 항목에 부여되는 옵션 */
