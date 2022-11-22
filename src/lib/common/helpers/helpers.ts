@@ -26,7 +26,7 @@ export const pxToNum = (value: number | string = 0): number =>
  * @return {object} merge된 오브젝트
  */
 
-export const mergeTwoObject = (
+export const mergeTwoObjects = (
     isComponentTypeNeeded: boolean,
     ...objects: any[]
 ) => {

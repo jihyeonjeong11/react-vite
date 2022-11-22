@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Dialogs } from "@/components/common/contexts/dialogs/useDialogsContextState";
+import { motion } from "framer-motion";
 
 import ErrorBoundary from "@/routes/error/ErrorBoundary";
 import MainExamDialog from "./MainExamDialog";
@@ -18,7 +19,7 @@ const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
     );
     const SafeComponent = (
         <ErrorBoundary>
-            <Dialog />
+                <Dialog />
         </ErrorBoundary>
     );
 

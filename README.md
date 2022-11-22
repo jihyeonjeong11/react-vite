@@ -1,3 +1,8 @@
+https://www.notion.so/SIMPREC-b5a8874803ae4190a37431ddb8910281
+
+api 및 자료형 참고
+
+
 yarn create vite@latest
 
 CRA환경이 아닌 react proj를 간단하게 만들어보기 위한 프로젝트
@@ -74,6 +79,16 @@ draggable components
 이후 
 
 리팩토링 작업 필요 + 테스트추가
+
+11/21
+
+Dialog 작업 시작. @/components/common/dialog 폴더에 정리
+
+11/22
+
+Dialog 애니메이션을 위해 Framer-motion 설치. 메인 시험명 dialog 제작중. 아름님의 form과 합침
+-> 모달 사라지는 애니메이션은 추가적인 작업이 필요하여 넘어갑니다.
+-> 먼저 메인시험 등록 -> 하위 시험 페이지를 만드는게 좋겠습니다.
 
 1. 스트링 로케일
 2. 테마(tailwindcss)

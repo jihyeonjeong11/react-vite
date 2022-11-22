@@ -1,37 +1,35 @@
-import { ReactElement, ReactNode } from "react";
-import { fieldProps, labelProps } from '../../../types/Global';
+import React, { ReactElement, ReactNode } from "react";
+import { fieldProps, labelProps } from "@/types/Global";
 
 const tipClass = "";
-const errorMessageClass = "";
+const errorMessageClass = "h-8";
 const LabelRoot = ({
     name,
-    children
+    children,
 }: {
     children: ReactNode;
-} & Partial<labelProps>
-):ReactElement => {
+} & Partial<labelProps>): ReactElement => {
     return (
         <label>
             <span className="pb-2 inline-block font-medium">{name}</span>
             {children}
         </label>
-    )
+    );
 };
 
 const FieldsetRoot = ({
     name,
-    children
+    children,
 }: {
     children: ReactNode | ReactNode[];
-} & Partial<labelProps>
-): ReactElement => {
+} & Partial<labelProps>): ReactElement => {
     return (
         <fieldset>
             <legend className="pb-2 inline-block font-medium">{name}</legend>
             {children}
         </fieldset>
-    )
-}
+    );
+};
 
 const InputRoot = ({
     tip,
@@ -40,98 +38,84 @@ const InputRoot = ({
     register,
     dataKey,
     applyOption,
-    error
-}: Partial<labelProps>
-): JSX.Element => {
+    error,
+}: Partial<labelProps>): JSX.Element => {
     // 클래스
-    const inputClass = (isError: string | undefined) => {
-        const base = "px-2 py-1 rounded w-full outline-0 outline-none"
-        let result: string = '';
-        if(isError) {
+    const inputClass = React.useMemo(() => (isError: string | undefined) => {
+        const base = "px-2 py-1 rounded w-full outline-0 outline-none";
+        let result: string = "";
+        if (isError) {
             result = "border-rose-600 border-2";
         } else {
             result = "border-slate-300 border";
         }
-        return result.concat(' ', base);
-    };
+        return result.concat(" ", base);
+    }, []);
 
     let element;
-    
-    switch(type) {
+
+    switch (type) {
         case "text":
         case "password":
         case "number_string":
-            element = 
-                <input 
-                    type={(type === "number_string" ? "tel"
-                        : (type === "password" ? "password"
-                        : "text"
-                        ))
-                    } 
+            element = (
+                <input
+                    type={
+                        type === "number_string"
+                            ? "tel"
+                            : type === "password"
+                            ? "password"
+                            : "text"
+                    }
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
+                    placeholder={placeholder ? placeholder : ""}
                 />
+            );
             break;
         case "desc":
-            element = 
-                <textarea 
+            element = (
+                <textarea
                     {...register(dataKey, applyOption)}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
+                    placeholder={placeholder ? placeholder : ""}
                 />
+            );
             break;
         case "number":
-            element =
-                <input 
+            element = (
+                <input
                     type={"number"}
                     inputMode={"numeric"}
                     pattern={"[0-9]*"}
-                    {...register(dataKey, {...applyOption, valueAsNumber: true})}
+                    {...register(dataKey, {
+                        ...applyOption,
+                        valueAsNumber: true,
+                    })}
                     aria-invalid={error ? "true" : "false"}
                     className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
+                    placeholder={placeholder ? placeholder : ""}
                 />
+            );
     }
+
     return (
         <>
-            {
-                tip && 
-                <p className={tipClass}>{tip}</p>
-            }
-            {element}
-            {
-                error &&
-                <p className={errorMessageClass}>{error}</p>
-            }
+            <div className="flex flex-col gap-1">
+                {tip && <p className={tipClass}>{tip}</p>}
+                {element}
+                {error ? 
+                    <small className={errorMessageClass}>{error}</small> : <small className="h-8" />
+                }
+            </div>
         </>
-    )
+    );
 };
-            element = 
-                <input 
-                    type={"password"}
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
-                />
-    }
-    return (
-        <>
-            {
-                tip && 
-                <p>{tip}</p>
-            }
-            {element}
-            {
-                error &&
-                <p className={messageClass}>{error}</p>
-            }
-        </>
-    )
-};
+
+const MemoizedLabelRoot = React.memo(LabelRoot);
+const MemoizedInputRoot = React.memo(InputRoot);
 
 const FormItem = ({
     name,
@@ -140,47 +124,48 @@ const FormItem = ({
     dataKey,
     register,
     applyOption,
-    error
-}: labelProps
-): ReactElement => {
+    error,
+}: labelProps): ReactElement => {
     return (
-        <LabelRoot name={name}>
-            <InputRoot
+        <MemoizedLabelRoot name={name}>
+            <MemoizedInputRoot
                 tip={tip}
                 type={type}
-                register={register} 
-                dataKey={dataKey}
-                applyOption={applyOption}
-                error={error}
-            />
-        </LabelRoot>
-    )
-};
-
-const FormOptions = ({
-    name,
-    tip,
-    type,
-    dataKey,
-    register,
-    selectOption,
-    applyOption,
-    error
-}: Partial<fieldProps>
-): ReactElement => {
-    return (
-        <FieldsetRoot name={name}>
-            <SelectRoot 
-                tip={tip}
-                type={type}
-                selectOption={selectOption}
                 register={register}
                 dataKey={dataKey}
                 applyOption={applyOption}
                 error={error}
             />
-        </FieldsetRoot>
-    )
-}
+        </MemoizedLabelRoot>
+    );
+};
 
-export { FormItem, FormOptions }
+// const FormOptions = ({
+//     name,
+//     tip,
+//     type,
+//     dataKey,
+//     register,
+//     selectOption,
+//     applyOption,
+//     error
+// }: Partial<fieldProps>
+// ): ReactElement => {
+//     return (
+//         <FieldsetRoot name={name}>
+//             <SelectRoot
+//                 tip={tip}
+//                 type={type}
+//                 selectOption={selectOption}
+//                 register={register}
+//                 dataKey={dataKey}
+//                 applyOption={applyOption}
+//                 error={error}
+//             />
+//         </FieldsetRoot>
+//     )
+// }
+
+//FormOptions
+
+export { FormItem };

@@ -5,7 +5,7 @@ import { SessionConsumer } from "@/components/common/contexts/session";
 import RenderComponent from "../components/RenderComponents";
 import useUnmount from "@/components/common/hooks/useUnmount";
 
-import Remote from "../components/remote";
+import Remote from "../components/Remote";
 
 const DraggableRoot = () => {
     

@@ -8,7 +8,6 @@ import { useProcesses } from "@/components/common/contexts/process/index";
 import { useSession } from "@/components/common/contexts/session/index";
 
 import { constants } from "@/components/common/contexts/constants";
-import { mergeTwoObject } from "@/lib/common/helpers/helpers";
 
 const Remote = ({}) => {
     const { windowStates } = useSession();

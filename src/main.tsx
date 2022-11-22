@@ -21,7 +21,7 @@ import RegistrationScreen from "./routes/registration/RegistrationScreen";
 import DraggableScreen from "./routes/draggable/DraggableScreen";
 
 import CrashErrorScreen from "./routes/error/CrashErrorScreen";
-import RegistrationRoot from "./components/registration/container/registrationRoot";
+import RegistrationRoot from "./components/registration/container/RegistrationRoot";
 import BasicExamInfo from "@/components/registration/basicExamInfo";
 import RoomSelection from "@/components/registration/roomSelection";
 
