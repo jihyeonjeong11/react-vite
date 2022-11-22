@@ -1,7 +1,7 @@
 import { labelProps } from "@/types/Global";
-import { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-const LabelRoot = ({
+const Label = ({
     name,
     children
 }: {
@@ -15,75 +15,56 @@ const LabelRoot = ({
         </label>
     )
 };
-const InputRoot = ({
+
+const Input = ({
     tip,
-    placeholder,
-    type,
-    register,
-    dataKey,
-    applyOption,
-    error
+    error,
+    ...rest
 }: Partial<labelProps>
 ): JSX.Element => {
-    // 클래스
-    const inputClass = (isError: string | undefined) => {
-        const base = "px-2 py-1 rounded w-full outline-0 outline-none"
-        let result: string = '';
-        if(isError) {
-            result = "border-rose-600 border-2";
-        } else {
-            result = "border-slate-300 border";
+    // 요소 생성
+    const makeInput = useCallback(({type, placeholder, register, error}: Partial<labelProps>): JSX.Element | undefined => {
+        let element;
+        switch(type) {
+            case "text":
+            case "email":
+            case "password":
+            case "number_string":
+            case "number":
+                element = 
+                    <input 
+                        type={( type === "number" ? "number"
+                            : (type === "number_string" ? "tel"
+                            : (type === "password" ? "password"
+                            : "text"
+                            )))
+                        }
+                        {...register}
+                        placeholder={placeholder ? placeholder : ''}
+                        className={error ? "input-outlined-error" : "input-outlined"}
+                        aria-invalid={error ? "true" : "false"}
+                    />
+                break;
+            case "desc":
+                element = 
+                    <textarea 
+                        {...register}
+                        placeholder={placeholder ? placeholder : ''}
+                        className={error ? "input-outlined-error" : "input-outlined"}
+                        aria-invalid={error ? "true" : "false"}
+                    />
+                break;
         }
-        return result.concat(' ', base);
-    };
+    return element;
+    },[]);
 
-    let element;
-    
-    switch(type) {
-        case "text":
-        case "password":
-        case "number_string":
-            element = 
-                <input 
-                    type={(type === "number_string" ? "tel"
-                        : (type === "password" ? "password"
-                        : "text"
-                        ))
-                    } 
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
-                />
-            break;
-        case "desc":
-            element = 
-                <textarea 
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
-                />
-            break;
-        case "number":
-            element =
-                <input 
-                    type={"number"}
-                    inputMode={"numeric"}
-                    pattern={"[0-9]*"}
-                    {...register(dataKey, {...applyOption, valueAsNumber: true})}
-                    aria-invalid={error ? "true" : "false"}
-                    className={inputClass(error)}
-                    placeholder={placeholder ? placeholder : ''}
-                />
-    }
     return (
         <>
             {
                 tip && 
                 <p>{tip}</p>
             }
-            {element}
+            {makeInput({error, ...rest})}
             {
                 error &&
                 <p>{error}</p>
@@ -91,30 +72,18 @@ const InputRoot = ({
         </>
     )
 };
-const FormItem = ({
+const FormItem = React.memo(({
     name,
-    tip,
-    placeholder,
-    type,
-    dataKey,
-    register,
-    applyOption,
-    error
+    ...rest
 }: labelProps
 ): ReactElement => {
     return (
-        <LabelRoot name={name}>
-            <InputRoot
-                tip={tip}
-                placeholder={placeholder}
-                type={type}
-                register={register} 
-                dataKey={dataKey}
-                applyOption={applyOption}
-                error={error}
+        <Label name={name}>
+            <Input
+                {...rest}
             />
-        </LabelRoot>
+        </Label>
     )
-};
+});
 
 export default FormItem;
