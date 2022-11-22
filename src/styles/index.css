@@ -11,6 +11,9 @@
 }
 
 @layer components {
+  .label-heading {
+    @apply pb-2 inline-block font-medium
+  }
   .input-outlined {
     @apply inline-block px-2 py-1 rounded w-full outline-0 outline-none border-slate-300 border
   }

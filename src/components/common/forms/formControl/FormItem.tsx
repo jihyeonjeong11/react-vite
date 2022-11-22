@@ -10,7 +10,7 @@ const Label = ({
 ):ReactElement => {
     return (
         <label>
-            <span className="pb-2 inline-block font-medium">{name}</span>
+            <span className="label-heading">{name}</span>
             {children}
         </label>
     )
