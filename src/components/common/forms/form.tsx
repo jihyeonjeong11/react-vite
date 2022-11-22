@@ -1,6 +1,6 @@
-import { ReactElement, useCallback, useEffect, useState } from "react";
-import { useForm, SubmitHandler, set } from "react-hook-form";
-import type { applyOption, CommonForms, fieldProps, formArrayprops, formControlprops, labelProps } from "@/types/Global";
+import { ReactElement, useCallback } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import type { applyOption, CommonForms, fieldProps, formArrayprops, labelProps } from "@/types/Global";
 import FormItem from "./formControl/FormItem";
 import { addRegex, addRequired } from "./helpers";
 

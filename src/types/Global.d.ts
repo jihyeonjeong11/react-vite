@@ -1,6 +1,5 @@
 import { ExamForms } from './exam.d';
 import React from "react";
-import { object } from 'yup';
 
 export {};
 
