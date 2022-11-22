@@ -26,7 +26,7 @@ const Form = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             {formProps.map(item => {
-                const {type, applyOption, dataKey, name, tip, placeholder} = item;
+                const {type, applyOption, dataKey, name, tip, placeholder, disabled, defaultValue} = item;
                 /* register 설정 */
                 let _option: applyOption = {
                     // 기본 설정 1: 필수
@@ -60,7 +60,9 @@ const Form = ({
                             tip={tip}
                             placeholder={placeholder}
                             register={_register}
-                            error={errors[dataKey] && errors[dataKey]?.message?.toString()} 
+                            error={errors[dataKey] && errors[dataKey]?.message?.toString()}
+                            disabled={disabled}
+                            defaultValue={defaultValue} 
                         />
                     )
                 }

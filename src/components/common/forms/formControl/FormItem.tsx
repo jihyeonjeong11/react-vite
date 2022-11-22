@@ -23,7 +23,7 @@ const Input = ({
 }: Partial<labelProps>
 ): JSX.Element => {
     // 요소 생성
-    const makeInput = useCallback(({type, placeholder, register, error}: Partial<labelProps>): JSX.Element | undefined => {
+    const makeInput = useCallback(({type, placeholder, defaultValue, register, disabled, error}: Partial<labelProps>): JSX.Element | undefined => {
         let element;
         switch(type) {
             case "text":
@@ -40,6 +40,8 @@ const Input = ({
                             )))
                         }
                         {...register}
+                        value={defaultValue}
+                        disabled={disabled ? true : false}
                         placeholder={placeholder ? placeholder : ''}
                         className={error ? "input-outlined-error" : "input-outlined"}
                         aria-invalid={error ? "true" : "false"}
@@ -49,6 +51,8 @@ const Input = ({
                 element = 
                     <textarea 
                         {...register}
+                        value={defaultValue}
+                        disabled={disabled ? true : false}
                         placeholder={placeholder ? placeholder : ''}
                         className={error ? "input-outlined-error" : "input-outlined"}
                         aria-invalid={error ? "true" : "false"}
