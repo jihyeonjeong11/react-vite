@@ -27,20 +27,30 @@ const Select = ({
     applyOption,
     error
 }: Partial<fieldProps>
-): JSX.Element => {
-
-    let element;
-
-    switch(type) {
-        case "select":
-            element = 
-                <select
-                    {...register(dataKey, applyOption)}
-                    aria-invalid={error ? "true" : "false"}
-                >
-                    <option></option>
-                </select>
-    }
+): ReactNode | ReactNode[] => {
+    // 요소 생성
+    const makeSelect = useCallback(({name, type, placeholder, defaultValue, register, disabled, error, selectOption}: Partial<fieldProps>): JSX.Element | JSX.Element[] | undefined => {
+        let elements;
+        switch(type) {
+            case "select":
+                elements = 
+                    <select disabled={disabled ? true : false} value={defaultValue} {...register} >
+                        {placeholder &&
+                            <option value="">{placeholder}</option>
+                        }
+                        {selectOption && selectOption.length > 0 && selectOption.map(option => {
+                            return <option value={option.value}>{option.name || option.value}</option>
+                        })
+                        }
+                    </select>
+                break;
+            case "checkbox":
+                <p></p>
+            case "radio":
+                <div></div>
+        }
+        return elements;
+    },[]);
     return (
         <>
             {
