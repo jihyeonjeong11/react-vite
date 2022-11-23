@@ -44,17 +44,22 @@ type formProps = {
     /** 비활성화 여부 */
     disabled?: boolean;
     /** 입력된 값 */
-    defaultValue?: string | string[] | number ;
+    defaultValue?: string | string[];
 }
 export type labelProps = {
     /** 입력 요소의 종류 */
     type: "text" | "desc"| "number" | "number_string" | "password" | "email";
 } & formProps;
+export type selectOption = {value: string; name?: string}[];
 export type fieldProps = {
     /** 입력 요소의 종류 */
     type:  "select" | "radio" | "checkbox";
-    /** 하위 선택 목록 */
-    selectOption: {value: string | number; name?: string}[];
+    /** 하위 선택 목록(유효한 값의 목록이어야 합니다) */
+    selectOption: selectOption;
+    /** checkbox에서 전체 목록 선택 가능한 기능 유무 */
+    useAllcheck?: boolean;
+    /** checkbox에서 배열 업데이트를 위한 함수 */
+    setValue?: any;
 } & formProps;
 
 export type formControlprops = (labelProps | fieldProps);
