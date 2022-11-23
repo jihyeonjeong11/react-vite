@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import type { applyOption, CommonForms, fieldProps, formArrayprops, labelProps } from "@/types/Global";
 import FormItem from "./formControl/FormItem";
 import { addRegex, addRequired } from "./helpers";
+import FormOptions from "./formControl/FormOptions";
 
 const Form = ({
     formProps,
@@ -49,6 +50,20 @@ const Form = ({
                 if(isSelector(item)){
                     // 선택 가능한 입력 항목 
                     console.log("select")
+                    return (
+                        <FormOptions 
+                            type={item.type}
+                            dataKey={dataKey}
+                            name={name}
+                            selectOption={item.selectOption}
+                            tip={tip}
+                            placeholder={placeholder}
+                            register={_register}
+                            error={errors[dataKey] && errors[dataKey]?.message?.toString()}
+                            disabled={disabled}
+                            defaultValue={defaultValue}
+                        />
+                    )
                 } else if (item as labelProps) {
                     // 사용자 입력 항목
                     return (
