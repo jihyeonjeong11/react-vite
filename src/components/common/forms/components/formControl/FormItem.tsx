@@ -6,7 +6,7 @@ const Label = ({
     children
 }: {
     children: ReactNode;
-} & Partial<labelProps>
+} & Pick<labelProps, "name">
 ):ReactElement => {
     return (
         <label>
@@ -20,10 +20,18 @@ const Input = ({
     tip,
     error,
     ...rest
-}: Partial<labelProps>
+}: Omit<labelProps, "dataKey"|"name">
 ): JSX.Element => {
     // 요소 생성
-    const makeInput = useCallback(({type, placeholder, defaultValue, register, disabled, error}: Partial<labelProps>): JSX.Element | undefined => {
+    const makeInput = useCallback(({
+        type, 
+        placeholder, 
+        defaultValue, 
+        register, 
+        disabled, 
+        error
+    }: Omit<labelProps, "dataKey"|"name">
+    ): JSX.Element | undefined => {
         let element;
         switch(type) {
             case "text":
@@ -80,7 +88,7 @@ const Input = ({
 const FormItem = React.memo(({
     name,
     ...rest
-}: labelProps
+}: Omit<labelProps, "dataKey">
 ): ReactElement => {
     return (
         <Label name={name}>

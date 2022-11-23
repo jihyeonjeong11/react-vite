@@ -2,7 +2,7 @@ import { ReactElement, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import type { applyOption, CommonForms, fieldProps, formArrayprops, labelProps } from "@/types/Global";
 import FormItem from "./formControl/FormItem";
-import { addRegex, addRequired } from "./helpers";
+import { addRegex, addRequired } from "../helpers";
 import FormOptions from "./formControl/FormOptions";
 
 const Form = ({
@@ -14,7 +14,7 @@ const Form = ({
     children?: ReactElement | ReactElement[];
     submit: (data: CommonForms) => void;
 }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<CommonForms>();
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm<CommonForms>();
     const onSubmit: SubmitHandler<CommonForms> = data => {
         submit(data);
     };
@@ -41,6 +41,9 @@ const Form = ({
                     // 기본 설정 3: 숫자 타입 항목일 경우 추가
                     _option.valueAsNumber = true;
                 }
+                if (type === "checkbox") {
+
+                }
                 if(applyOption !== undefined) {
                     // item으로 전달된 설정이 있을 경우 덮어쓰기
                     _option = {...applyOption};
@@ -52,7 +55,6 @@ const Form = ({
                     return (
                         <FormOptions 
                             type={item.type}
-                            dataKey={dataKey}
                             name={name}
                             selectOption={item.selectOption}
                             tip={tip}
@@ -61,14 +63,15 @@ const Form = ({
                             error={errors[dataKey] && errors[dataKey]?.message?.toString()}
                             disabled={disabled}
                             defaultValue={defaultValue}
+                            useAllcheck={item.useAllcheck}
+                            setValue={setValue}
                         />
                     )
                 } else if (item as labelProps) {
                     // 사용자 입력 항목
                     return (
                         <FormItem 
-                            type={item.type} 
-                            dataKey={dataKey} 
+                            type={item.type}
                             key={dataKey} 
                             name={name}
                             tip={tip}

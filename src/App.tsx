@@ -6,10 +6,8 @@ import localforage from "localforage";
 import Aside from "@/routes/aside/Aside";
 import AsideRoot from "./components/aside/container/AsideRoot";
 import { IndexedDbProvider } from "@/components/common/contexts/indexeddb/index";
-import Form from "./components/common/forms/Form";
+import Form from "./components/common/forms/components/form";
 import { CommonForms, formArrayprops } from "./types/Global";
-import FormItem from "./components/common/forms/formControl/FormItem";
-import { addRegex, addRequired } from "./components/common/forms/helpers";
 
 // todo
 
