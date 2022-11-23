@@ -1,22 +1,23 @@
-import { fieldProps, labelProps } from "@/types/Global"
-import { ReactElement, ReactNode } from "react"
+import { fieldProps } from "@/types/Global"
+import { ReactElement, ReactNode, useCallback } from "react"
 
-const FieldsetRoot = ({
+const Fieldset = ({
     name,
     children
 }: {
     children: ReactNode | ReactNode[];
-} & Partial<labelProps>
+} & Partial<fieldProps>
 ): ReactElement => {
     return (
         <fieldset>
-            <legend className="pb-2 inline-block font-medium">{name}</legend>
+            <legend className="label-heading">{name}</legend>
             {children}
         </fieldset>
     )
 };
 
-const SelectRoot = ({
+const Select = ({
+    name,
     tip,
     placeholder,
     type,
@@ -57,29 +58,16 @@ const SelectRoot = ({
 
 const FormOptions = ({
     name,
-    tip,
-    placeholder,
-    type,
-    dataKey,
-    register,
-    selectOption,
-    applyOption,
-    error
-}: Partial<fieldProps>
+    ...rest
+}: fieldProps
 ): ReactElement => {
     return (
-        <FieldsetRoot name={name}>
-            <SelectRoot 
-                tip={tip}
-                placeholder={placeholder}
-                type={type}
-                selectOption={selectOption}
-                register={register}
-                dataKey={dataKey}
-                applyOption={applyOption}
-                error={error}
+        <Fieldset name={name}>
+            <Select
+                name={name}
+                {...rest}
             />
-        </FieldsetRoot>
+        </Fieldset>
     )
 }
 
