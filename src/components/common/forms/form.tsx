@@ -49,7 +49,6 @@ const Form = ({
                 /* 항목 그리기 */
                 if(isSelector(item)){
                     // 선택 가능한 입력 항목 
-                    console.log("select")
                     return (
                         <FormOptions 
                             type={item.type}
