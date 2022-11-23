@@ -21,7 +21,7 @@ const Select = ({
     error,
     ...rest
 }: Partial<fieldProps>
-): ReactNode | ReactNode[] => {
+): JSX.Element => {
     // 요소 생성
     const makeSelect = useCallback(({name, type, placeholder, defaultValue, register, disabled, error, selectOption}: Partial<fieldProps>): JSX.Element | JSX.Element[] | undefined => {
         let elements;
