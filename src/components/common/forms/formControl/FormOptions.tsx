@@ -54,6 +54,7 @@ const Select = ({
                                         <input
                                             key={option.value}
                                             type={"checkbox"}
+                                            disabled={disabled ? true : false} 
                                             value={option.value}
                                             {...register}
                                         />
@@ -74,6 +75,7 @@ const Select = ({
                                             name={name}
                                             key={option.value}
                                             type={"radio"}
+                                            disabled={disabled ? true : false} 
                                             value={option.value}
                                             {...register}
                                         />
