@@ -17,15 +17,9 @@ const Fieldset = ({
 };
 
 const Select = ({
-    name,
     tip,
-    placeholder,
-    type,
-    selectOption,
-    register,
-    dataKey,
-    applyOption,
-    error
+    error,
+    ...rest
 }: Partial<fieldProps>
 ): ReactNode | ReactNode[] => {
     // 요소 생성
@@ -35,7 +29,12 @@ const Select = ({
             switch(type) {
             case "select":
                 elements = 
-                    <select disabled={disabled ? true : false} value={defaultValue} {...register} >
+                    <select 
+                        disabled={disabled ? true : false} 
+                        value={defaultValue} 
+                        {...register}
+                        aria-invalid={error ? "true" : "false"} 
+                    >
                         {placeholder &&
                             <option value="">{placeholder}</option>
                         }
@@ -47,7 +46,7 @@ const Select = ({
                 break;
             case "checkbox":
                 elements = 
-                    <ul>
+                    <ul aria-invalid={error ? "true" : "false"}>
                         {selectOption.map(option => {
                             return (
                                 <li>
@@ -66,8 +65,23 @@ const Select = ({
                     </ul>
             case "radio":
                 elements = 
-                    <ul>
-                        {}
+                    <ul aria-invalid={error ? "true" : "false"}>
+                        {selectOption.map(option => {
+                            return (
+                                <li>
+                                    <label>
+                                        <input 
+                                            name={name}
+                                            key={option.value}
+                                            type={"radio"}
+                                            value={option.value}
+                                            {...register}
+                                        />
+                                        {option.name || option.value}
+                                    </label>
+                                </li>
+                            )
+                        })}
                     </ul>
             }
         } else {
@@ -81,7 +95,7 @@ const Select = ({
                 tip &&
                 <p>{tip}</p>
             }
-            {element}
+                {makeSelect({error, ...rest})}
             {
                 error &&
                 <p>{error}</p>
