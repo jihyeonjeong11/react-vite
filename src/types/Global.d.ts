@@ -44,7 +44,7 @@ type formProps = {
     /** 비활성화 여부 */
     disabled?: boolean;
     /** 입력된 값 */
-    defaultValue?: string | string[] | number | number[];
+    defaultValue?: string | string[] | number ;
 }
 export type labelProps = {
     /** 입력 요소의 종류 */
@@ -54,7 +54,7 @@ export type fieldProps = {
     /** 입력 요소의 종류 */
     type:  "select" | "radio" | "checkbox";
     /** 하위 선택 목록 */
-    selectOption: (string | number)[];
+    selectOption: {value: string | number; name?: string}[];
 } & formProps;
 
 export type formControlprops = (labelProps | fieldProps);
