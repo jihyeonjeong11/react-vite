@@ -31,23 +31,47 @@ const Select = ({
     // 요소 생성
     const makeSelect = useCallback(({name, type, placeholder, defaultValue, register, disabled, error, selectOption}: Partial<fieldProps>): JSX.Element | JSX.Element[] | undefined => {
         let elements;
-        switch(type) {
+        if(selectOption && selectOption.length > 0) {
+            switch(type) {
             case "select":
                 elements = 
                     <select disabled={disabled ? true : false} value={defaultValue} {...register} >
                         {placeholder &&
                             <option value="">{placeholder}</option>
                         }
-                        {selectOption && selectOption.length > 0 && selectOption.map(option => {
+                        {selectOption.map(option => {
                             return <option value={option.value}>{option.name || option.value}</option>
                         })
                         }
                     </select>
                 break;
             case "checkbox":
-                <p></p>
+                elements = 
+                    <ul>
+                        {selectOption.map(option => {
+                            return (
+                                <li>
+                                    <label>
+                                        <input
+                                            key={option.value}
+                                            type={"checkbox"}
+                                            value={option.value}
+                                            {...register}
+                                        />
+                                        {option.name || option.value}
+                                    </label>
+                                </li>
+                            )
+                        })}
+                    </ul>
             case "radio":
-                <div></div>
+                elements = 
+                    <ul>
+                        {}
+                    </ul>
+            }
+        } else {
+            elements = <></>;
         }
         return elements;
     },[]);
