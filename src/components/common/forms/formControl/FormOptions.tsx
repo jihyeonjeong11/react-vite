@@ -64,6 +64,7 @@ const Select = ({
                             )
                         })}
                     </ul>
+                break;
             case "radio":
                 elements = 
                     <ul aria-invalid={error ? "true" : "false"}>
@@ -85,6 +86,7 @@ const Select = ({
                             )
                         })}
                     </ul>
+                break;
             }
         } else {
             elements = <></>;
