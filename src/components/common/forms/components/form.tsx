@@ -14,7 +14,10 @@ const Form = ({
     children?: ReactElement | ReactElement[];
     submit: (data: CommonForms) => void;
 }) => {
-    const { register, setValue, handleSubmit, formState: { errors } } = useForm<CommonForms>();
+    /** useForm 초기 설정 */
+    let defaultList: {[key: string]: string | string[]} = {};
+    formProps.map(item => defaultList[item.dataKey] = item.defaultValue ? item.defaultValue : "");
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm<CommonForms>({defaultValues: defaultList});
     const onSubmit: SubmitHandler<CommonForms> = data => {
         submit(data);
     };
@@ -79,7 +82,6 @@ const Form = ({
                             register={_register}
                             error={errors[dataKey] && errors[dataKey]?.message?.toString()}
                             disabled={disabled}
-                            defaultValue={defaultValue} 
                         />
                     )
                 }
