@@ -26,11 +26,10 @@ const Input = ({
     const makeInput = useCallback(({
         type, 
         placeholder, 
-        defaultValue, 
         register, 
         disabled, 
         error
-    }: Omit<labelProps, "dataKey"|"name">
+    }: Omit<labelProps, "dataKey"|"name"|"defaultValue">
     ): JSX.Element | undefined => {
         let element;
         switch(type) {
@@ -48,7 +47,6 @@ const Input = ({
                             )))
                         }
                         {...register}
-                        value={defaultValue}
                         disabled={disabled ? true : false}
                         placeholder={placeholder ? placeholder : ''}
                         className={error ? "input-outlined-error" : "input-outlined"}
@@ -59,7 +57,6 @@ const Input = ({
                 element = 
                     <textarea 
                         {...register}
-                        value={defaultValue}
                         disabled={disabled ? true : false}
                         placeholder={placeholder ? placeholder : ''}
                         className={error ? "input-outlined-error" : "input-outlined"}
@@ -88,7 +85,7 @@ const Input = ({
 const FormItem = React.memo(({
     name,
     ...rest
-}: Omit<labelProps, "dataKey">
+}: Omit<labelProps, "dataKey"|"defaultValue">
 ): ReactElement => {
     return (
         <Label name={name}>
