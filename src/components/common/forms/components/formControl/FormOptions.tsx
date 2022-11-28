@@ -22,11 +22,10 @@ const Select = ({
     tip,
     error,
     ...rest
-}: Omit<fieldProps, "dataKey">
+}: Omit<fieldProps, "name">
 ): JSX.Element => {
     // 요소 생성
     const makeSelect = useCallback(({
-        name, 
         type, 
         placeholder, 
         register, 
@@ -35,8 +34,9 @@ const Select = ({
         selectOption, 
         customCheck,
         defaultValue,
-        control
-    }: Omit<fieldProps, "dataKey">
+        control,
+        dataKey
+    }: Omit<fieldProps, "name">
     ): JSX.Element | JSX.Element[] | undefined => {
         let elements;
         if(selectOption && selectOption.length > 0) {
@@ -53,7 +53,7 @@ const Select = ({
                             return (
                             <option 
                                 value={option.value}
-                                key={`${name}_${option.value}`}
+                                key={`${dataKey}_${option.value}`}
                             >
                                 {option.name || option.value}
                             </option>
@@ -69,7 +69,7 @@ const Select = ({
                     elements =
                         <Controller 
                             control={control}
-                            name={name}
+                            name={dataKey}
                             render={({field}) => {
                                 const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                                     const target = event.currentTarget;
@@ -109,7 +109,7 @@ const Select = ({
                     <ul aria-invalid={error ? "true" : "false"}> 
                         {selectOption.map(option => {
                             return (
-                                <li key={`${name}_${option.value}`}>
+                                <li key={`${dataKey}_${option.value}`}>
                                     <label>
                                         <input
                                             type={"checkbox"}
@@ -130,10 +130,10 @@ const Select = ({
                     <ul aria-invalid={error ? "true" : "false"}>
                         {selectOption.map(option => {
                             return (
-                                <li key={`${name}_${option.value}`}>
+                                <li key={`${dataKey}_${option.value}`}>
                                     <label>
                                         <input 
-                                            name={name}
+                                            name={dataKey}
                                             type={"radio"}
                                             disabled={disabled ? true : false} 
                                             value={option.value}
@@ -170,12 +170,11 @@ const Select = ({
 const FormOptions = React.memo(({
     name,
     ...rest
-}: Omit<fieldProps, "dataKey">
+}: fieldProps
 ): ReactElement => {
     return (
         <Fieldset name={name}>
             <Select
-                name={name}
                 {...rest}
             />
         </Fieldset>
