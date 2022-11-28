@@ -1,5 +1,6 @@
 import { ExamForms } from './exam.d';
 import React from "react";
+import { Control } from 'react-hook-form';
 
 export {};
 
@@ -50,15 +51,16 @@ export type labelProps = {
     /** 입력 요소의 종류 */
     type: "text" | "desc"| "number" | "number_string" | "password" | "email";
 } & formProps;
+export type customCheck = "all" | "odd" | "even";
 export type fieldProps = {
     /** 입력 요소의 종류 */
     type:  "select" | "radio" | "checkbox";
     /** 하위 선택 목록(유효한 값의 목록이어야 합니다) */
     selectOption: {value: string; name?: string}[];
-    /** checkbox에서 전체 목록 선택 가능한 기능 유무 */
-    useAllcheck?: boolean;
-    /** checkbox에서 배열 업데이트를 위한 함수 */
-    setValue?: any;
+    /** checkbox에서의 커스텀 액션(특정 항목들을 선택하는 체크박스 생성) */
+    customCheck?: customCheck[]
+    /** checkbox를 controlled component로 사용할 경우 제공 */
+    control?: Control;
 } & formProps;
 
 export type formControlprops = (labelProps | fieldProps);
@@ -68,11 +70,18 @@ export type formArrayprops = (formControlprops)[];
 type numericOption = { value: number, message: string };
 export type regexOption = { value: RegExp, message: string };
 export type applyOption = {
+    /** 필수 여부, 기본값은 true(필수) */
     required?: { value: boolean, message: string };
+    /** 숫자의 최솟값 */
     min?: numericOption;
+    /** 숫자의 최댓값 */
     max?: numericOption;
+    /** 문자열의 최소 길이 */
     minLength?: numericOption;
+    /** 문자열의 최대 길이 */
     maxLength?: numericOption;
+    /** 정규식 표현 검사 */
     pattern?: regexOption;
+    /** 숫자로서 처리할 것인지 여부. true라면 숫자로 처리 */
     valueAsNumber?: boolean;
 }

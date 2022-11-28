@@ -1,6 +1,7 @@
 import { fieldProps } from "@/types/Global"
 import React, { ReactElement, ReactNode, useCallback } from "react"
-import useCheckbox from "../../hooks/useCheckbox";
+import { Controller } from "react-hook-form";
+import { useCustomCheck } from "../../hooks/useCustomCheck";
 
 const Fieldset = ({
     name,
@@ -28,13 +29,13 @@ const Select = ({
         name, 
         type, 
         placeholder, 
-        defaultValue, 
         register, 
         disabled, 
         error, 
         selectOption, 
-        useAllcheck, 
-        setValue
+        customCheck,
+        defaultValue,
+        control
     }: Omit<fieldProps, "dataKey">
     ): JSX.Element | JSX.Element[] | undefined => {
         let elements;
@@ -58,28 +59,50 @@ const Select = ({
                     </select>
                 break;
             case "checkbox":
-                const [result, handleChange, handleChangeAll] = useCheckbox(selectOption);
-                const update = useCallback((name: string, result: Array<string>) => {
-                    setValue(name, result)
-                },[]);
-                const _handleChange = (event:React.ChangeEvent) => {
-                    handleChange(event);
-                    update(name, result);
-                }
-                elements = 
-                    <ul aria-invalid={error ? "true" : "false"}>
-                        {useAllcheck &&
-                            <li key={`${name}_all`}>
-                                <label>
-                                    <input 
-                                        type={"checkbox"}
-                                        disabled={disabled ? true : false}
-                                        checked={result.length === selectOption.length ? true : false}
-                                        onChange={handleChangeAll}
-                                    />
-                                </label>
-                            </li>
-                        }
+                if(customCheck && customCheck.length > 0) {
+                    // const [props, logic, effect] = useCustomCheck(customCheck[0])
+                    // console.log(props)
+                    elements =
+                        <Controller 
+                            control={control}
+                            name={name}
+                            render={({field}) => {
+                                const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+                                    const target = event.currentTarget;
+                                    // 커스텀 액션 추가
+                                    // 그 외 일반적인 핸들링
+                                    if(target.checked) {
+                                        if([...field.value].length + 2 === selectOption.length) {
+                                            return field.onChange(selectOption.map(option => option.value));
+                                        }
+                                        return field.onChange([...field.value, target.value]);
+                                    } else {}
+                                }
+                                return (
+                                    <ul aria-invalid={error ? "true" : "false"}>
+                                        {selectOption.map(option => {
+                                            return (
+                                                <li key={`${name}_${option.value}`}>
+                                                    <label>
+                                                        <input 
+                                                        type={"checkbox"}
+                                                        onChange={onChange}
+                                                        value={option.value}
+                                                        checked={field.value ? field.value.some((val: string) => val === option.value) : false}
+                                                        />
+                                                        {option.name || option.value}
+                                                    </label>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                )
+                            }}
+                            defaultValue={defaultValue ? defaultValue : null}
+                        />
+                } else {
+                    elements = 
+                    <ul aria-invalid={error ? "true" : "false"}> 
                         {selectOption.map(option => {
                             return (
                                 <li key={`${name}_${option.value}`}>
@@ -87,15 +110,7 @@ const Select = ({
                                         <input
                                             type={"checkbox"}
                                             disabled={disabled ? true : false}
-                                            checked={
-                                                (
-                                                    defaultValue === option.value || 
-                                                    defaultValue && Array.isArray(defaultValue) && defaultValue.find(val => val === option.value)
-                                                ) ? 
-                                                true : false
-                                            } 
                                             value={option.value}
-                                            onChange
                                             {...register}
                                         />
                                         {option.name || option.value}
@@ -116,7 +131,6 @@ const Select = ({
                                             name={name}
                                             type={"radio"}
                                             disabled={disabled ? true : false} 
-                                            checked={defaultValue === option.value ? true : false}
                                             value={option.value}
                                             {...register}
                                         />

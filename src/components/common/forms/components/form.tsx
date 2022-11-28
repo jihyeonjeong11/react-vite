@@ -17,7 +17,7 @@ const Form = ({
     /** useForm 초기 설정 */
     let defaultList: {[key: string]: string | string[]} = {};
     formProps.map(item => defaultList[item.dataKey] = item.defaultValue ? item.defaultValue : "");
-    const { register, setValue, handleSubmit, formState: { errors } } = useForm<CommonForms>({defaultValues: defaultList});
+    const { register, handleSubmit, control, formState: { errors } } = useForm<CommonForms>({defaultValues: defaultList});
     const onSubmit: SubmitHandler<CommonForms> = data => {
         submit(data);
     };
@@ -44,9 +44,6 @@ const Form = ({
                     // 기본 설정 3: 숫자 타입 항목일 경우 추가
                     _option.valueAsNumber = true;
                 }
-                if (type === "checkbox") {
-
-                }
                 if(applyOption !== undefined) {
                     // item으로 전달된 설정이 있을 경우 덮어쓰기
                     _option = {...applyOption};
@@ -66,8 +63,8 @@ const Form = ({
                             error={errors[dataKey] && errors[dataKey]?.message?.toString()}
                             disabled={disabled}
                             defaultValue={defaultValue}
-                            useAllcheck={item.useAllcheck}
-                            setValue={setValue}
+                            control={control}
+                            customCheck={item.customCheck}
                         />
                     )
                 } else if (item as labelProps) {
