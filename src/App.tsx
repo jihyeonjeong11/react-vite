@@ -93,7 +93,7 @@ function App() {
                         >
                             모드 전환
                         </button>
-                        <Form submit={submitTest} formProps={emailForm}>
+                        <Form submit={submitTest} formProps={emailForm} key={"emailForm"} keyName={"emailForm"}>
                             <p>그냥 p 태그</p>
                             <button type="submit">제출 버튼</button>
                         </Form>

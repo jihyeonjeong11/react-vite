@@ -43,17 +43,21 @@ const Select = ({
             switch(type) {
             case "select":
                 elements = 
-                    <select 
+                    <select
                         disabled={disabled ? true : false} 
-                        value={defaultValue} 
                         {...register}
                         aria-invalid={error ? "true" : "false"} 
                     >
-                        {placeholder &&
-                            <option value="">{placeholder}</option>
-                        }
+                        <option value="">{placeholder ? placeholder : "선택"}</option>
                         {selectOption.map(option => {
-                            return <option value={option.value}>{option.name || option.value}</option>
+                            return (
+                            <option 
+                                value={option.value}
+                                key={`${name}_${option.value}`}
+                            >
+                                {option.name || option.value}
+                            </option>
+                            )
                         })
                         }
                     </select>
@@ -119,6 +123,7 @@ const Select = ({
                             )
                         })}
                     </ul>
+                }
                 break;
             case "radio":
                 elements = 
@@ -162,7 +167,7 @@ const Select = ({
     )
 }
 
-const FormOptions = ({
+const FormOptions = React.memo(({
     name,
     ...rest
 }: Omit<fieldProps, "dataKey">
@@ -175,6 +180,6 @@ const FormOptions = ({
             />
         </Fieldset>
     )
-}
+})
 
 export default FormOptions;

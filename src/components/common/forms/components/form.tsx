@@ -8,10 +8,12 @@ import FormOptions from "./formControl/FormOptions";
 const Form = ({
     formProps,
     children,
+    keyName,
     submit
 }: {
     formProps: formArrayprops;
     children?: ReactElement | ReactElement[];
+    keyName: string;
     submit: (data: CommonForms) => void;
 }) => {
     /** useForm 초기 설정 */
@@ -29,7 +31,7 @@ const Form = ({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-            {formProps.map(item => {
+            {formProps.map((item) => {
                 const {type, applyOption, dataKey, name, tip, placeholder, disabled, defaultValue} = item;
                 /* register 설정 */
                 let _option: applyOption = {
@@ -54,6 +56,7 @@ const Form = ({
                     // 선택 가능한 입력 항목 
                     return (
                         <FormOptions 
+                            key={`${keyName}_${dataKey}`}
                             type={item.type}
                             name={name}
                             selectOption={item.selectOption}
