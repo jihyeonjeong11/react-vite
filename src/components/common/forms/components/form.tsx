@@ -48,7 +48,7 @@ const Form = ({
                 }
                 if(applyOption !== undefined) {
                     // item으로 전달된 설정이 있을 경우 덮어쓰기
-                    _option = {...applyOption};
+                    _option = {..._option, ...applyOption};
                 }
                 const _register = register(dataKey, _option)
                 /* 항목 그리기 */
@@ -57,6 +57,7 @@ const Form = ({
                     return (
                         <FormOptions 
                             key={`${keyName}_${dataKey}`}
+                            dataKey={dataKey}
                             type={item.type}
                             name={name}
                             selectOption={item.selectOption}
