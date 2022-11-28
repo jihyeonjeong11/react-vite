@@ -10,19 +10,14 @@ const Backdrop = ({
     onClick: () => any;
 }) => {
     return (
-        <AnimatePresence
-            initial={false}
-            exitBeforeEnter={true}
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            {...rest}
         >
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                {...rest}
-            >
-                {children}
-            </motion.div>
-        </AnimatePresence>
+            {children}
+        </motion.div>
     );
 };
 

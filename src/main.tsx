@@ -27,6 +27,7 @@ import RoomSelection from "@/components/registration/roomSelection";
 
 import IkTest from "@/components/registration/ikTest";
 import HookFormTest from "@/components/registration/hookformTest";
+import ModalContainer from "./components/common/dialog/components/ModalContainer";
 
 const draggableAction = () => {
     return "data";
@@ -73,11 +74,15 @@ const router = createBrowserRouter([
     },
 ]);
 
+// 내일 indexeddbprovider 이름 바꾸기, 얘는 process만 담당
+// 시험 데이터 저장할 다른 key의 프로바이더를 만들기
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <IndexedDbProvider>
+            
             <DialogsProvider>
-                <DialogRoot />
+                    <DialogRoot />
                 <RouterProvider router={router} />
             </DialogsProvider>
         </IndexedDbProvider>

@@ -21,16 +21,16 @@ export default defineConfig({
     //     name: "App"
     //   }
     // },
-    // esbuild: {
-    //   jsxFactory: 'f',
-    //   jsxFragment: 'Fragment',
-    //   jsxInject: `import React from 'react'`,
 
-    // },
+    esbuild: {
+        jsxFactory: "f",
+        jsxFragment: "Fragment",
+        // jsxInject: `import React from 'react'`,
+        target: "es2020",
+    },
 
-    
     build: {
-        outDir: "/"
+        outDir: "/",
     },
     plugins: [react(), visualizer()],
     resolve: {

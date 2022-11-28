@@ -6,6 +6,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import AsideRoot from "./components/aside/container/AsideRoot";
+import ClockRoot from "./components/clock/ClockRoot";
 import Form from "./components/common/forms/form";
 import { CommonForms } from "./types/Global";
 import { FormItem } from "./components/common/forms/formControl";
@@ -52,7 +53,6 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
     });
 
 function App() {
-
     return (
         <>
             <div className="flex overflow-y-hidden bg-white dark:bg-black text-black dark:text-white">
@@ -69,8 +69,8 @@ function App() {
                         <p>테스트용 텍스트</p> */}
                     <Outlet />
                 </div>
-                        
-                    </div>
+                <ClockRoot />
+            </div>
         </>
     );
 }

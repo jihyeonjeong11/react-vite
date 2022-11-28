@@ -16,7 +16,7 @@ export type IndexedDbContextState = {
     storedValue: null | StoredWindowProps;
     dbLoaded: boolean;
     removeValue: () => void;
-    setValue: (value: StoredWindowProps) => void;
+    setValue: (value: StoredWindowProps, optionalKey?: string) => void;
 };
 
 type ErrorHandler = (e?: Error) => void;
@@ -30,6 +30,7 @@ const useIndexedDbContextState = (): IndexedDbContextState => {
         null
     );
     const [dbLoaded, setDbLoaded] = useState<boolean>(false);
+
 
     const _errorHandler = useRef(
         typeof defaultErrorHandler == undefined || defaultErrorHandler == null
@@ -55,11 +56,11 @@ const useIndexedDbContextState = (): IndexedDbContextState => {
     }, []);
 
     const setValue = useCallback(
-        (value: StoredWindowProps) => {
+        (value: StoredWindowProps, optionalKey?: string) => {
             async function set(value: StoredWindowProps) {
                 try {
                     setStoredValue(value);
-                    await localForage.setItem(dbKey, value);
+                    await localForage.setItem(optionalKey ?? dbKey, value);
                 } catch (e: any) {
                     error(e);
                 }

@@ -3,9 +3,12 @@ function CustomTR({ children, ...rest }: ComponentWithChildrenProps) {
     return <tr {...rest}>{children}</tr>;
 }
 
+
+// thborder border-b 
+
 function CustomTH({ children, ...rest }: ComponentWithChildrenProps) {
     return (
-        <th {...rest} scope="col" className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+        <th  scope="col" className="py-2 px-3 sticky top-0 " {...rest}>
             {children}
         </th>
     );

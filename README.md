@@ -80,9 +80,16 @@ draggable components
 
 리팩토링 작업 필요 + 테스트추가
 
+
+
+
+
+
 11/21
 
 Dialog 작업 시작. @/components/common/dialog 폴더에 정리
+
+스트링 로케일(i18next 작업)
 
 11/22
 
@@ -90,10 +97,17 @@ Dialog 애니메이션을 위해 Framer-motion 설치. 메인 시험명 dialog �
 -> 모달 사라지는 애니메이션은 추가적인 작업이 필요하여 넘어갑니다.
 -> 먼저 메인시험 등록 -> 하위 시험 페이지를 만드는게 좋겠습니다.
 
-1. 스트링 로케일
-2. 테마(tailwindcss)
+소문자였던 root.tsx 파일들 대문자로 변경.ㅣ
 
-작업 진행예정
+11/23 
+
+react-query 도입 및 
+테이블 스타일 변경(변수에 따라 변경가능)
+
+11/28
+
+Timer 작업 중.(offscreencanvas, web worker 사용)
+
 
 # 실행법
 
@@ -197,3 +211,16 @@ Commit the changes so far (yarn-X.Y.Z.js, .yarnrc.yml, ...)
 Run yarn install to migrate the lockfile
 Take a look at this article to see what should be gitignored
 Commit everything remaining
+
+
+
+리액트 쿼리 -> Tanstack query 라고 명칭 바꿈 ) 를 사용하는 이유
+
+https://tanstack.com/query/v4
+
+always-up-to-date auto-managed queries 가 핵심임.
+
+서버와의 상태 일치, 자동 관리 쿼리
+
+데이터베이스 변경 -> 업데이트 -> 리페칭 -> 프론트 리렌더 부분이 핵심이라는 것.,
+

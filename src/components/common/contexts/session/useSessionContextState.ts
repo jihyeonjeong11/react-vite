@@ -9,15 +9,11 @@ import { useIndexedDb } from "../indexeddb";
 
 // 나중에 Process와 네이밍 맞출것
 
-
-
 export type WindowProps = {
     position: Position;
     size: { width: number; height: number };
     value: string;
 };
-
-
 
 export type WindowStates = Record<string, WindowProps>;
 
@@ -39,7 +35,9 @@ export type SessionContextState = SessionData & {
 
 const useSessionContextState = (): SessionContextState => {
     const { processes, setProcesses } = useProcesses();
-    const [windowStates, setWindowStates] = useState<WindowStates>({} as WindowStates);
+    const [windowStates, setWindowStates] = useState<WindowStates>(
+        {} as WindowStates
+    );
 
     const { dbLoaded, storedValue } = useIndexedDb();
 
@@ -64,7 +62,6 @@ const useSessionContextState = (): SessionContextState => {
                     }
 
                 if (!processes[k] && windowStates[k]) delete result[k];
-
             });
 
             setWindowStates({ ...windowStates, ...result });
@@ -98,7 +95,6 @@ const useSessionContextState = (): SessionContextState => {
 };
 
 export default useSessionContextState;
-
 
 // export interface WindowState {
 //     position?: Position;
