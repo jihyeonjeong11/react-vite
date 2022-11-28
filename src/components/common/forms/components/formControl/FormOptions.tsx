@@ -24,6 +24,20 @@ const Select = ({
     ...rest
 }: Omit<fieldProps, "name">
 ): JSX.Element => {
+    // 커스텀 요소 생성
+    const makeCustomArray = useCallback((customCheck: Pick<fieldProps, "customCheck">["customCheck"]) => {
+        let _customCheckbox: any[] = [];
+        let _customlogics: any[] = [];
+        let _customeffects: any[] = [];
+        customCheck?.forEach(custom => {
+            const [props, logic, effect] = useCustomCheck(custom);
+            _customCheckbox.push(props);
+            _customlogics.push(logic);
+            _customeffects.push(effect);
+            
+        });
+        return [_customCheckbox, _customlogics, _customeffects]
+    }, []);
     // 요소 생성
     const makeSelect = useCallback(({
         type, 
@@ -64,8 +78,8 @@ const Select = ({
                 break;
             case "checkbox":
                 if(customCheck && customCheck.length > 0) {
-                    // const [props, logic, effect] = useCustomCheck(customCheck[0])
-                    // console.log(props)
+                    const [boxes, logics, effects] = makeCustomArray(customCheck);
+                    const customNames = boxes.map(box => box.name);
                     elements =
                         <Controller 
                             control={control}
@@ -74,31 +88,59 @@ const Select = ({
                                 const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                                     const target = event.currentTarget;
                                     // 커스텀 액션 추가
+                                    if(customNames.some(name => name === target.value)) {
+                                        logics.forEach(logic => {
+                                            field.onChange(logic(target.value, selectOption, target.checked))
+                                        })
+                                        return;
+                                    }
                                     // 그 외 일반적인 핸들링
+                                    let currentArray: string[];
                                     if(target.checked) {
-                                        if([...field.value].length + 2 === selectOption.length) {
-                                            return field.onChange(selectOption.map(option => option.value));
-                                        }
-                                        return field.onChange([...field.value, target.value]);
-                                    } else {}
+                                        currentArray = [...(field.value && field.value), target.value];
+                                    } else {
+                                        currentArray = field.value.filter((val: string) => val !== target.value);
+                                    }
+                                    effects.forEach(effect => {
+                                        effect(selectOption, currentArray);
+                                    })
+                                    field.onChange(currentArray);
+                                    return;
                                 }
                                 return (
                                     <ul aria-invalid={error ? "true" : "false"}>
-                                        {selectOption.map(option => {
-                                            return (
-                                                <li key={`${name}_${option.value}`}>
-                                                    <label>
-                                                        <input 
-                                                        type={"checkbox"}
-                                                        onChange={onChange}
-                                                        value={option.value}
-                                                        checked={field.value ? field.value.some((val: string) => val === option.value) : false}
-                                                        />
-                                                        {option.name || option.value}
-                                                    </label>
-                                                </li>
-                                            )
-                                        })}
+                                        <>
+                                            {boxes.map(box => {
+                                                return (
+                                                    <li key={`${dataKey}_${box.name}`}>
+                                                        <label>
+                                                            <input 
+                                                                type={"checkbox"}
+                                                                onChange={onChange}
+                                                                checked={box.checked}
+                                                                value={box.name}
+                                                            />
+                                                            {box.name}
+                                                        </label>
+                                                    </li>
+                                                )
+                                            })}
+                                            {selectOption.map(option => {
+                                                return (
+                                                    <li key={`${dataKey}_${option.value}`}>
+                                                        <label>
+                                                            <input 
+                                                            type={"checkbox"}
+                                                            onChange={onChange}
+                                                            value={option.value}
+                                                            checked={field.value ? field.value.some((val: string) => val === option.value) : false}
+                                                            />
+                                                            {option.name || option.value}
+                                                        </label>
+                                                    </li>
+                                                )
+                                            })}
+                                        </>
                                     </ul>
                                 )
                             }}

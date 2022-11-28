@@ -6,18 +6,23 @@ export const useCustomCheck = (
 ) => {
     type props = {checked: boolean, name: string}; 
     type logic = (
+        /** 타겟 이름 */
+        value: string,
         /** 유효한 값 목록 */
         validArray: Pick<fieldProps, "selectOption">["selectOption"],
         /** 체크 여부 */
         checked: boolean
     ) => void; 
     type effect = (
-        /** 상태 변화의 기준 */
-        judge: boolean
+        /** 유효한 값 목록 */
+        validArray: Pick<fieldProps, "selectOption">["selectOption"],
+        /** 현재 값 목록 */
+        currentArray: string[]
     ) => void;
     let props: props = {checked: false, name: ""}
-    let logic: logic = (validArray, checked) => {}
-    let effect: effect = (judge) => {};
+    let logic: logic = () => {}
+    let effect: effect = () => {};
+
     switch (type) {
         case "all":
             const [all, setAll] = useState(false);
@@ -26,21 +31,26 @@ export const useCustomCheck = (
                 return setAll(status);
             }
             logic = (
+                value,
                 validArray,
                 checked
             ) => {
-                if(!checked) {
-                    updateAll(true)
-                    return validArray.map(item => item.value);
-                } else {
-                    updateAll(false)
-                    return [];
+                if(value === "모두") {
+                    if(checked) {
+                        updateAll(true)
+                        return validArray.map(item => item.value);
+                    } else {
+                        updateAll(false)
+                        return [];
+                    }
                 }
+                return;
             }
             effect = (
-                sameLength
+                validArray,
+                currentArray
                 ) => {
-                    if(sameLength) {
+                    if(validArray.length === currentArray.length) {
                         return updateAll(true);
                     } else {
                         return updateAll(false);
