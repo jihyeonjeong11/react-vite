@@ -75,10 +75,16 @@ const Select = ({
                                     const target = event.currentTarget;
                                     // 커스텀 액션 추가
                                     if(customNames.some(name => name === target.value)) {
-                                        logics.forEach(logic => {
-                                            field.onChange(logic(target.value, selectOption, target.checked))
+                                        return logics.forEach(logic => {
+                                            const result = logic(target.value, selectOption, (field.value ? field.value : []), target.checked);
+                                            if(Array.isArray(result)) {
+                                                effects.forEach(effect => {
+                                                    effect(selectOption, result);
+                                                })
+                                                return field.onChange(result);
+                                            }
+                                            return;
                                         })
-                                        return;
                                     }
                                     // 그 외 일반적인 핸들링
                                     let currentArray: string[];
