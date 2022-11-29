@@ -77,7 +77,7 @@ function App() {
                 {value: "메일5"}
             ],
             customCheck: [
-                "all", "even"
+                "all", "even", "odd"
             ]
         }
     ]

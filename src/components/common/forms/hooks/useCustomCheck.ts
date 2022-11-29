@@ -76,11 +76,11 @@ const checkGenerator = (
                 if(value === "짝수 선택") {
                     const evenArray = makeEvenArray(validArray);
                     if(checked) {
-                        setEven(true)
+                        setEven(true);
                         return [...currentArray, ...evenArray];
                     } else {
-                        setEven(false)
-                        return currentArray.filter(item => !evenArray.includes(item))
+                        setEven(false);
+                        return currentArray.filter(item => !evenArray.includes(item));
                     }
                 }
                 return;
@@ -90,15 +90,48 @@ const checkGenerator = (
                 currentArray
             ) => {
                 const evenArray = makeEvenArray(validArray);
-                if(evenArray.length > 0) {
-                    if(evenArray.every(item => item && currentArray.includes(item))) {
-                        return setEven(true);
+                if(evenArray.every(item => item && currentArray.includes(item))) {
+                    return setEven(true);
+                } else {
+                    return setEven(false);
+                }
+            };
+            break;
+        case "odd":
+            const [odd, setOdd] = useState(false);
+            props = {checked: odd, name: "홀수 선택"};
+            const makeOddArray = (array: Pick<fieldProps, "selectOption">["selectOption"]) => {
+                return array.filter((item, index) => (index + 1) % 2 !== 0).map(item => item.value);
+            };
+            logic = (
+                value,
+                validArray,
+                currentArray,
+                checked
+            ) => {
+                if(value === "홀수 선택") {
+                    const oddArray = makeOddArray(validArray);
+                    if(checked) {
+                        setOdd(true);
+                        return [...currentArray, ...oddArray];
                     } else {
-                        return setEven(false);
+                        setOdd(false);
+                        return currentArray.filter(item => !oddArray.includes(item));
                     }
                 }
                 return;
             };
+            effect = (
+                validArray,
+                currentArray
+            ) => {
+                const oddArray = makeOddArray(validArray);
+                if(oddArray.every(item => item && currentArray.includes(item))) {
+                    return setOdd(true);
+                } else {
+                    return setOdd(false);
+                }
+            }
             break;
     }
     return [props, logic, effect];
