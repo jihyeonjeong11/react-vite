@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, Children } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import type { CommonForms } from "../../../types/Global";
 
@@ -13,7 +13,7 @@ const Form = ({
     const onSubmit: SubmitHandler<CommonForms> = data => {
         submit(data)
     };
-    const [labels, setLabels] = useState(React.Children.map(children, (child) => {
+    const [labels, setLabels] = useState(Children.map(children, (child) => {
         if(typeof child === "object") {
             if(child.props && child.props.dataKey) {
                 return {...child, props: {...child.props, register: register}}
@@ -24,7 +24,7 @@ const Form = ({
     useEffect(() => {
         if(errors !== undefined) {
             const errorKeys = Object.keys(errors);
-            setLabels(React.Children.map(children, (child) => {
+            setLabels(Children.map(children, (child) => {
                 if(typeof child === "object") {
                     if(child.props && child.props.dataKey) {
                         const key = errorKeys.find(key => key === child.props.dataKey);

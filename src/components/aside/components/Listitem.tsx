@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -36,13 +36,13 @@ const ListItem = ({
     eventKey: number;
 }) => {
     const { activeIndex, toggleClick } = useAccordion();
-    const isFocused = React.useMemo(
+    const isFocused = useMemo(
         () => eventKey == activeIndex,
         [activeIndex, eventKey]
     );
     const { t } = useTranslation();
     return (
-        <article className="relative cursor-pointer" id={title} >
+        <article className="relative cursor-pointer" id={title}>
             <button
                 className={
                     "flex items-center p-2 px-4 text-base font-normal " +
@@ -53,7 +53,6 @@ const ListItem = ({
                 }
                 data-href={href && href}
                 data-dialog={hasDialog && dialogType}
-
             >
                 {iconSorter(
                     title,
@@ -73,4 +72,4 @@ const ListItem = ({
     );
 };
 
-export default React.memo(ListItem);
+export default memo(ListItem);

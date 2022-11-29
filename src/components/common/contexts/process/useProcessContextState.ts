@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { StoredWindowProps } from "../../hooks/useLocalForage";
 
@@ -41,7 +41,7 @@ const useProcessContextState = (): ProcessContextState => {
     const [processes, setProcesses] = useState<Processes>({} as Processes);
     const {dbLoaded, storedValue} = useIndexedDb();
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (dbLoaded) openStoredProcesses();
     }, [dbLoaded]);
 

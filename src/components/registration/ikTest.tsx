@@ -1,8 +1,3 @@
-import React from "react";
-
-import type { ZeroOrOne, ExamTypes, BasicTestProps } from "@/types/exam";
-import type { FormikProps } from "formik";
-
 import { useFormik, Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 

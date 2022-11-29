@@ -25,12 +25,13 @@ export default defineConfig({
     esbuild: {
         jsxFactory: "f",
         jsxFragment: "Fragment",
-        // jsxInject: `import React from 'react'`,
-        target: "es2020",
+        jsxInject: `import React from 'react'`,
     },
 
     build: {
-        outDir: "/",
+        outDir: "./build",
+        // sourcemap 차후 프로덕션에서는 꺼야함;.
+        sourcemap:  true
     },
     plugins: [react(), visualizer()],
     resolve: {

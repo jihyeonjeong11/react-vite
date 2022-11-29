@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 
 import type { Processes } from "../process/useProcessContextState";
 import type { WindowStates } from "../session/useSessionContextState";

@@ -1,4 +1,3 @@
-
 //Size는 useRnd로 갈것
 import type { LocaleTimeDate, Size } from "../src/components/clock/helpers";
 import { formatLocaleDateTime } from "../src/components/clock/helpers";
@@ -42,7 +41,10 @@ const textPosition = {
 const TEXT_HEIGHT_OFFSET = 1;
 
 const styleClock = (): void => {
-    offscreenContext.scale(globalThis.devicePixelRatio, globalThis.devicePixelRatio);
+    offscreenContext.scale(
+        globalThis.devicePixelRatio,
+        globalThis.devicePixelRatio
+    );
     offscreenContext.fillStyle = textColor;
     offscreenContext.font = `${fontSize} ${formats.systemFont}`;
     offscreenContext.textAlign = "center";
@@ -78,10 +80,8 @@ const drawClockText = (dateTime: LocaleTimeDate): void => {
 
 const sendTick = (): void => {
     const now = getNow();
-    
-    const dateTime = formatLocaleDateTime(now);
-    console.log('here', dateTime)
 
+    const dateTime = formatLocaleDateTime(now);
     globalThis.postMessage(dateTime);
     if (offscreenCanvas) drawClockText(dateTime);
 };

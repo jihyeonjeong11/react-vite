@@ -1,4 +1,3 @@
-import React from "react";
 
 import type { MenuType } from "../constants";
 
@@ -6,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useMenuAnimation from "@/components/common/hooks/useMenuAnimation";
 import menus from "../constants";
 
+// 사용하지 않으므로 차후 지움 11/29
 
 
 type MenuFunctionProps = {

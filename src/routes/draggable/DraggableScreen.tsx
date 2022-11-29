@@ -1,5 +1,3 @@
-import React from "react";
-
 import DraggableRoot from "@/components/draggable/container/DraggableRoot";
 import { ProcessProvider } from "@/components/common/contexts/process";
 import { SessionProvider } from "@/components/common/contexts/session";

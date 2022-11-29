@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { SlCamrecorder, SlNote } from "react-icons/sl";
 import { CgScreen } from "react-icons/cg";

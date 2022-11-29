@@ -1,5 +1,3 @@
-import React from "react";
-
 import { BiNotepad } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
 

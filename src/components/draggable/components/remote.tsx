@@ -1,5 +1,3 @@
-import React from "react";
-
 import MemoComp from "./MemoComp";
 import type { StoredWindowProps } from "@/components/common/contexts/indexeddb/useIndexedDbContextState";
 

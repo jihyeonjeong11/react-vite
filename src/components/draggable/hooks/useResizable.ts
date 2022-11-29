@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useLayoutEffect } from "react";
+import { useMemo, useState, useLayoutEffect } from "react";
 import type { Props } from "react-rnd";
 
 import { useSession } from "@/components/common/contexts/session/index";

@@ -1,6 +1,6 @@
-import React from "react";
+import { useRef } from "react";
 
-import type { StoredWindowProps } from "@/components/common/hooks/useLocalForage";
+// import type { StoredWindowProps } from "@/components/common/hooks/useLocalForage";
 
 import Window from "./Window";
 import { Rnd } from "react-rnd";
@@ -20,10 +20,9 @@ const MemoComp = ({ id }: { id: string }) => {
         windowStates,
     } = useSession();
 
-    const rndRef = React.useRef(null);
+    const rndRef = useRef(null);
 
-
-    const textareaRef = React.useRef(null);
+    const textareaRef = useRef(null);
 
     return (
         <>
@@ -35,13 +34,17 @@ const MemoComp = ({ id }: { id: string }) => {
                     size={windowState.size}
                     onResizeStop={(e, direction, ref, delta, position) => {
                         const { width, height } = ref.style;
-                        
-                        addToWindow(id, { size: { width: pxToNum(width), height:pxToNum(height) } });
+
+                        addToWindow(id, {
+                            size: {
+                                width: pxToNum(width),
+                                height: pxToNum(height),
+                            },
+                        });
                     }}
                     onDragStop={(e, { x, y }) => {
                         addToWindow(id, { position: { x, y } });
-                        console.log(windowState)
-
+                        console.log(windowState);
                     }}
                     minHeight={282}
                     minWidth={250}
@@ -70,7 +73,9 @@ const MemoComp = ({ id }: { id: string }) => {
                                 rows={10}
                                 ref={textareaRef}
                                 value={windowState.value}
-                                onChange={(e)=>addToWindow(id,{value: e.target.value})}
+                                onChange={(e) =>
+                                    addToWindow(id, { value: e.target.value })
+                                }
                                 className="w-full h-full resize-none"
                             />
                         </article>

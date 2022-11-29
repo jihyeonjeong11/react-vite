@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 
 import ErrorBoundary from "@/routes/error/ErrorBoundary";
 import MemoComp from "./MemoComp";
@@ -16,7 +16,7 @@ const RenderComponent: React.FunctionComponent<RenderComponentProps> = ({
     Component,
     id,
 }) => {
-    const Comp = React.useMemo(
+    const Comp = useMemo(
         () => (Component == "memo" ? MemoComp : MemoComp),
         [Component]
     );

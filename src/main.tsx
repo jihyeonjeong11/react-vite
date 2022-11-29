@@ -1,4 +1,5 @@
-import React, { lazy } from "react";
+import { StrictMode } from "react";
+
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@/styles/index.css";
@@ -78,13 +79,12 @@ const router = createBrowserRouter([
 // 시험 데이터 저장할 다른 key의 프로바이더를 만들기
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <React.StrictMode>
+    <StrictMode>
         <IndexedDbProvider>
-            
             <DialogsProvider>
-                    <DialogRoot />
+                <DialogRoot />
                 <RouterProvider router={router} />
             </DialogsProvider>
         </IndexedDbProvider>
-    </React.StrictMode>
+    </StrictMode>
 );

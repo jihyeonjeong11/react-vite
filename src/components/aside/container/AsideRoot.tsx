@@ -1,3 +1,5 @@
+import { Fragment, useCallback } from "react";
+
 import AccordionCompound from "../components/AccordionCompound";
 
 import { useTranslation } from "react-i18next";
@@ -7,8 +9,10 @@ import { AccordionConsumer } from "@/components/common/contexts/accordion";
 import { useDialogsContextState } from "@/components/common/contexts/dialogs";
 
 import ListItem from "../components/Listitem";
-import React from "react";
-import { DialogTypes, Dialogs } from "@/components/common/contexts/dialogs/useDialogsContextState";
+import {
+    DialogTypes,
+    Dialogs,
+} from "@/components/common/contexts/dialogs/useDialogsContextState";
 
 const AsideRoot = () => {
     const { i18n } = useTranslation();
@@ -16,13 +20,18 @@ const AsideRoot = () => {
 
     const { dialogType, setDialogs } = useDialogsContextState();
 
-    const navBubble = React.useCallback((e: React.MouseEvent) => {
-        const target = (e.target as Element).closest("button");
-        if (target && target.dataset.dialog) return setDialogs(target.dataset.dialog as DialogTypes);
-        if (target && target.dataset.lang)
-            return i18n.changeLanguage(target.dataset.lang);
-        if (target && target.dataset.href) return navigate(target.dataset.href);
-    }, [dialogType, i18n, navigate]);
+    const navBubble = useCallback(
+        (e: React.MouseEvent) => {
+            const target = (e.target as Element).closest("button");
+            if (target && target.dataset.dialog)
+                return setDialogs(target.dataset.dialog as DialogTypes);
+            if (target && target.dataset.lang)
+                return i18n.changeLanguage(target.dataset.lang);
+            if (target && target.dataset.href)
+                return navigate(target.dataset.href);
+        },
+        [dialogType, i18n, navigate]
+    );
 
     return (
         <>
@@ -58,7 +67,7 @@ const AsideRoot = () => {
                                                     },
                                                     index
                                                 ) => (
-                                                    <React.Fragment
+                                                    <Fragment
                                                         key={
                                                             index + "asidemenu"
                                                         }
@@ -109,7 +118,7 @@ const AsideRoot = () => {
                                                                     )}
                                                             </AccordionCompound.Collapse>
                                                         </AccordionCompound.Item>
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 )
                                             )}
                                         </>

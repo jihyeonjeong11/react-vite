@@ -1,12 +1,14 @@
-import React from "react";
+import { lazy } from "react";
 
-const Lazy = React.lazy(() => import("@/components/registration/container/RegistrationRoot"));
+const Lazy = lazy(
+    () => import("@/components/registration/container/RegistrationRoot")
+);
 
 const RegistrationScreen = () => {
     return (
-        <React.Fragment>
+        <>
             <Lazy />
-        </React.Fragment>
+        </>
     );
 };
 

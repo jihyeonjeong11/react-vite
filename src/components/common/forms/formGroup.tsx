@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const FormGroup = ({
     children,
@@ -20,7 +20,7 @@ const FormGroup = ({
     return (
         <div className="flex flex-col gap-1" ref={ref}>
             <label htmlFor={name}>{label}</label>
-            <React.Fragment>{children}</React.Fragment>
+            <>{children}</>
             {error && <div className="text-red-500">{error}</div>}
         </div>
     );

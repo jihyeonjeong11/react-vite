@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import { useSearchParams, useOutletContext, Outlet } from "react-router-dom";
 import Stepper from "../stepper";
@@ -7,12 +7,12 @@ const steps = ["basic", "hobbys", "social", "else", "someping", "stubs"];
 
 const RegistrationRoot = () => {
     let [searchParams, _] = useSearchParams();
-    let [idx, setIdx] = React.useState(1);
+    let [idx, setIdx] = useState(1);
 
     // let [user, setUser] = useOutletContext('eee');
 
     return (
-        <React.Fragment>
+        <>
             <main className="w-[calc(100vw_-_16rem)]">
                 <div className="container flex flex-col items-center">
                     <Stepper steps={steps} currentStep={idx} />
@@ -35,7 +35,7 @@ const RegistrationRoot = () => {
                     <Outlet />
                 </div>
             </main>
-        </React.Fragment>
+        </>
     );
 };
 

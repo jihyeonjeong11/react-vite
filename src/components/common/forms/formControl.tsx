@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useMemo, memo } from "react";
 import { fieldProps, labelProps } from "@/types/Global";
 
 const tipClass = "";
@@ -41,7 +41,7 @@ const InputRoot = ({
     error,
 }: Partial<labelProps>): JSX.Element => {
     // 클래스
-    const inputClass = React.useMemo(() => (isError: string | undefined) => {
+    const inputClass = useMemo(() => (isError: string | undefined) => {
         const base = "px-2 py-1 rounded w-full outline-0 outline-none";
         let result: string = "";
         if (isError) {
@@ -114,8 +114,8 @@ const InputRoot = ({
     );
 };
 
-const MemoizedLabelRoot = React.memo(LabelRoot);
-const MemoizedInputRoot = React.memo(InputRoot);
+const MemoizedLabelRoot = memo(LabelRoot);
+const MemoizedInputRoot = memo(InputRoot);
 
 const FormItem = ({
     name,

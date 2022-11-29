@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { generateArrayFromLengthAndVal } from "@/lib/common/helpers/helpers";
 
 export const useCheckBoxes = (arrLength: number | null) => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import type { Position } from "react-rnd";
 import type { StoredWindowProps } from "../../hooks/useLocalForage";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const useSessionContextState = (): SessionContextState => {
 
     const { dbLoaded, storedValue } = useIndexedDb();
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (processes) {
             const ids = Object.keys(processes);
             let result: WindowStates = {};

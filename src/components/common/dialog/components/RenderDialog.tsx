@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 
 import { Dialogs } from "@/components/common/contexts/dialogs/useDialogsContextState";
 import { motion } from "framer-motion";
@@ -13,13 +13,13 @@ type RenderDialogProps = {
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
     Component,
 }) => {
-    const Dialog = React.useMemo(
+    const Dialog = useMemo(
         () => (Component == Dialogs["MainExam"] ? MainExamDialog : () => <></>),
         [Component]
     );
     const SafeComponent = (
         <ErrorBoundary>
-                <Dialog />
+            <Dialog />
         </ErrorBoundary>
     );
 

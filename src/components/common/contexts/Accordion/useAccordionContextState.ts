@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 
 import type { MenuType } from "@/components/aside/constants";
 
@@ -13,7 +13,7 @@ export type AccordionContextState = {
 const useAccordionContextState = (): AccordionContextState => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-    const toggleClick = React.useCallback((eventIndex: number) => {
+    const toggleClick = useCallback((eventIndex: number) => {
         return setActiveIndex(eventIndex === activeIndex ? null : eventIndex);
     }, [activeIndex]);
 

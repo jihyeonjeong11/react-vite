@@ -1,11 +1,10 @@
-import React from "react";
+import {useState, useEffect, useCallback, useRef, useMemo} from "react";
 import type { LocaleTimeDate, Size } from "./helpers";
 import { getNtpAdjustedTime } from "./ntp";
 import { createOffscreenCanvas } from "./helpers";
 import useWorker from "./hooks/useWorker";
 
 import ClockWorker from "./clock.worker?worker&url";
-
 
 // @vite-ignore
 // import * as worker from "./clock.worker";
@@ -46,7 +45,7 @@ const clockSize: Size = {
     width: 66,
 };
 
-const styledClock = "height-full absolute right-0 bg-red-300";
+const styledClock = "height-full absolute left-0 bottom-0 bg-red-300";
 
 const MILLISECONDS_IN_SECOND = 1000;
 
@@ -58,32 +57,30 @@ const ClockSourceMap = {
     ntp: "Server",
 };
 
-
-
 const ClockRoot = () => {
-    const [now, setNow] = React.useState<LocaleTimeDate>({} as LocaleTimeDate);
+    // session이나, 따로 hook으로 빼야 나중에 남은시간 계산가능
+    const [now, setNow] = useState<LocaleTimeDate>({} as LocaleTimeDate);
     const { date, time } = now;
     // 일단 context하나로 따로 빼서 넣기.
     //const { clockSource } = useSession();
-    const clockWorkerInit = React.useCallback(
+    const clockWorkerInit = useCallback(
         () =>
-            //@vite-ignore
-            new Worker(new URL("/clockWorker", import.meta.url), {type: "module"}),
+            new Worker(new URL("/clockWorker", import.meta.url), {
+                type: "module",
+            }),
         []
     );
     // 일단 ntp소스만 구현하ㅣ므ㅏ로 필요없음.
     //const clockContextMenu = useClockContextMenu();
 
-    const supportsOffscreenCanvas = React.useMemo(
+    const supportsOffscreenCanvas = useMemo(
         () => typeof window !== "undefined" && "OffscreenCanvas" in window,
         []
     );
 
-    const offScreenClockCanvas = React.useRef<OffscreenCanvas>();
+    const offScreenClockCanvas = useRef<OffscreenCanvas>();
 
-    console.log(now)
-
-    const updateTime = React.useCallback(
+    const updateTime = useCallback(
         ({ data, target: clockWorker }: MessageEvent<ClockWorkerResponse>) => {
             if (data === "source") {
                 (clockWorker as Worker).postMessage("ntp");
@@ -104,7 +101,7 @@ const ClockRoot = () => {
         updateTime
     );
 
-    const clockCallbackRef = React.useCallback(
+    const clockCallbackRef = useCallback(
         (clockContainer: HTMLDivElement | null) => {
             if (
                 !offScreenClockCanvas.current &&
@@ -133,7 +130,7 @@ const ClockRoot = () => {
         [currentWorker, now]
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (supportsOffscreenCanvas) {
             const monitorPixelRatio = (): void =>
                 window
@@ -154,11 +151,7 @@ const ClockRoot = () => {
         }
     }, [currentWorker, supportsOffscreenCanvas]);
 
-    console.log("clock");
-
-
     if (!time) return <></>;
-
 
     return (
         <div
@@ -168,6 +161,7 @@ const ClockRoot = () => {
             title={date}
             suppressHydrationWarning
         >
+            현재시간
             {!supportsOffscreenCanvas ? time : undefined}
         </div>
     );

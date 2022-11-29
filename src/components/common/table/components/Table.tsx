@@ -1,4 +1,4 @@
-import React from "react";
+import { createContext } from "react";
 
 import CustomTable from "./CustomTable";
 import CustomTableHead from "./CustomTableHead";
@@ -12,7 +12,7 @@ interface TableContextState {
     setActiveLayout: (prevLayout: string) => void;
 }
 
-const tableContext = React.createContext<TableContextState | null>(null);
+const tableContext = createContext<TableContextState | null>(null);
 
 export function Table({ children, ...rest }: ComponentWithChildrenProps) {
     return <CustomTable {...rest}>{children}</CustomTable>;

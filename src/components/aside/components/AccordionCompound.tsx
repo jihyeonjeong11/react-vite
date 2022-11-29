@@ -1,4 +1,5 @@
-import React from "react";
+import {useState, useLayoutEffect, memo, useMemo} from 'react';
+
 import {
     AccordionProvider,
     useAccordion,
@@ -40,11 +41,11 @@ const AccordionCollapse = ({
     eventKey: number;
 }) => {
     const { activeIndex } = useAccordion();
-    const [style, setStyle] = React.useState({height: 0});
+    const [style, setStyle] = useState({height: 0});
 
-    const id = React.useMemo(() => "accordionCollapse-" + eventKey, [eventKey]);
+    const id = useMemo(() => "accordionCollapse-" + eventKey, [eventKey]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
         const element = document.getElementById(id);
         if(eventKey === activeIndex){
             const height = element?.scrollHeight;
@@ -61,8 +62,8 @@ const AccordionCollapse = ({
     );
 };
 
-AccordionCompound.Item = React.memo(AccordionItem);
-AccordionCompound.Toggle = React.memo(AccordionToggle);
-AccordionCompound.Collapse = React.memo(AccordionCollapse);
+AccordionCompound.Item = memo(AccordionItem);
+AccordionCompound.Toggle = memo(AccordionToggle);
+AccordionCompound.Collapse = memo(AccordionCollapse);
 
 export default AccordionCompound;

@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 
 import CrashErrorScreen from "./CrashErrorScreen";
 
@@ -10,7 +10,7 @@ type State = {
     hasError: boolean;
 };
 
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
     public state: State = {
         hasError: false,
     };
@@ -36,7 +36,11 @@ class ErrorBoundary extends React.Component<Props, State> {
             return <CrashErrorScreen />;
         }
 
-        return <ErrorBoundaryWrapper hasError={this.state.hasError}>{this.props.children}</ErrorBoundaryWrapper>;
+        return (
+            <ErrorBoundaryWrapper hasError={this.state.hasError}>
+                {this.props.children}
+            </ErrorBoundaryWrapper>
+        );
     }
 }
 

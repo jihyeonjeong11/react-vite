@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import { useSafeState } from "../../hooks/useSafeState";
 
 export const Dialogs = {
@@ -18,7 +18,7 @@ const useDialogsContextState = (): DialogsContextState => {
         Dialogs.Inactive
     );
 
-    const setDialogs = React.useCallback(
+    const setDialogs = useCallback(
         (type: DialogTypes) => {
             return setDialogType(
                 type == dialogType ? Dialogs.Inactive : type

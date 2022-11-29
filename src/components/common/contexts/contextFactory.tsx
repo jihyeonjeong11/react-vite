@@ -1,4 +1,4 @@
-import React, { createContext, useContext, FC } from "react";
+import { createContext, useContext, FC } from "react";
 
 const contextFactory = <T,>(
     useContextState: () => T,
