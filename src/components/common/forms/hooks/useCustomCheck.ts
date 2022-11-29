@@ -1,7 +1,6 @@
 import { customCheck, fieldProps } from "@/types/Global";
 import { useState } from "react";
 
-export const useCustomCheck = (
 type props = {checked: boolean, name: string}; 
 type logic = (
     /** 타겟 이름 */
@@ -20,9 +19,14 @@ type effect = (
     currentArray: string[]
 ) => void;
 
+const checkGenerator = (
     type: customCheck
+): [props, logic, effect] => {
+    /** 특수 체크박스의 상태 및 명칭 정보 */
     let props: props = {checked: false, name: ""}
+    /** 특수 체크박스의 onChange event handler */
     let logic: logic = () => {}
+    /** 다른 체크박스에서 onChange event 발생할 때 부수적(side-effect)으로 발생하는 event handler */
     let effect: effect = () => {};
 
     switch (type) {
@@ -59,4 +63,19 @@ type effect = (
             break;
     }
     return [props, logic, effect];
+
+export const useCustomCheck = (
+    customCheck: Pick<fieldProps, "customCheck">["customCheck"]
+):[props[], logic[], effect[]] => {
+    let _customCheckbox: props[] = [];
+    let _customlogics: logic[] = [];
+    let _customeffects: effect[] = [];
+    customCheck?.forEach(custom => {
+        const [props, logic, effect] = checkGenerator(custom);
+        _customCheckbox.push(props);
+        _customlogics.push(logic);
+        _customeffects.push(effect);
+        
+    });
+    return [_customCheckbox, _customlogics, _customeffects]
 }

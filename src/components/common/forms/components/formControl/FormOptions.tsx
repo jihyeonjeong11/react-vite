@@ -24,20 +24,6 @@ const Select = ({
     ...rest
 }: Omit<fieldProps, "name">
 ): JSX.Element => {
-    // 커스텀 요소 생성
-    const makeCustomArray = useCallback((customCheck: Pick<fieldProps, "customCheck">["customCheck"]) => {
-        let _customCheckbox: any[] = [];
-        let _customlogics: any[] = [];
-        let _customeffects: any[] = [];
-        customCheck?.forEach(custom => {
-            const [props, logic, effect] = useCustomCheck(custom);
-            _customCheckbox.push(props);
-            _customlogics.push(logic);
-            _customeffects.push(effect);
-            
-        });
-        return [_customCheckbox, _customlogics, _customeffects]
-    }, []);
     // 요소 생성
     const makeSelect = useCallback(({
         type, 
@@ -78,7 +64,7 @@ const Select = ({
                 break;
             case "checkbox":
                 if(customCheck && customCheck.length > 0) {
-                    const [boxes, logics, effects] = makeCustomArray(customCheck);
+                    const [boxes, logics, effects] = useCustomCheck(customCheck);
                     const customNames = boxes.map(box => box.name);
                     elements =
                         <Controller 
