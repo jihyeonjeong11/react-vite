@@ -59,10 +59,50 @@ const checkGenerator = (
                     } else {
                         return setAll(false);
                     }
+            };
+            break;
+        case "even":
+            const [even, setEven] = useState(false);
+            props = {checked: even, name: "짝수 선택"}
+            const makeEvenArray = (array: Pick<fieldProps, "selectOption">["selectOption"]) => {
+                return array.filter((item, index) => (index + 1) % 2  === 0).map(item => item.value);
+            };
+            logic = (
+                value,
+                validArray,
+                currentArray,
+                checked
+            ) => {
+                if(value === "짝수 선택") {
+                    const evenArray = makeEvenArray(validArray);
+                    if(checked) {
+                        setEven(true)
+                        return [...currentArray, ...evenArray];
+                    } else {
+                        setEven(false)
+                        return currentArray.filter(item => !evenArray.includes(item))
+                    }
                 }
+                return;
+            };
+            effect = (
+                validArray,
+                currentArray
+            ) => {
+                const evenArray = makeEvenArray(validArray);
+                if(evenArray.length > 0) {
+                    if(evenArray.every(item => item && currentArray.includes(item))) {
+                        return setEven(true);
+                    } else {
+                        return setEven(false);
+                    }
+                }
+                return;
+            };
             break;
     }
     return [props, logic, effect];
+}
 
 export const useCustomCheck = (
     customCheck: Pick<fieldProps, "customCheck">["customCheck"]
