@@ -23,4 +23,17 @@
 2. 정아름·[FormItem.tsx](src/components/common/forms/components/formControl/FormItem.tsx)    
     - defaultValue를 상위 컴포넌트(Form)에서 처리하게 되었으므로(1번 참고) 해당 속성 제외
 3. 정아름·[FormOptions.tsx](src/components/common/forms/components/formControl/FormOptions.tsx)    
-    - defaultValue를 상위 컴포넌트(Form)에서 처리하게 되었으므로(1번 참고) 해당 속성 제외하되, checkbox 타입은 유지함
+    - defaultValue를 상위 컴포넌트(Form)에서 처리하게 되었으므로(1번 참고) 해당 속성 제외하되, checkbox 타입은 유지함    
+
+2022.11.28
+- 목록형 컴포넌트에 key 추가하여 잠재적 오류 방지    
+- 커스텀 체크박스의 적용 방법 변경
+> (기존) prop, logic 직접 작성 후 전달 → (변경 후) 특정 액션 형태를 사전 정의 후 골라서 사용    
+
+1. 정아름·[Global.d.ts](src/types/Global.d.ts)
+    - 사용상의 편의를 위해 required 항목의 message를 선택적 프로퍼티로 변경    
+    - 커스텀 체크박스의 종류 타입 선언: "all"(모두 선택), "odd"(홀수 선택), "even"(짝수 선택)
+2. 정아름·[FormOptions.tsx](src/components/common/forms/components/formControl/FormOptions.tsx)    
+    - 커스텀 체크박스 로직 "모두 선택(all)" 작성 완료
+    - dataKey를 받지 않아 전송 결과가 예측하지 못한 형태로 나오는 현상 수정(react hook form에서의 name이 현 로직에서는 dataKey에 해당하는데 name을 전달하여 일어난 오류)
+    - 일부 체크박스 형태에서 controller 도입, 불필요한 hook(useCheckbox) 제거
