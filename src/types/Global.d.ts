@@ -71,7 +71,7 @@ type numericOption = { value: number, message: string };
 export type regexOption = { value: RegExp, message: string };
 export type applyOption = {
     /** 필수 여부, 기본값은 true(필수) */
-    required?: { value: boolean, message?: string };
+    required?: { value: boolean, message: string };
     /** 숫자의 최솟값 */
     min?: numericOption;
     /** 숫자의 최댓값 */
