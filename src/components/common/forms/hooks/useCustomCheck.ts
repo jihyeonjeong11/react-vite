@@ -28,34 +28,32 @@ type effect = (
     switch (type) {
         case "all":
             const [all, setAll] = useState(false);
-            props = {checked: all, name: "모두"};
-            const updateAll = (status: boolean) => {
-                return setAll(status);
-            }
+            props = {checked: all, name: "모두 선택"};
             logic = (
                 value,
                 validArray,
+                currentArray,
                 checked
             ) => {
-                if(value === "모두") {
+                if(value === "모두 선택") {
                     if(checked) {
-                        updateAll(true)
+                        setAll(true)
                         return validArray.map(item => item.value);
                     } else {
-                        updateAll(false)
+                        setAll(false)
                         return [];
                     }
                 }
                 return;
-            }
+            };
             effect = (
                 validArray,
                 currentArray
                 ) => {
                     if(validArray.length === currentArray.length) {
-                        return updateAll(true);
+                        return setAll(true);
                     } else {
-                        return updateAll(false);
+                        return setAll(false);
                     }
                 }
             break;
