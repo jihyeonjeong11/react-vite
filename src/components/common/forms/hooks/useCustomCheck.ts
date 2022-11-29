@@ -2,23 +2,25 @@ import { customCheck, fieldProps } from "@/types/Global";
 import { useState } from "react";
 
 export const useCustomCheck = (
+type props = {checked: boolean, name: string}; 
+type logic = (
+    /** 타겟 이름 */
+    value: string,
+    /** 유효한 값 목록 */
+    validArray: Pick<fieldProps, "selectOption">["selectOption"],
+    /** 현재 값 목록 */
+    currentArray: string[],
+    /** 체크 여부 */
+    checked: boolean
+) => void; 
+type effect = (
+    /** 유효한 값 목록 */
+    validArray: Pick<fieldProps, "selectOption">["selectOption"],
+    /** 현재 값 목록 */
+    currentArray: string[]
+) => void;
+
     type: customCheck
-) => {
-    type props = {checked: boolean, name: string}; 
-    type logic = (
-        /** 타겟 이름 */
-        value: string,
-        /** 유효한 값 목록 */
-        validArray: Pick<fieldProps, "selectOption">["selectOption"],
-        /** 체크 여부 */
-        checked: boolean
-    ) => void; 
-    type effect = (
-        /** 유효한 값 목록 */
-        validArray: Pick<fieldProps, "selectOption">["selectOption"],
-        /** 현재 값 목록 */
-        currentArray: string[]
-    ) => void;
     let props: props = {checked: false, name: ""}
     let logic: logic = () => {}
     let effect: effect = () => {};
