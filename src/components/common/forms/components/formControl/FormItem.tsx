@@ -1,4 +1,4 @@
-import { labelProps } from "@/types/Global";
+import type { labelProps } from "@/types/Global";
 import React, { ReactElement, ReactNode, useCallback } from "react";
 
 const Label = ({

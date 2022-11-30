@@ -1,4 +1,4 @@
-import { fieldProps } from "@/types/Global"
+import type { fieldProps } from "@/types/Global"
 import React, { ReactElement, ReactNode, useCallback } from "react"
 import { Controller } from "react-hook-form";
 import { useCustomCheck } from "../../hooks/useCustomCheck";

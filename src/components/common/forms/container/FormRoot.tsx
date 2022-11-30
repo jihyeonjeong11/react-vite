@@ -1,8 +1,8 @@
-import { CommonForms } from "@/types/Global"
+import type { CommonForms } from "@/types/Global"
 import Form from "../components/form"
 import { example } from "../constants";
 
-export const FormRoot = ({
+const FormRoot = ({
         submit
     }: {
         submit: (data: CommonForms) => void
@@ -14,3 +14,5 @@ export const FormRoot = ({
         </Form>
     )
 };
+
+export default FormRoot;
