@@ -26,9 +26,9 @@ import RegistrationRoot from "./components/registration/container/RegistrationRo
 import BasicExamInfo from "@/components/registration/basicExamInfo";
 import RoomSelection from "@/components/registration/roomSelection";
 
-import IkTest from "@/components/registration/ikTest";
-import HookFormTest from "@/components/registration/hookformTest";
-import ModalContainer from "./components/common/dialog/components/ModalContainer";
+import IkTest from '@/components/registration/ikTest';
+import HookFormTest from '@/components/registration/hookformTest';
+import { FormScreen } from "./routes/form/FormScreen";
 
 const draggableAction = () => {
     return "data";
@@ -65,12 +65,12 @@ const router = createBrowserRouter([
             {
                 path: "draggable",
                 action: draggableAction,
-                element: <DraggableScreen />,
+                element: <DraggableScreen />
             },
             {
-                path: "test",
-                element: <DraggableScreen />,
-            },
+                path: "form",
+                element: <FormScreen />
+            }
         ],
     },
 ]);
