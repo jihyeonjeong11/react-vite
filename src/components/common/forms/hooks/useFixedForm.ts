@@ -79,12 +79,12 @@ const useFixedForm = (
                 {
                     type: "text",
                     dataKey: "mec_nm",
-                    name: "메인 시험 이름"
+                    name: "시험 이름"
                 },
                 {
                     type: "desc",
                     dataKey: "mec_memo",
-                    name: "설명",
+                    name: "시험 설명",
                     applyOption: {
                         required: { value: false, message: "" }
                     }
