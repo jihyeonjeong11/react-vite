@@ -1,5 +1,5 @@
 import type { labelProps } from "@/types/Global";
-import React, { ReactElement, ReactNode, useCallback } from "react";
+import { ReactElement, ReactNode, useCallback, memo } from "react";
 
 const Label = ({
     name,
@@ -82,7 +82,7 @@ const Input = ({
     )
 };
 
-const FormItem = React.memo(({
+const FormItem = memo(({
     name,
     ...rest
 }: Omit<labelProps, "dataKey"|"defaultValue">

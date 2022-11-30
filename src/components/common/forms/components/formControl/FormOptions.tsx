@@ -1,5 +1,5 @@
 import type { fieldProps } from "@/types/Global"
-import React, { ReactElement, ReactNode, useCallback } from "react"
+import { ReactElement, ReactNode, useCallback, memo } from "react"
 import { Controller } from "react-hook-form";
 import useCustomCheck from "../../hooks/useCustomCheck";
 
@@ -201,7 +201,7 @@ const Select = ({
     )
 }
 
-const FormOptions = React.memo(({
+const FormOptions = memo(({
     name,
     ...rest
 }: fieldProps
