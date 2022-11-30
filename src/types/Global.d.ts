@@ -1,4 +1,4 @@
-import type { ExamForms } from './exam.d';
+import type { ExamForms, ExamFormNames } from './exam.d';
 import type { Control } from 'react-hook-form';
 
 const windowTypes = {
@@ -23,6 +23,7 @@ declare global {
 
 /** form 양식 */
 export type CommonForms = ExamForms | testProps;
+export type FormNames = ExamFormNames | "example";
 /** formControl props */
 type formProps = {
     /** 해당 Form에서 리턴되는 객체 내에서 사용될 항목의 고유한 이름(키) */
