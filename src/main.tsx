@@ -16,6 +16,7 @@ import RoomSelection from "@/components/registration/roomSelection";
 
 import IkTest from '@/components/registration/ikTest';
 import HookFormTest from '@/components/registration/hookformTest';
+import { FormScreen } from "./routes/form/FormScreen";
 
 const draggableAction = () => {
 
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
                 path: "draggable",
                 action: draggableAction,
                 element: <DraggableScreen />
+            },
+            {
+                path: "form",
+                element: <FormScreen />
             }
         ],
     },

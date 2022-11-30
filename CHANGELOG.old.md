@@ -36,4 +36,23 @@
 2. 정아름·[FormOptions.tsx](src/components/common/forms/components/formControl/FormOptions.tsx)    
     - 커스텀 체크박스 로직 "모두 선택(all)" 작성 완료
     - dataKey를 받지 않아 전송 결과가 예측하지 못한 형태로 나오는 현상 수정(react hook form에서의 name이 현 로직에서는 dataKey에 해당하는데 name을 전달하여 일어난 오류)
-    - 일부 체크박스 형태에서 controller 도입, 불필요한 hook(useCheckbox) 제거
+    - 일부 체크박스 형태에서 controller 도입, 불필요한 hook(useCheckbox) 제거    
+
+2022.11.29    
+- FormGroup 삭제
+1. 정아름·[Global.d.ts](src/types/Global.d.ts)
+    - 11.28 때 required 항목의 message를 선택적 프로퍼티로 변경하는 것이 react hook form의 타입과 충돌을 일으켜 원복     
+2. 정아름·[useCustomCheck.ts](src/components/common/forms/hooks/useCustomCheck.ts)    
+    - 훅 내에서 사용되던 type들을 끌어올려 모듈 내 전역 스코프로 이동    
+    - 배열 분해 할당 후 type이 OR로 묶이는 문제로 return 타입 지정
+    - 불필요한 update 함수들 제거, setState() 함수 직접 사용
+    - 기존 useCustomCheck 함수 checkGenerator로 명칭 변경하고 export 중지, 내부 함수로 사용
+    - FormOptions에서 사용되던 makeCustomArray 함수를 이전 후 useCustomCheck으로 이름 변경하고 export    
+        + 실질적으로 사용되는 함수를 훅으로 사용하도록 변경     
+    - 커스텀 체크박스 로직 "짝수 선택(even)" 작성 완료
+    - 커스텀 체크박스 로직 "홀수 선택(odd)" 작성 완료
+3. 정아름·[FormOptions.tsx](src/components/common/forms/components/formControl/FormOptions.tsx)    
+    - makeCustomArray 함수 useCustomCheck으로 이전     
+    - 커스텀 체크박스 클릭 후 일반 체크박스 onChange event handler 부분으로 넘어가는 현상 막기 위해 if문 내에 return 추가
+    - 커스텀 체크박스 event handler 내부에 effect 함수 추가
+        + 커스텀 체크박스 이벤트가 서로 영향을 주는 현상 반영

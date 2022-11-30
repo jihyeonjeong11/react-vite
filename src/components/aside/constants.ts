@@ -29,6 +29,7 @@ const menus: MenuType = [
     },
     { title: "videos", hasChildren: false, href: "video" },
     { title: "managing", hasChildren: false, href: "managing" },
+    { title: "React Hook Form", hasChildren: false, href: "form" },
 ];
 
 export default menus;

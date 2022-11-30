@@ -8,12 +8,10 @@ import FormOptions from "./formControl/FormOptions";
 const Form = ({
     formProps,
     children,
-    keyName,
     submit
 }: {
     formProps: formArrayprops;
     children?: ReactElement | ReactElement[];
-    keyName: string;
     submit: (data: CommonForms) => void;
 }) => {
     /** useForm 초기 설정 */
@@ -56,7 +54,7 @@ const Form = ({
                     // 선택 가능한 입력 항목 
                     return (
                         <FormOptions 
-                            key={`${keyName}_${dataKey}`}
+                            key={dataKey}
                             dataKey={dataKey}
                             type={item.type}
                             name={name}
