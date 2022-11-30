@@ -47,7 +47,6 @@ const useProcessContextState = (): ProcessContextState => {
 
     const openStoredProcesses = async () => {
         if (storedValue !== null && storedValue.processes) {
-            console.log(storedValue)
             let result: Processes = {};
             for (let [k, v] of Object.entries(storedValue.processes)) {
                 result[k] = v;

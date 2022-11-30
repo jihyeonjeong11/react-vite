@@ -44,7 +44,6 @@ const MemoComp = ({ id }: { id: string }) => {
                     }}
                     onDragStop={(e, { x, y }) => {
                         addToWindow(id, { position: { x, y } });
-                        console.log(windowState);
                     }}
                     minHeight={282}
                     minWidth={250}

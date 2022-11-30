@@ -36,7 +36,7 @@ const dropIn = {
 };
 
 const MainExamDialog = () => {
-    const { setDialogs } = useDialogsContextState();
+    const { setDialogs, turnOff } = useDialogsContextState();
     const { setValue } = useIndexedDb();
     const [loading, setIsLoading] = useToggle(false);
 
@@ -47,7 +47,11 @@ const MainExamDialog = () => {
         // then: 하위 시험 페이지 이동
         // catch: 에러 이후 메인페이지로 강제이동
         const exam = await createExam(data.mec_nm);
-        if (exam) alert("추가 성공");
+        if (exam) {
+            alert("추가 성공");
+            return turnOff();
+        };
+        
     };
 
     return (

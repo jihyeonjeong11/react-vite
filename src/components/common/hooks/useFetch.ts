@@ -732,7 +732,6 @@ export function useFetch<T>(endpoint: string): FetchResponseData<T> {
                     `${import.meta.env.VITE_TEST_ENDPOINT}${endpoint}`
                 );
                 const responseJson = await res.json();
-                console.log(responseJson)
                 if (!didCancelFetch) {
                     const updatedResponse: Response<T> = { data: responseJson };
                     if (res.headers.get("X-Total-Count") != null) {
@@ -744,7 +743,6 @@ export function useFetch<T>(endpoint: string): FetchResponseData<T> {
                     setResponse(updatedResponse);
                 }
             } catch (err: any) {
-                console.log(err);
                 setError(err.message || "errors");
             }
             setLoading(false);

@@ -108,6 +108,8 @@ react-query 도입 및
 
 Timer 작업 중.(offscreencanvas, web worker 사용)
 
+11/29 components/clock에 타이머 작업.
+
 
 # 실행법
 

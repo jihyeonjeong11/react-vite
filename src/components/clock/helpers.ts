@@ -7,7 +7,9 @@ export type LocaleTimeDate = {
     time: string;
 };
 
-const DEFAULT_LOCALE = "en";
+//INTL object의 경우, i18n을 대체할 수도 있을 것으로 보임..
+
+const DEFAULT_LOCALE = "ko";
 
 const dateFormat: Intl.DateTimeFormatOptions = {
     day: "numeric",
@@ -16,10 +18,11 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 };
 
 const timeFormat: Intl.DateTimeFormatOptions = {
-    hour: "numeric",
-    hour12: true,
-    minute: "2-digit",
-    second: "2-digit",
+    // hour: "numeric",
+    // hour12: true,
+    // minute: "2-digit",
+    // second: "2-digit",
+    timeStyle: "medium"
 };
 
 const dayFormat: Intl.DateTimeFormatOptions = {
@@ -41,6 +44,10 @@ export const formatLocaleDateTime = (now: Date): LocaleTimeDate => {
     };
 };
 
+// https://medium.com/samsung-internet-dev/offscreencanvas-workers-and-performance-3023ca15d7c7
+// 워커 + 오프스크린캔버스로 퍼포먼스 향상 article
+// 위 url에서는 worker에서 캔버스를 그렸음. 무엇이 더 나은지?? 하지만 캔버스 자체가 그렇게 계산량이 많지는 않다고 생각함(내 생각)
+
 export const createOffscreenCanvas = (
     containerElement: HTMLElement,
     devicePixelRatio = 1,
@@ -58,6 +65,5 @@ export const createOffscreenCanvas = (
 
     containerElement.appendChild(canvas);
 
-    // https://github.com/microsoft/TypeScript/issues/45745 타입스ㅜ크립트에서 지워짐
     return canvas.transferControlToOffscreen();
 };

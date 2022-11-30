@@ -1,5 +1,5 @@
 import { memo } from "react";
-
+  
 import styles from '@/styles/table.module.css';
 
 function CustomTable({children, ...rest}: ComponentWithChildrenProps) {

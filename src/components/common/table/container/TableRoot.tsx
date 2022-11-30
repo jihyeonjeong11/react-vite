@@ -22,18 +22,18 @@ export interface UserListProps {
 }
 
 const TableWrapper = () => {
-    const {
-        response: { data: users },
-        error,
-        loading,
-    } = useFetch<UserData[]>("/users");
-    // 나중에 훅 형태로 만들기 11-29
+    // const {
+    //     response: { data: users },
+    //     error,
+    //     loading,
+    // } = useFetch<UserData[]>("/users");
+    // // 나중에 훅 형태로 만들기 11-29
     const [exams, setExams] = useState<ExamsType>([]);
 
-    const checkboxes = useCheckBoxes(users && users.length ? users.length : 0);
-    if (error) {
-        return <h2>{"페칭에 실패했습니다"}</h2>;
-    }
+    const checkboxes = useCheckBoxes(exams && exams.length ? exams.length : 0);
+    // if (error) {
+    //     return <h2>{"페칭에 실패했습니다"}</h2>;
+    // }
 
     useEffect(() => {
         getExamList();
@@ -46,8 +46,8 @@ const TableWrapper = () => {
 
     return (
         <>
-            {loading && <h3>학생 정보 불러오는 중</h3>}
-            {users !== null && checkboxes.checkArr.length ? (
+            {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
+            {exams !== null && checkboxes.checkArr.length ? (
                 <div className="w-[calc(100vw_-_12.5rem)] h-screen bg-gray-200 px-2">
                     <h1 className="text-3xl py-4 border-b mb-10">
                         작성 중 시험

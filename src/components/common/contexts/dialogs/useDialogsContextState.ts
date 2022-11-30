@@ -11,6 +11,7 @@ export type DialogTypes = typeof Dialogs[keyof typeof Dialogs];
 export type DialogsContextState = {
     dialogType: DialogTypes;
     setDialogs: (type: DialogTypes) => void;
+    turnOff: () => void;
 };
 
 const useDialogsContextState = (): DialogsContextState => {
@@ -27,9 +28,19 @@ const useDialogsContextState = (): DialogsContextState => {
         [dialogType]
     );
 
+    const turnOff = useCallback(
+        () => {
+            return setDialogType(
+                Dialogs.Inactive
+            );
+        },
+        [dialogType]
+    )
+
     return {
         dialogType,
         setDialogs,
+        turnOff
     };
 };
 

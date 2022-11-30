@@ -79,6 +79,6 @@ async function fakeNetwork(key: string = "e_mec") {
 
     fakeCache[key] = true;
     return new Promise((res) => {
-        setTimeout(res, Math.random() * 800);
+        setTimeout(res, Math.random() * 100);
     });
 }

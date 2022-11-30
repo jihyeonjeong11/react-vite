@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { generateArrayFromLengthAndVal } from "@/lib/common/helpers/helpers";
 
 export const useCheckBoxes = (arrLength: number | null) => {
+    console.log(arrLength)
     const [checkArr, setCheckArr] = useState<boolean[]>([]);
     const [isAllChecked, setIsAllChecked] = useState(false);
 

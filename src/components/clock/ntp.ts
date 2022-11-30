@@ -13,6 +13,8 @@ const NTP_SERVER = "https://use.ntpjs.org/v1/time.json";
 const NtpReqOptions = {
     cache: "no-cache",
     credentials: "omit",
+    // https://www.imperva.com/learn/performance/http-keep-alive/
+    // keepalive는 더 볼필요있음
     keepalive: false,
     mode: "cors",
     priority: "high",
