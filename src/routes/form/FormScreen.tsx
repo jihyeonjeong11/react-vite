@@ -10,7 +10,9 @@ export const FormScreen = () => {
         <main>
             <h1>react hook form</h1>
             <p>테스트</p>
-            <FormRoot submit={submitTest} key="test" />
+            <FormRoot submit={submitTest} key="test" type={"example"}>
+                <button type="submit">제출</button>
+            </FormRoot>
         </main>
     );
 };
