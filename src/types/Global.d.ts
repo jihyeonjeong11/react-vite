@@ -1,8 +1,5 @@
-import { ExamForms } from './exam.d';
-
-import { Control } from 'react-hook-form';
-
-export {};
+import type { ExamForms } from './exam.d';
+import type { Control } from 'react-hook-form';
 
 const windowTypes = {
     memo: 'memo',
