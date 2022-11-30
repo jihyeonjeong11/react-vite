@@ -5,12 +5,12 @@ import { useIndexedDb } from "../../contexts/indexeddb";
 import Backdrop from "./Backdrop";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
-import type { CommonForms } from "@/types/Global";
 import { useToggle } from "../../hooks/useToggle";
 import LoadingSpinner from "./LoadingSpinner";
 import { createExam } from "../../temporal/examFakeClient";
 import ModalContainer from "./ModalContainer";
 import FormRoot from "../../forms/container/FormRoot";
+import type { NewMainExam } from "@/types/exam";
 
 const dropIn = {
     hidden: {
@@ -38,7 +38,7 @@ const MainExamDialog = () => {
     const { setValue } = useIndexedDb();
     const [loading, setIsLoading] = useToggle(false);
 
-    const submit = async (data: CommonForms) => {
+    const submit = async (data: NewMainExam) => {
         setIsLoading(true);
         // https://www.notion.so/SIMPREC-b5a8874803ae4190a37431ddb8910281?p=cc28676b83e84dfca109318d0df1b089&pm=s
         // 백엔드 api 콜 코드 작성 /exam/new/insertMainExam
