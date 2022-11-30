@@ -137,7 +137,7 @@ const checkGenerator = (
     return [props, logic, effect];
 }
 
-export const useCustomCheck = (
+const useCustomCheck = (
     customCheck: Pick<fieldProps, "customCheck">["customCheck"]
 ):[props[], logic[], effect[]] => {
     let _customCheckbox: props[] = [];
@@ -152,3 +152,5 @@ export const useCustomCheck = (
     });
     return [_customCheckbox, _customlogics, _customeffects]
 }
+
+export default useCustomCheck;
