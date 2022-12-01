@@ -18,6 +18,9 @@
 }
 
 @layer components {
+  .back-drop {
+    @apply w-screen h-screen fixed top-0 left-0 bg-black/80
+  }
   .label-heading {
     @apply pb-2 inline-block font-medium
   }
