@@ -69,16 +69,7 @@ const TableWrapper = () => {
                     <span className="text-sm">김은미님 반갑습니다.</span>
                 </header>
 
-                {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
-                {exams !== null && checkboxes.checkArr.length ? (
-                    <>
-                        <div className="px-[2rem] bg-main-100 h-full">
-                            <div className="py-6 mb-8 px-2 ">
-                                <span className="text-2xl font-pretendard font-bold	">
-                                    메인 시험 {dialogType}
-                                </span>
-                            </div>
-                            <div onClick={()=>{
+                <div onClick={()=>{
                                 return setDialogs("mainExam" as DialogTypes);
 
                             }} className="sm:flex items-center justify-between mb-3">
@@ -93,6 +84,17 @@ const TableWrapper = () => {
                                     </p>
                                 </button>
                             </div>
+
+                {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
+                {exams !== null && checkboxes.checkArr.length ? (
+                    <>
+                        <div className="px-[2rem] bg-main-100 h-full">
+                            <div className="py-6 mb-8 px-2 ">
+                                <span className="text-2xl font-pretendard font-bold	">
+                                    메인 시험 {dialogType}
+                                </span>
+                            </div>
+                            
                             <div className="rounded-lg shadow w-full">
                                 <Table className="w-full whitespace-nowrap mb-5">
                                     <Table.Head>
