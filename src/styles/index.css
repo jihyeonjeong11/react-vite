@@ -451,3 +451,30 @@ button:focus-visible {
         --main-100: 248, 250, 253 /* #f8fafd */;
     }
 }
+:root {
+    --deep-blue-100: 46, 83, 218 /* #2e53da  */;
+    --deep-blue-200: 41, 69, 168 /* #2945a8  */;
+}
+:root.dark {
+    --deep-blue-100: 37, 68, 179 /* #2544B3 */;
+    --deep-blue-200: 55, 93, 230 /* #375DE6 */;
+}
+
+div {
+    max-width: initial;
+}
+
+@layer components {
+    .back-drop {
+        @apply w-screen h-screen fixed top-0 left-0 bg-black/80;
+    }
+    .label-heading {
+        @apply pb-2 inline-block font-medium;
+    }
+    .input-outlined {
+        @apply inline-block px-2 py-1 rounded w-full outline-0 outline-none border-slate-300 border;
+    }
+    .input-outlined-error {
+        @apply inline-block px-2 py-1 rounded w-full outline-0 outline-none border-rose-600 border-2;
+    }
+}

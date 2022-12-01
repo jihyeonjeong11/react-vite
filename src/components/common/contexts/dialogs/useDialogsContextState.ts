@@ -1,46 +1,49 @@
-import { useCallback, useState, useEffect, useRef } from "react";
+import { useCallback } from "react";
+import type { DialogTypes } from "../../dialog/constants";
+import { Dialogs } from "../../dialog/constants";
 import { useSafeState } from "../../hooks/useSafeState";
-
-export const Dialogs = {
-    Inactive: "inactive",
-    MainExam: "mainExam",
-} as const;
-
-export type DialogTypes = typeof Dialogs[keyof typeof Dialogs];
 
 export type DialogsContextState = {
     dialogType: DialogTypes;
     setDialogs: (type: DialogTypes) => void;
     turnOff: () => void;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
 };
 
 const useDialogsContextState = (): DialogsContextState => {
+    // 다이얼로그 로직 실행 중 상태
+    const [loading, setLoading] = useSafeState<boolean>(false);
+    
+    // 현재 활성화된 다이얼로그 타입
     const [dialogType, setDialogType] = useSafeState<DialogTypes>(
-        Dialogs.Inactive
-    ); 
-
+        Dialogs.inactive.name
+    );
+    // 다이얼로그 타입 전환
     const setDialogs = useCallback(
         (type: DialogTypes) => {
             return setDialogType(
-                type == dialogType ? Dialogs.Inactive : type
+                type == dialogType ? Dialogs.inactive.name : type
             );
         },
         [dialogType]
     );
-
+    // 다이얼로그 비활성화 처리
     const turnOff = useCallback(
         () => {
             return setDialogType(
-                Dialogs.Inactive
+                Dialogs.inactive.name
             );
         },
-        [dialogType]
-    )
+        []
+    );
 
     return {
         dialogType,
         setDialogs,
-        turnOff
+        turnOff,
+        loading,
+        setLoading
     };
 };
 

@@ -9,10 +9,12 @@ import { AccordionConsumer } from "@/components/common/contexts/accordion";
 import { useDialogsContextState } from "@/components/common/contexts/dialogs";
 
 import ListItem from "../components/Listitem";
-import {
-    DialogTypes,
-    Dialogs,
-} from "@/components/common/contexts/dialogs/useDialogsContextState";
+import type { DialogTypes } from "@/components/common/dialog/constants";
+
+
+// useDialogContextState, 중앙관리
+// RenderDialog 실제 컴포넌트 import
+// 해야 할 것: modal 감싸는 공통 부분 더 분리하기, 모달 결정하는 함수 switch 문으로 변경
 
 const AsideRoot = () => {
     const { i18n } = useTranslation();

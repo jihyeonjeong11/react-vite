@@ -1,13 +1,10 @@
 import { useMemo } from "react";
-
-import { Dialogs } from "@/components/common/contexts/dialogs/useDialogsContextState";
-import { motion } from "framer-motion";
-
 import ErrorBoundary from "@/routes/error/ErrorBoundary";
 import MainExamDialog from "./MainExamDialog";
+import type { DialogTypes } from "../constants";
 
 type RenderDialogProps = {
-    Component: string;
+    Component: DialogTypes;
 };
 
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
@@ -16,17 +13,21 @@ const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
 
     console.log(Component)
     const Dialog = useMemo(
-        () => (Component == Dialogs["MainExam"] ? MainExamDialog : () => <></>),
+        () => {
+            switch (Component) {
+                case "mainExam": 
+                    return MainExamDialog;
+                default:
+                    return () => <></>;
+            }
+        },
         [Component]
     );
-
-    const SafeComponent = (
+    return (
         <ErrorBoundary>
             <Dialog />
         </ErrorBoundary>
     );
-
-    return SafeComponent;
 };
 
 export default RenderDialog;

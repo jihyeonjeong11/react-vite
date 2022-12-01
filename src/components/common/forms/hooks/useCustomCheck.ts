@@ -1,5 +1,5 @@
 import { customCheck, fieldProps } from "@/types/Global";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 type props = {checked: boolean, name: string}; 
 type logic = (
@@ -33,7 +33,7 @@ const checkGenerator = (
         case "all":
             const [all, setAll] = useState(false);
             props = {checked: all, name: "모두 선택"};
-            logic = (
+            logic = useCallback((
                 value,
                 validArray,
                 currentArray,
@@ -49,8 +49,8 @@ const checkGenerator = (
                     }
                 }
                 return;
-            };
-            effect = (
+            }, []);
+            effect = useCallback((
                 validArray,
                 currentArray
                 ) => {
@@ -59,15 +59,15 @@ const checkGenerator = (
                     } else {
                         return setAll(false);
                     }
-            };
+            }, []);
             break;
         case "even":
             const [even, setEven] = useState(false);
             props = {checked: even, name: "짝수 선택"}
-            const makeEvenArray = (array: Pick<fieldProps, "selectOption">["selectOption"]) => {
+            const makeEvenArray = useCallback((array: Pick<fieldProps, "selectOption">["selectOption"]) => {
                 return array.filter((item, index) => (index + 1) % 2  === 0).map(item => item.value);
-            };
-            logic = (
+            }, []);
+            logic = useCallback((
                 value,
                 validArray,
                 currentArray,
@@ -84,8 +84,8 @@ const checkGenerator = (
                     }
                 }
                 return;
-            };
-            effect = (
+            }, []);
+            effect = useCallback((
                 validArray,
                 currentArray
             ) => {
@@ -95,15 +95,15 @@ const checkGenerator = (
                 } else {
                     return setEven(false);
                 }
-            };
+            }, []);
             break;
         case "odd":
             const [odd, setOdd] = useState(false);
             props = {checked: odd, name: "홀수 선택"};
-            const makeOddArray = (array: Pick<fieldProps, "selectOption">["selectOption"]) => {
+            const makeOddArray = useCallback((array: Pick<fieldProps, "selectOption">["selectOption"]) => {
                 return array.filter((item, index) => (index + 1) % 2 !== 0).map(item => item.value);
-            };
-            logic = (
+            }, []);
+            logic = useCallback((
                 value,
                 validArray,
                 currentArray,
@@ -120,8 +120,8 @@ const checkGenerator = (
                     }
                 }
                 return;
-            };
-            effect = (
+            }, []);
+            effect = useCallback((
                 validArray,
                 currentArray
             ) => {
@@ -131,13 +131,13 @@ const checkGenerator = (
                 } else {
                     return setOdd(false);
                 }
-            }
+            }, []);
             break;
     }
     return [props, logic, effect];
 }
 
-export const useCustomCheck = (
+const useCustomCheck = (
     customCheck: Pick<fieldProps, "customCheck">["customCheck"]
 ):[props[], logic[], effect[]] => {
     let _customCheckbox: props[] = [];
@@ -152,3 +152,5 @@ export const useCustomCheck = (
     });
     return [_customCheckbox, _customlogics, _customeffects]
 }
+
+export default useCustomCheck;

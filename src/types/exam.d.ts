@@ -1,4 +1,3 @@
-import { subExamStep1 } from './exam.d';
 // Type definitions for [~THE LIBRARY NAME~] [~OPTIONAL VERSION NUMBER~]
 // Project: [~THE PROJECT NAME~]
 // Definitions by: [~YOUR NAME~] <[~A URL FOR YOU~]>
@@ -47,32 +46,53 @@ export interface BasicExamProps {
 }
 
 /** 시험 작성 */
+// api request body 기준으로 작성되었습니다.
 /** 메인 시험 추가 */
-export interface NewMainExam  {
+export type NewMainExam =  {
     mec_nm: string; // 메인시험_명
+    mec_memo?: string; // 메인시험_설명
 }
-/** 서브 시험 단계 1 */
-export interface subExamStep1 {
+/** 서브 시험 단계 1: 추가 및 수정 */
+export type subExamStep1 = {
     ec_cd?: string; // 시험수업_코드
     mec_cd: string; // 메인시험수업_코드
     ec_name: string; // 시험수업_명
-    e_type: string; // 시험종류
-    e_pa_use: string; // 시험_방송_사용
+    e_type: "1" | "2" | "3" | "4"; // 시험종류 (1: CPX, 2: OSCE, 3: 한CPX, 4:한OSCE)
+    e_pa_use: "0" | "1"; // 시험_방송_사용 (0: 미사용, 1: 사용)
 }
-/** 서브 시험 단계 2 */
-export interface subExamStep2 {
-    exam_class_group_cd: string; // 시험_수업_그룹_코드
+/** 서브 시험 단계 2: 그룹별 시나리오 */
+export type subExamStep2 = {
+    exam_class_group_cd?: string; // 시험_수업_그룹_코드
     ec_cd: string; // 시험수업_코드
     mec_cd: string; // 메인시험수업_코드
     group_nm: string; // 그룹_명
-    exam_class_group_row_data: {
+    exam_class_group_row_data?: {
         exam_class_group_row_cd: string, // 시험_수업_그룹_하위_코드
         room_cd: string, // 룸_코드
         scenario_cd: string // 시나리오_코드
     }[]
 }
+/** 서브 시험 단계 3: 대기학생 추가 */
+export type subExamStep3 = Omit<subExamStep2, "exam_class_group_row_data"> & {
+    exam_wait_student_data: {
+        student_cd: string; // 학생_코드
+        student_id: string; // 학생_아이디
+        student_nm: string; // 학생_이름
+        student_grade: string; // 학생_학년
+    }[]
+}
+/** 서브 시험 단계 4: PA 등록 */
+export type subExamStep4 = Pick<subExamStep2, "ec_cd"|"mec_cd"> & {
+    pa_data: {
+        pa_play_dt: string; // 방송_재생_시간
+        exam_pa_mp3_cd: string; // 시험_방송_mp3_코드
+        pa_content: string; // 방송_내용
+        mp3_file_nm: string; // mp3_파일_명
+    }
+}
 
-export type ExamForms = NewMainExam | subExamStep1;
+export type ExamForms = NewMainExam | subExamStep1 | subExamStep2 | subExamStep3 | subExamStep4;
+export type ExamFormNames = "NewMainExam" | "subExamStep1" | "subExamStep2" | "subExamStep3" | "subExamStep4";
 
 
 // api 별로 따로 끊어서, 후에 extends하여 사용할 것임.

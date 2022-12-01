@@ -1,4 +1,4 @@
-import { Dialogs, DialogTypes } from "../common/contexts/dialogs/useDialogsContextState";
+import { Dialogs, DialogTypes } from "../common/dialog/constants";
 
 export type MenuProps = {
     title: string;
@@ -27,8 +27,8 @@ const menus: MenuType = [
         hasChildren: true,
         href: "",
         children: [
-            { title: "메인 시험 작성", hasChildren: false, hasDialog: true, dialogType: Dialogs["MainExam"]}, // 지금 작업하는 TableRoot
-            { title: "메인 시험 마감", hasChildren: false, href: "/table" }, // 마감된 메인시험의 테이블
+            { title: "시험 작성", hasChildren: false, href: "/table" },
+            { title: "시험 목록", hasChildren: false, href: "/table" },
         ],
     },
     { title: "videos", hasChildren: false, href: "video" },

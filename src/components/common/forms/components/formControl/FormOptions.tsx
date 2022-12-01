@@ -1,7 +1,7 @@
-import { fieldProps } from "@/types/Global"
-import { ReactElement, ReactNode, useCallback } from "react"
+import type { fieldProps } from "@/types/Global"
+import { ReactElement, ReactNode, useCallback, memo } from "react"
 import { Controller } from "react-hook-form";
-import { useCustomCheck } from "../../hooks/useCustomCheck";
+import useCustomCheck from "../../hooks/useCustomCheck";
 
 const Fieldset = ({
     name,
@@ -201,7 +201,7 @@ const Select = ({
     )
 }
 
-const FormOptions = React.memo(({
+const FormOptions = memo(({
     name,
     ...rest
 }: fieldProps
