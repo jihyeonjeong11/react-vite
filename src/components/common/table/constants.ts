@@ -1,40 +1,48 @@
 interface StaticProps {
     [key: string]: string[];
-};
+}
 
-const MainExams =  {
-    mecCd: 'mec_cd',
-    skinCd: 'skin_cd',
-    mecNm: 'mecNm',
-    mecState: 'mecState',
-    mecInsertDt: 'mec_insert_dt',
-    mecUpdateDt: 'mec_update_dt',
+const MainExams = {
+    id: "id",
+    mecCd: "mec_cd",
+    skinCd: "skin_cd",
+    mecNm: "mecNm",
+    mecState: "mecState",
+    mecInsertDt: "mec_insert_dt",
+    mecUpdateDt: "mec_update_dt",
+    event: "event",
 } as const;
 
 export type MainExamKeys = typeof MainExams[keyof typeof MainExams];
 
 export type MainExamProps = Record<string, MainExamKeys>;
 
-export const mainExamClassMenu: {titleObject: {title: string, key: MainExamKeys}[]} = {
+export const mainExamClassMenu: {
+    titleObject: { title: string; key: MainExamKeys }[];
+} = {
     titleObject: [
         {
-            title: '메인시험명',
-            key: MainExams['mecCd'],
+            title: "코드",
+            key: MainExams["id"],
         },
         {
-            title: '메인시험상태',
-            key: MainExams['mecState'],
+            title: "메인시험명",
+            key: MainExams["mecCd"],
         },
         {
-            title: '생성일자',
-            key: MainExams['mecInsertDt'],
+            title: "메인시험상태",
+            key: MainExams["mecState"],
         },
         {
-            title: '수정일자',
-            key: MainExams['mecUpdateDt'],
-        }
-    ]
-}
+            title: "수정일자",
+            key: MainExams["mecUpdateDt"],
+        },
+        {
+            title: "이벤트",
+            key: MainExams["event"],
+        },
+    ],
+};
 
 export const staticState: StaticProps = {
     test: [

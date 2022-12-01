@@ -17,7 +17,7 @@ export type DialogsContextState = {
 const useDialogsContextState = (): DialogsContextState => {
     const [dialogType, setDialogType] = useSafeState<DialogTypes>(
         Dialogs.Inactive
-    );
+    ); 
 
     const setDialogs = useCallback(
         (type: DialogTypes) => {

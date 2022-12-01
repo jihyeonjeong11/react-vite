@@ -13,10 +13,13 @@ type RenderDialogProps = {
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
     Component,
 }) => {
+
+    console.log(Component)
     const Dialog = useMemo(
         () => (Component == Dialogs["MainExam"] ? MainExamDialog : () => <></>),
         [Component]
     );
+
     const SafeComponent = (
         <ErrorBoundary>
             <Dialog />

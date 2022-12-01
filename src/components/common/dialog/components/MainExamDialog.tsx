@@ -5,8 +5,8 @@ import { useIndexedDb } from "../../contexts/indexeddb";
 import Backdrop from "./Backdrop";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
-import Form from "../../forms/form";
-import { FormItem } from "../../forms/formControl";
+import Form from "../../forms/components/form";
+import FormItem from "../../forms/components/formControl/FormItem";
 import type { CommonForms } from "@/types/Global";
 import { addRegex, addRequired } from "../../forms/helpers";
 import { useToggle } from "../../hooks/useToggle";
@@ -79,18 +79,8 @@ const MainExamDialog = () => {
                                     메인 시험을 등록 중입니다.
                                 </div>
                             ) : (
-                                <Form submit={submit}>
-                                    <FormItem
-                                        key="mec_nm"
-                                        dataKey="mec_nm"
-                                        name="메인시험명 입력"
-                                        type="desc"
-                                        applyOption={{
-                                            required: addRequired,
-                                        }}
-                                    />
+
                                     <button type="submit">제출 버튼</button>
-                                </Form>
                             )}
                         </div>
                     </motion.div>

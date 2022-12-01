@@ -12,6 +12,15 @@ module.exports = {
                     100: "rgba(var(--deep-blue-100), <alpha-value>)",
                     200: "rgba(var(--deep-blue-200), <alpha-value>)"
                 },
+                "header-white": {
+                    100: "rgba(var(--header-white-100), <alpha-value>)",
+                },
+                "header-text": {
+                    100: "rgba(var(--header-text-100), <alpha-value>)",
+                },
+                "main": {
+                    100: "rgba(var(--main-100), <alpha-value>)",
+                },
                 // window
                 "window-header": "rgb(43, 43, 43)",
                 "window-shadow": "0 0 12px 0 rgba(0, 0, 0, 50%)",
@@ -24,6 +33,9 @@ module.exports = {
                 // "sidebar__text--focused": "#ffffff"
 
             },
+            fontFamily: {
+                pretendard: ["Pretendard-Regular", "sans-serif"]
+            }
         },
     },
     plugins: [],

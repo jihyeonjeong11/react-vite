@@ -6,10 +6,10 @@ import RenderDialog from "../components/RenderDialog";
 const DialogRoot = () => {
     const element = document.getElementById("portal") as Element;
     const { dialogType } = useDialogsContextState();
-
     return ReactDom.createPortal(
         <>
             <RenderDialog Component={dialogType} />
+            <div>{dialogType}</div>
         </>,
         element
     );
