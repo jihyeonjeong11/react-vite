@@ -1,7 +1,7 @@
 import MainExamDialog from "./components/presentational/MainExamDialog";
 
 export const Dialogs = {
-    inactive: () => null,
+    inactive: null,
     mainExam: ()=> MainExamDialog,
 } as const;
 
