@@ -42,7 +42,6 @@ const AsideRoot = () => {
                     onClick={navBubble}
                     className=" h-screen py-4 bg-brand-100"
                 >
-                    <>{dialogType}</>
                     <div className="flex justify-evenly mb-12">
                         <button data-lang="ko" className="text-white">
                             ko

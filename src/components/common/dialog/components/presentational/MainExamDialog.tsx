@@ -1,4 +1,3 @@
-
 import { useIndexedDb } from "../../../contexts/indexeddb";
 
 import { useDialogsContextState } from "../../../contexts/dialogs";
@@ -32,7 +31,8 @@ const dropIn = {
 };
 
 const MainExamDialog = () => {
-    const { setDialogs, turnOff, loading, setLoading } = useDialogsContextState();
+    const { setDialogs, turnOff, loading, setLoading } =
+        useDialogsContextState();
     const { setValue } = useIndexedDb();
 
     const submit = async (data: NewMainExam) => {
@@ -47,16 +47,15 @@ const MainExamDialog = () => {
             // alert("추가 성공");
             // 얼럿은 실패 케이스에 사용
             return close();
-        };
-        
+        }
     };
     const close = useCallback(() => {
-        if(loading) {
+        if (loading) {
             return;
         } else {
             return turnOff();
         }
-    }, [loading])
+    }, [loading]);
 
     return (
         <ModalWrapper close={close}>
@@ -66,7 +65,7 @@ const MainExamDialog = () => {
                     <div className="flex w-full h-full items-center justify-center flex-col">
                         <LoadingSpinner />
                         메인 시험을 등록 중입니다.
-                    </div> 
+                    </div>
                 ) : (
                     <FormRoot submit={submit} type={"NewMainExam"}>
                         <button type="submit">추가</button>

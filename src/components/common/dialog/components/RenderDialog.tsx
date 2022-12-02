@@ -1,11 +1,11 @@
 import ErrorBoundary from "@/routes/error/ErrorBoundary";
 
 type RenderDialogProps = {
-    component: (() => JSX.Element) | null;
+    Component: (() => JSX.Element) | null;
 };
 
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
-    component: Component
+    Component: Component
 }) => {
     return (
         <ErrorBoundary>
