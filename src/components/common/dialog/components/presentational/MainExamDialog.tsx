@@ -1,3 +1,4 @@
+
 import { useIndexedDb } from "../../../contexts/indexeddb";
 
 import { useDialogsContextState } from "../../../contexts/dialogs";
@@ -5,7 +6,30 @@ import LoadingSpinner from "../../../loading/components/LoadingSpinner";
 import { createExam } from "../../../temporal/examFakeClient";
 import FormRoot from "../../../forms/container/FormRoot";
 import type { NewMainExam } from "@/types/exam";
+import ModalWrapper from "../container/ModalWrapper";
+import ModalHeader from "../container/ModalHeader";
+import { useCallback } from "react";
 
+const dropIn = {
+    hidden: {
+        y: "-100vh",
+        opacity: 0,
+    },
+    visible: {
+        y: "0",
+        opacity: 1,
+        transition: {
+            duration: 0.1,
+            type: "spring",
+            damping: 25,
+            stiffness: 500,
+        },
+    },
+    exit: {
+        y: "100vh",
+        opacity: 0,
+    },
+};
 
 const MainExamDialog = () => {
     const { setDialogs, turnOff, loading, setLoading } = useDialogsContextState();
@@ -19,30 +43,37 @@ const MainExamDialog = () => {
         // catch: 에러 이후 메인페이지로 강제이동
         const exam = await createExam(data.mec_nm);
         if (exam) {
+            setLoading(false);
             // alert("추가 성공");
             // 얼럿은 실패 케이스에 사용
-            return turnOff();
+            return close();
         };
         
     };
+    const close = useCallback(() => {
+        if(loading) {
+            return;
+        } else {
+            return turnOff();
+        }
+    }, [loading])
 
     return (
-        <>
-            <div className="bg-white">
+        <ModalWrapper close={close}>
+            <div className="bg-white w-[50vw] h-[60vh] overflow-hidden rounded">
+                <ModalHeader modalHeading={"메인 시험 추가"} close={close} />
                 {loading ? (
                     <div className="flex w-full h-full items-center justify-center flex-col">
                         <LoadingSpinner />
                         메인 시험을 등록 중입니다.
                     </div> 
                 ) : (
-                    <>
                     <FormRoot submit={submit} type={"NewMainExam"}>
                         <button type="submit">추가</button>
                     </FormRoot>
-                    </>
                 )}
             </div>
-        </>
+        </ModalWrapper>
     );
 };
 

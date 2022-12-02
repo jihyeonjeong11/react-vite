@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import type { DialogTypes } from "../../dialog/constants";
-import { Dialogs } from "../../dialog/constants";
 import { useSafeState } from "../../hooks/useSafeState";
 
 export type DialogsContextState = {
@@ -31,6 +30,7 @@ const useDialogsContextState = (): DialogsContextState => {
     // 다이얼로그 비활성화 처리
     const turnOff = useCallback(
         () => {
+            console.log("inacive")
             return setDialogType(
                 "inactive"
             );

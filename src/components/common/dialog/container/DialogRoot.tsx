@@ -2,14 +2,15 @@ import ReactDom from "react-dom";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
 import RenderDialog from "../components/RenderDialog";
-import { Dialogs } from "../constants";
+import createDialog from "../helper";
 
 const DialogRoot = () => {
     const element = document.getElementById("portal") as Element;
     const { dialogType } = useDialogsContextState();
+    const component = createDialog(dialogType);
 
     return ReactDom.createPortal(
-        <RenderDialog component={dialogType} />,
+        <RenderDialog component={component} />,
         element
     );
 };
