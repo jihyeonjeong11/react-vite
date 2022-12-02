@@ -45,7 +45,7 @@ const clockSize: Size = {
     width: 66,
 };
 
-const styledClock = "height-full absolute left-0 bottom-0 bg-red-300";
+const styledClock = "height-full absolute bottom-0 right-0 bg-red-300";
 
 const MILLISECONDS_IN_SECOND = 1000;
 

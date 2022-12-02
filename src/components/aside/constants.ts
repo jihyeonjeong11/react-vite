@@ -27,7 +27,7 @@ const menus: MenuType = [
         hasChildren: true,
         href: "",
         children: [
-            { title: "시험 작성", hasChildren: false, hasDialog: true, dialogType: "mainExam"},
+            { title: "시험 작성", hasChildren: false, href: "/table" },
             { title: "시험 목록", hasChildren: false, href: "/table" },
         ],
     },

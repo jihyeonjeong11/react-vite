@@ -1,5 +1,5 @@
 import "./App.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, useOutlet, Outlet } from "react-router-dom";
 
 import localforage from "localforage";
 import i18n from "i18next";
@@ -7,6 +7,9 @@ import { initReactI18next } from "react-i18next";
 
 import AsideRoot from "./components/aside/container/AsideRoot";
 import ClockRoot from "./components/clock/ClockRoot";
+import DialogRoot from "./components/common/dialog/container/DialogRoot";
+import useDialogsContextState from "./components/common/contexts/dialogs/useDialogsContextState";
+import { DialogsProvider } from "./components/common/contexts/dialogs";
 
 // todo
 
@@ -49,13 +52,15 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
     });
 
 function App() {
-    
+    const outlet = useOutlet();
     return (
         <>
             <div className="flex overflow-y-hidden bg-white dark:bg-black text-black dark:text-white">
-                <AsideRoot />
-                <div id="detail">
-                    {/* <button 
+                <DialogsProvider>
+                    <AsideRoot />
+                    
+                    <div id="detail">
+                        {/* <button 
                             className="bg-black dark:bg-white py-2 px-4 text-white dark:text-black rounded mx-2 my-2"
                             onClick={() => {document.getElementsByTagName("html")[0].classList.toggle("dark")}}
                         >
@@ -64,9 +69,13 @@ function App() {
                         <p>테스트용 텍스트</p>
                         <p>테스트용 텍스트</p>
                         <p>테스트용 텍스트</p> */}
-                    <Outlet />
-                </div>
-                <ClockRoot />
+
+                        <Outlet />
+                        <DialogRoot />
+                    </div>
+
+                    <ClockRoot />
+                </DialogsProvider>
             </div>
         </>
     );
