@@ -47,6 +47,7 @@ export interface BasicExamProps {
 
 /** 시험 작성 */
 // api request body 기준으로 작성되었습니다.
+// 실제 form을 통해 입력되는 내용이 다른 경우 form_접두어를 포함하여 따로 타입 선언
 /** 메인 시험 추가 */
 export type NewMainExam =  {
     mec_nm: string; // 메인시험_명
@@ -60,6 +61,7 @@ export type subExamStep1 = {
     e_type: "1" | "2" | "3" | "4"; // 시험종류 (1: CPX, 2: OSCE, 3: 한CPX, 4:한OSCE)
     e_pa_use: "0" | "1"; // 시험_방송_사용 (0: 미사용, 1: 사용)
 }
+type form_subExamStep1 = Omit<subExamStep1, "ec_cd"|"mec_cd">;
 /** 서브 시험 단계 2: 그룹별 시나리오 */
 export type subExamStep2 = {
     exam_class_group_cd?: string; // 시험_수업_그룹_코드
@@ -91,7 +93,7 @@ export type subExamStep4 = Pick<subExamStep2, "ec_cd"|"mec_cd"> & {
     }
 }
 
-export type ExamForms = NewMainExam | subExamStep1 | subExamStep2 | subExamStep3 | subExamStep4;
+export type ExamForms = NewMainExam | form_subExamStep1 | subExamStep2 | subExamStep3 | subExamStep4;
 export type ExamFormNames = "NewMainExam" | "subExamStep1" | "subExamStep2" | "subExamStep3" | "subExamStep4";
 
 

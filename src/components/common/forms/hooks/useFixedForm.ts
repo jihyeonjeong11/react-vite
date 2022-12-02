@@ -79,7 +79,7 @@ const useFixedForm = (
                 {
                     type: "text",
                     dataKey: "mec_nm",
-                    name: "시험 이름"
+                    name: "시험명"
                 },
                 {
                     type: "desc",
@@ -91,6 +91,64 @@ const useFixedForm = (
                 }
             ];
             break;
+        case "subExamStep1":
+            _result = [
+                {
+                    type: "text",
+                    dataKey: "ec_name",
+                    name: "시험명"
+                },
+                {
+                    type: "radio",
+                    dataKey: "ec_unkown",
+                    name: "학생 배치",
+                    selectOption: [
+                        {value: "?", name: "자동"},
+                        {value: "??", name: "수동"}
+                    ],
+                    defaultValue: "?"
+                },
+                {
+                    type: "select",
+                    dataKey: "e_type",
+                    name: "시험 종류",
+                    selectOption: [
+                        {value: "1", name: "CPX"},
+                        {value: "2", name: "OSCE"},
+                        {value: "3", name: "한CPX"},
+                        {value: "4", name: "한OSCE"}
+                    ]
+                },
+                {
+                    type: "radio",
+                    dataKey: "ec_ununknown",
+                    name: "PA",
+                    selectOption: [
+                        {value: "?", name: "사용"},
+                        {value: "??", name: "미사용"},
+                    ],
+                    defaultValue: "?"
+                },
+                {
+                    type: "date",
+                    dataKey: "ec_uunnknown",
+                    name: "PA 시작",
+                    placeholder: "YYYY-MM-DD HH:MM:SS",
+                    isBelongto: {
+                        targetDataKey: "ec_ununknown",
+                        targetValue: "?"
+                    }
+                }
+            ]
+    };
+    if(defaultValues !== undefined) {
+        const _keys = Object.keys(defaultValues);
+        _result = [..._result].map(item => {
+            const _key = _keys.findIndex(key => key=== item.dataKey);
+            if(_key > 0) {
+                return {...item, defaultValue: defaultValues[_key]}
+            } else return item;
+        })
     };
     return _result;
 };
