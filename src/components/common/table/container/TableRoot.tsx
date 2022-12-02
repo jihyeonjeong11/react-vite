@@ -13,7 +13,6 @@ import { useDialogsContextState } from "@/components/common/contexts/dialogs";
 
 import { motion } from "framer-motion";
 
-
 const staticHead = "test";
 
 export interface UserData {
@@ -70,24 +69,28 @@ const TableWrapper = () => {
                     <span className="text-sm">김은미님 반갑습니다.</span>
                 </header>
 
-                <div onClick={()=>{
-                                return setDialogs("mainExam" as DialogTypes);
-
-                            }} className="sm:flex items-center justify-between mb-3">
-                                <motion.button className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
-                                    <p className="text-sm font-pretendard font-medium leading-none text-white">
-                                        메인 시험 추가
-                                    </p>
-                                </motion.button>
-                                <button onClick={()=>{
-                                return setDialogs("animated");
-
-                            }} className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
-                                    <p className="text-sm font-pretendard font-medium leading-none text-white">
-                                        메인 시험 삭제
-                                    </p>
-                                </button>
-                            </div>
+                <div className="sm:flex items-center justify-between mb-3">
+                    <motion.button
+                        onClick={() => {
+                            return setDialogs("animated");
+                        }}
+                        className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded"
+                    >
+                        <p className="text-sm font-pretendard font-medium leading-none text-white">
+                            메인 시험 추가
+                        </p>
+                    </motion.button>
+                    <button
+                        onClick={() => {
+                            return setDialogs("animated");
+                        }}
+                        className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded"
+                    >
+                        <p className="text-sm font-pretendard font-medium leading-none text-white">
+                            메인 시험 삭제
+                        </p>
+                    </button>
+                </div>
 
                 {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
                 {exams !== null && checkboxes.checkArr.length ? (
@@ -98,7 +101,7 @@ const TableWrapper = () => {
                                     메인 시험 {dialogType}
                                 </span>
                             </div>
-                            
+
                             <div className="rounded-lg shadow w-full">
                                 <Table className="w-full whitespace-nowrap mb-5">
                                     <Table.Head>

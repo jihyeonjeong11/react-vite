@@ -2,6 +2,7 @@ import ReactDom from "react-dom";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
 import RenderDialog from "../components/RenderDialog";
+import { Dialogs } from "../constants";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -16,7 +17,7 @@ const DialogRoot = () => {
                 exitBeforeEnter={true}
             >
                 {dialogType != "inactive" && (
-                    <RenderDialog Component={dialogType} />
+                    <RenderDialog component={dialogType} />
                 )}
             </AnimatePresence>
         </>,

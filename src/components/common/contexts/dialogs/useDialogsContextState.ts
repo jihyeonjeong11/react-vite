@@ -17,13 +17,13 @@ const useDialogsContextState = (): DialogsContextState => {
     
     // 현재 활성화된 다이얼로그 타입
     const [dialogType, setDialogType] = useSafeState<DialogTypes>(
-        Dialogs.inactive.name
+        "inactive"
     );
     // 다이얼로그 타입 전환
     const setDialogs = useCallback(
         (type: DialogTypes) => {
             return setDialogType(
-                type == dialogType ? Dialogs.inactive.name : type
+                type == dialogType ? "inactive" : type
             );
         },
         [dialogType]
@@ -32,7 +32,7 @@ const useDialogsContextState = (): DialogsContextState => {
     const turnOff = useCallback(
         () => {
             return setDialogType(
-                Dialogs.inactive.name
+                "inactive"
             );
         },
         []

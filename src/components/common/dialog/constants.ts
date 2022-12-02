@@ -1,14 +1,10 @@
+import AnimatedDialog from "./components/AnimatedDialog";
+import MainExamDialog from "./components/presentational/MainExamDialog";
+
 export const Dialogs = {
-    inactive: {
-        name: "inactive",
-        title: null,
-        component: null
-    },
-    mainExam: {
-        name: "mainExam",
-        title: "메인 시험 추가",
-        component: null
-    },
+    inactive: null,
+    mainExam: MainExamDialog,
+    animated: AnimatedDialog
 } as const;
 
 export type DialogTypes = keyof typeof Dialogs;

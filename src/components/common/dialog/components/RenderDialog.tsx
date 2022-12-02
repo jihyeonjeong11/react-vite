@@ -1,35 +1,40 @@
-import { useMemo } from "react";
+import { ComponentType, ReactElement, useMemo } from "react";
 import ErrorBoundary from "@/routes/error/ErrorBoundary";
 import MainExamDialog from "./MainExamDialog";
 import type { DialogTypes } from "../constants";
 import AnimatedDialog from "./AnimatedDialog";
 
-import {AnimatePresence} from "framer-motion"
+import { AnimatePresence } from "framer-motion";
+import { Dialogs } from "../constants";
 
 type RenderDialogProps = {
-    Component: DialogTypes;
+    component: DialogTypes;
 };
 
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
-    Component,
+    component,
 }) => {
-
     const Dialog = useMemo(
         () => {
-            switch (Component) {
-                case "mainExam": 
+            switch (component) {
+                case "mainExam":
                     return MainExamDialog;
                 case "animated":
-                    return AnimatedDialog
+                    return AnimatedDialog;
                 default:
                     return () => <></>;
             }
         },
-        [Component]
+        [component]
     );
     return (
         <ErrorBoundary>
-                <Dialog />
+            <Dialog />
+            <>
+                {/* {Dialogs[component] !== null &&
+                    Dialogs[component]()
+                } */}
+            </>
         </ErrorBoundary>
     );
 };
