@@ -30,7 +30,6 @@ const useDialogsContextState = (): DialogsContextState => {
     // 다이얼로그 비활성화 처리
     const turnOff = useCallback(
         () => {
-            console.log("inacive")
             return setDialogType(
                 "inactive"
             );
