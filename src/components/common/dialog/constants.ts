@@ -1,10 +1,3 @@
-import AnimatedDialog from "./components/AnimatedDialog";
-import MainExamDialog from "./components/presentational/MainExamDialog";
+const Dialogs = ["inactive", "mainExam"] as const;
 
-export const Dialogs = {
-    inactive: null,
-    mainExam: MainExamDialog,
-    animated: AnimatedDialog
-} as const;
-
-export type DialogTypes = keyof typeof Dialogs;
+export type DialogTypes = typeof Dialogs[number];

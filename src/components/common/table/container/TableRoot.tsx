@@ -72,7 +72,7 @@ const TableWrapper = () => {
                 <div className="sm:flex items-center justify-between mb-3">
                     <motion.button
                         onClick={() => {
-                            return setDialogs("animated");
+                            return setDialogs("mainExam");
                         }}
                         className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded"
                     >

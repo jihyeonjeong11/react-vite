@@ -1,14 +1,17 @@
+import { useMemo } from "react";
 import ReactDom from "react-dom";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
 import RenderDialog from "../components/RenderDialog";
-import { Dialogs } from "../constants";
+import createDialog from "../helper";
 
 import { AnimatePresence } from "framer-motion";
 
 const DialogRoot = () => {
     const element = document.getElementById("portal") as Element;
     const { dialogType } = useDialogsContextState();
+    const Component = useMemo(()=>createDialog(dialogType), [dialogType]);
+
     return ReactDom.createPortal(
         <>
             <AnimatePresence
@@ -17,7 +20,7 @@ const DialogRoot = () => {
                 exitBeforeEnter={true}
             >
                 {dialogType != "inactive" && (
-                    <RenderDialog component={dialogType} />
+                    <RenderDialog Component={Component} />
                 )}
             </AnimatePresence>
         </>,
