@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import type { ExamsType } from "../../temporal/examFakeClient";
-import type { DialogTypes } from "../../contexts/dialogs/useDialogsContextState";
 
 import { mainExamClassMenu } from "../constants";
 import { Table } from "../components/Table";
@@ -11,6 +10,8 @@ import { useCheckBoxes } from "../hooks/useCheckboxes";
 import { getExams } from "../../temporal/examFakeClient";
 import { ExamTypes } from "@/types/exam";
 import { useDialogsContextState } from "@/components/common/contexts/dialogs";
+
+import { motion } from "framer-motion";
 
 
 const staticHead = "test";
@@ -78,16 +79,23 @@ const TableWrapper = () => {
                                     메인 시험 {dialogType}
                                 </span>
                             </div>
-                            <div onClick={()=>{
-                                return setDialogs("mainExam" as DialogTypes);
-
-                            }} className="sm:flex items-center justify-between mb-3">
-                                <button className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
+                            <div  className="sm:flex items-center justify-between mb-3">
+                                <motion.button 
+                                onClick={()=>{
+                                    return setDialogs("mainExam");
+    
+                                }}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
                                     <p className="text-sm font-pretendard font-medium leading-none text-white">
                                         메인 시험 추가
                                     </p>
-                                </button>
-                                <button className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
+                                </motion.button>
+                                <button onClick={()=>{
+                                return setDialogs("animated");
+
+                            }} className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
                                     <p className="text-sm font-pretendard font-medium leading-none text-white">
                                         메인 시험 삭제
                                     </p>

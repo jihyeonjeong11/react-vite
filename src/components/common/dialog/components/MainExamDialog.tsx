@@ -48,8 +48,7 @@ const MainExamDialog = () => {
             // alert("추가 성공");
             // 얼럿은 실패 케이스에 사용
             return turnOff();
-        };
-        
+        }
     };
 
     return (
@@ -59,13 +58,13 @@ const MainExamDialog = () => {
                     <div className="flex w-full h-full items-center justify-center flex-col">
                         <LoadingSpinner />
                         메인 시험을 등록 중입니다.
-                    </div> 
+                    </div>
                 ) : (
                     <>
-                    <h4>메인 시험 추가</h4>
-                    <FormRoot submit={submit} type={"NewMainExam"}>
-                        <button type="submit">추가</button>
-                    </FormRoot>
+                        <h4>메인 시험 추가</h4>
+                        <FormRoot submit={submit} type={"NewMainExam"}>
+                            <button type="submit">추가</button>
+                        </FormRoot>
                     </>
                 )}
             </div>
