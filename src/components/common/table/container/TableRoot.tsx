@@ -70,24 +70,11 @@ const TableWrapper = () => {
                     <span className="text-sm">김은미님 반갑습니다.</span>
                 </header>
 
-                {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
-                {exams !== null && checkboxes.checkArr.length ? (
-                    <>
-                        <div className="px-[2rem] bg-main-100 h-full">
-                            <div className="py-6 mb-8 px-2 ">
-                                <span className="text-2xl font-pretendard font-bold	">
-                                    메인 시험 {dialogType}
-                                </span>
-                            </div>
-                            <div  className="sm:flex items-center justify-between mb-3">
-                                <motion.button 
-                                onClick={()=>{
-                                    return setDialogs("mainExam");
-    
-                                }}
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
+                <div onClick={()=>{
+                                return setDialogs("mainExam" as DialogTypes);
+
+                            }} className="sm:flex items-center justify-between mb-3">
+                                <motion.button className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded">
                                     <p className="text-sm font-pretendard font-medium leading-none text-white">
                                         메인 시험 추가
                                     </p>
@@ -101,6 +88,17 @@ const TableWrapper = () => {
                                     </p>
                                 </button>
                             </div>
+
+                {/* {loading && <h3>학생 정보 불러오는 중</h3>} */}
+                {exams !== null && checkboxes.checkArr.length ? (
+                    <>
+                        <div className="px-[2rem] bg-main-100 h-full">
+                            <div className="py-6 mb-8 px-2 ">
+                                <span className="text-2xl font-pretendard font-bold	">
+                                    메인 시험 {dialogType}
+                                </span>
+                            </div>
+                            
                             <div className="rounded-lg shadow w-full">
                                 <Table className="w-full whitespace-nowrap mb-5">
                                     <Table.Head>

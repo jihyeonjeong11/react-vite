@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 
-import { Dialogs } from "../../contexts/dialogs/useDialogsContextState";
+
 import { useIndexedDb } from "../../contexts/indexeddb";
 
 import { useDialogsContextState } from "../../contexts/dialogs";
 import { useToggle } from "../../hooks/useToggle";
-import LoadingSpinner from "../../loading/components/LoadingSpinner";
 import { createExam } from "../../temporal/examFakeClient";
 import ModalContainer from "./ModalContainer";
-import FormRoot from "../../forms/container/FormRoot";
 import type { NewMainExam } from "@/types/exam";
+import FormRoot from "../../forms/container/FormRoot";
 
 const dropIn = {
     hidden: {
@@ -56,7 +55,7 @@ const MainExamDialog = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[calc(100%_-_30rem)] border p-2">
                 {loading ? (
                     <div className="flex w-full h-full items-center justify-center flex-col">
-                        <LoadingSpinner />
+                        
                         메인 시험을 등록 중입니다.
                     </div>
                 ) : (
