@@ -52,7 +52,9 @@ export interface BasicExamProps {
 export type NewMainExam =  {
     mec_nm: string; // 메인시험_명
     mec_memo?: string; // 메인시험_설명
+    member_cd: string; // 담당자 코드
 }
+type FormNewMainExam = Omit<NewMainExam, "member_cd">;
 /** 서브 시험 단계 1: 추가 및 수정 */
 export type SubExamStep1 = {
     ec_cd?: string; // 시험수업_코드
@@ -93,7 +95,7 @@ export type SubExamStep4 = Pick<SubExamStep2, "ec_cd"|"mec_cd"> & {
     }
 }
 
-export type ExamForms = NewMainExam | FormSubExamStep1 | SubExamStep2 | SubExamStep3 | SubExamStep4;
+export type ExamForms = FormNewMainExam | FormSubExamStep1 | SubExamStep2 | SubExamStep3 | SubExamStep4;
 export type ExamFormNames = "NewMainExam" | "SubExamStep1" | "SubExamStep2" | "SubExamStep3" | "SubExamStep4";
 
 

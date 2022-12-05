@@ -4,7 +4,7 @@ import { useDialogsContextState } from "../../../contexts/dialogs";
 import LoadingSpinner from "../../../loading/components/LoadingSpinner";
 import { createExam } from "../../../temporal/examFakeClient";
 import FormRoot from "../../../forms/container/FormRoot";
-import type { NewMainExam } from "@/types/exam";
+import type { FormNewMainExam } from "@/types/exam";
 import ModalWrapper from "../container/ModalWrapper";
 import ModalHeader from "../container/ModalHeader";
 import { useCallback } from "react";
@@ -35,7 +35,7 @@ const MainExamDialog = () => {
         useDialogsContextState();
     const { setValue } = useIndexedDb();
 
-    const submit = async (data: NewMainExam) => {
+    const submit = async (data: FormNewMainExam) => {
         setLoading(true);
         // https://www.notion.so/SIMPREC-b5a8874803ae4190a37431ddb8910281?p=cc28676b83e84dfca109318d0df1b089&pm=s
         // 백엔드 api 콜 코드 작성 /exam/new/insertMainExam
