@@ -47,7 +47,7 @@ export interface BasicExamProps {
 
 /** 시험 작성 */
 // api request body 기준으로 작성되었습니다.
-// 실제 form을 통해 입력되는 내용이 다른 경우 form_접두어를 포함하여 따로 타입 선언
+// 실제 form을 통해 입력되는 내용이 다른 경우 Form 접두어를 포함하여 따로 타입 선언
 /** 메인 시험 추가 */
 export type NewMainExam =  {
     mec_nm: string; // 메인시험_명
