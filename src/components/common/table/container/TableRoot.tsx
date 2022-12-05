@@ -80,6 +80,16 @@ const TableWrapper = () => {
                             메인 시험 추가
                         </p>
                     </motion.button>
+                    <motion.button
+                        onClick={() => {
+                            return setDialogs("subExam");
+                        }}
+                        className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-brand-100 hover:bg-main focus:outline-none rounded"
+                    >
+                        <p className="text-sm font-pretendard font-medium leading-none text-white">
+                            서브 시험 추가 테스트
+                        </p>
+                    </motion.button>
                     <button
                         onClick={() => {
                             return setDialogs("animated");

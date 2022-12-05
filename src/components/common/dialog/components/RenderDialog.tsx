@@ -5,7 +5,7 @@ type RenderDialogProps = {
 };
 
 const RenderDialog: React.FunctionComponent<RenderDialogProps> = ({
-    Component: Component
+    Component
 }) => {
     return (
         <ErrorBoundary>

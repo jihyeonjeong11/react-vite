@@ -7,7 +7,8 @@ const FormRoot = ({
         submit,
         type,
         defaultValues,
-        children
+        children,
+        ...rest
     }: {
         /** form 처리 후 결과를 받을 함수 */
         submit: (data: CommonForms) => void,
@@ -20,7 +21,7 @@ const FormRoot = ({
 ) => {
     const formProps = useFixedForm(type, defaultValues);
     return (
-        <Form submit={submit} formProps={formProps}>
+        <Form submit={submit} formProps={formProps} name={type} {...rest}>
             {children}
         </Form>
     )

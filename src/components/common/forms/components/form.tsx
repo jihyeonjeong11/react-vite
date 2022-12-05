@@ -8,16 +8,19 @@ import FormOptions from "./formControl/FormOptions";
 const Form = ({
     formProps,
     children,
-    submit
+    submit,
+    name,
+    ...rest
 }: {
     formProps: formArrayprops;
     children?: ReactElement | ReactElement[];
     submit: (data: CommonForms) => void;
+    name: string;
 }) => {
     /** useForm 초기 설정 */
     let defaultList: {[key: string]: string | string[]} = {};
     formProps.map(item => defaultList[item.dataKey] = item.defaultValue ? item.defaultValue : "");
-    const { register, handleSubmit, control, formState: { errors } } = useForm<CommonForms>({defaultValues: defaultList});
+    const { register, handleSubmit, control, watch , formState: { errors } } = useForm<CommonForms>({defaultValues: defaultList});
     const onSubmit: SubmitHandler<CommonForms> = data => {
         submit(data);
     };
@@ -48,7 +51,7 @@ const Form = ({
                     // item으로 전달된 설정이 있을 경우 덮어쓰기
                     _option = {..._option, ...applyOption};
                 }
-                const _register = register(dataKey, _option)
+                const _register = register(dataKey, _option);
                 /* 항목 그리기 */
                 if(isSelector(item)){
                     // 선택 가능한 입력 항목 
@@ -67,6 +70,7 @@ const Form = ({
                             defaultValue={defaultValue}
                             control={control}
                             customCheck={item.customCheck}
+                            visibleState={item.isBelongto ? watch(item.isBelongto.targetDataKey) === item.isBelongto.targetValue : true}
                         />
                     )
                 } else if (item as labelProps) {
@@ -81,6 +85,7 @@ const Form = ({
                             register={_register}
                             error={errors[dataKey] && errors[dataKey]?.message?.toString()}
                             disabled={disabled}
+                            visibleState={item.isBelongto ? watch(item.isBelongto.targetDataKey) === item.isBelongto.targetValue : true}
                         />
                     )
                 }

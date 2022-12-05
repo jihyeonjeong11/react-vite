@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import { BiX } from 'react-icons/bi';
 const ModalHeader = (
     {
@@ -5,14 +6,14 @@ const ModalHeader = (
         close
     }: {
         modalHeading: string;
-        close: () => void;
+        close: MouseEventHandler;
     }
 ) => {
     return (
         <div className="flex items-center justify-between px-5">
             <h3 className="flex-1 py-4 text-center text-xl font-semibold">{modalHeading}</h3>
             <button 
-                className="w-6 h-6 flex items-center justify-center cursor-pointer"
+                className="icon-btn-sm"
                 aria-label={"close"}
                 onClick={close}
             >

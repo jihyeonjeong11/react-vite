@@ -203,16 +203,24 @@ const Select = ({
 
 const FormOptions = memo(({
     name,
+    visibleState,
     ...rest
-}: fieldProps
+}: fieldProps & { visibleState: boolean }
 ): ReactElement => {
-    return (
-        <Fieldset name={name}>
-            <Select
-                {...rest}
-            />
-        </Fieldset>
-    )
+    if(visibleState) {
+        return (
+            <Fieldset name={name}>
+                <Select
+                    {...rest}
+                />
+            </Fieldset>
+        )
+    } else {
+        return (
+            <></>
+        )
+    }
+    
 })
 
 export default FormOptions;
