@@ -36,12 +36,13 @@ const Input = ({
             case "text":
             case "email":
             case "password":
-            case "number_string":
+            case "phone":
             case "number":
+            case "date":
                 element = 
                     <input 
                         type={( type === "number" ? "number"
-                            : (type === "number_string" ? "tel"
+                            : (type === "phone" ? "tel"
                             : (type === "password" ? "password"
                             : "text"
                             )))
@@ -84,16 +85,23 @@ const Input = ({
 
 const FormItem = memo(({
     name,
+    visibleState,
     ...rest
-}: Omit<labelProps, "dataKey"|"defaultValue">
+}: Omit<labelProps, "dataKey"|"defaultValue"> & { visibleState: boolean }
 ): ReactElement => {
-    return (
-        <Label name={name}>
-            <Input
-                {...rest}
-            />
-        </Label>
-    )
+    if(visibleState) {
+        return (
+            <Label name={name}>
+                <Input
+                    {...rest}
+                />
+            </Label>
+        )
+    } else{
+        return (
+            <></>
+        )
+    }
 });
 
 export default FormItem;

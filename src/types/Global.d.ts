@@ -44,10 +44,15 @@ type formProps = {
     disabled?: boolean;
     /** 입력된 값 */
     defaultValue?: string | string[];
+    /** 의존 여부 */
+    isBelongto?: {
+        targetDataKey: string,
+        targetValue: string | boolean
+    }
 }
 export type labelProps = {
     /** 입력 요소의 종류 */
-    type: "text" | "desc"| "number" | "number_string" | "password" | "email";
+    type: "text" | "desc"| "number" | "phone" | "password" | "email" | "date";
 } & formProps;
 export type customCheck = "all" | "odd" | "even";
 export type fieldProps = {

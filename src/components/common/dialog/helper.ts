@@ -1,5 +1,6 @@
 import AnimatedDialog from './components/AnimatedDialog';
 import MainExamDialog from './components/presentational/MainExamDialog';
+import SubExamDialog from './components/presentational/SubExamDialog';
 import type { DialogTypes } from './constants';
 
 const createDialog = (dialog: DialogTypes) => {
@@ -8,6 +9,8 @@ const createDialog = (dialog: DialogTypes) => {
             return null;
         case "mainExam":
             return MainExamDialog;
+        case "subExam":
+            return SubExamDialog
         case "animated":
             return AnimatedDialog;
             
