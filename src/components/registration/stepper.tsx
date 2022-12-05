@@ -82,13 +82,13 @@ const Stepper = ({ steps, currentStep }: { steps: string[]; currentStep: number 
                     >
                         {step.completed ? <span className="text-white font-bold text-xl">&#10003;</span> : index + 1}
                     </div>
-                    <div
+                    {/* <div
                         className={`absolute top-0  text-center mt-16 w-32 text-xs font-medium uppercase ${
                             step.highlighted ? "text-gray-900" : "text-gray-400"
                         }`}
                     >
                         {step.description}
-                    </div>
+                    </div>  글 적는 부분 일단 뻄*/}
                 </div>
                 <div
                     className={`flex-auto border-t-2 transition duration-500 ease-in-out  ${

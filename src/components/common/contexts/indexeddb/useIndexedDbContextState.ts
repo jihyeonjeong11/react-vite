@@ -17,6 +17,8 @@ export type IndexedDbContextState = {
     dbLoaded: boolean;
     removeValue: () => void;
     setValue: (value: StoredWindowProps, optionalKey?: string) => void;
+    useLocalData: boolean;
+    setUseLocalData: (arg0:boolean) => void;
 };
 
 type ErrorHandler = (e?: Error) => void;
@@ -30,6 +32,8 @@ const useIndexedDbContextState = (): IndexedDbContextState => {
         null
     );
     const [dbLoaded, setDbLoaded] = useState<boolean>(false);
+
+    const [useLocalData, setUseLocalData] = useState(true);
 
 
     const _errorHandler = useRef(
@@ -92,6 +96,8 @@ const useIndexedDbContextState = (): IndexedDbContextState => {
         storedValue,
         setValue,
         removeValue,
+        useLocalData,
+        setUseLocalData
     };
 };
 

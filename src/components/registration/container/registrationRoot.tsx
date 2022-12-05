@@ -7,9 +7,7 @@ const steps = ["기본 정보", "그룹별 설정", "대기 학생", "PA 등록"
 
 const RegistrationRoot = () => {
     let [searchParams, _] = useSearchParams();
-    let [idx, setIdx] = useState(1);
-
-    // let [user, setUser] = useOutletContext('eee');
+    let [idx, setIdx] = useState(2);
 
     return (
         <>

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { memo, ReactElement } from "react";
 import useDialogsContextState from "../../contexts/dialogs/useDialogsContextState";
 import ModalContainer from "./ModalContainer";
-import { BiX } from 'react-icons/bi'
+import { BiX } from 'react-icons/bi';
 
 const ModalWrapper = memo((
     {

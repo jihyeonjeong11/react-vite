@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { AccordionConsumer } from "@/components/common/contexts/accordion";
 import { useDialogsContextState } from "@/components/common/contexts/dialogs";
 
+import { useIndexedDb } from "@/components/common/contexts/indexeddb";
+
 import ListItem from "../components/Listitem";
 import type { DialogTypes } from "@/components/common/dialog/constants";
 
@@ -21,6 +23,7 @@ const AsideRoot = () => {
     const navigate = useNavigate();
 
     const { dialogType, setDialogs } = useDialogsContextState();
+    const {useLocalData, setUseLocalData} = useIndexedDb();
 
     const navBubble = useCallback(
         (e: React.MouseEvent) => {
@@ -48,6 +51,14 @@ const AsideRoot = () => {
                         </button>
                         <button data-lang="en" className="text-white">
                             en
+                        </button>
+                    </div>
+                    <div className="flex justify-evenly mb-12">
+                        <button onClick={()=>setUseLocalData(true)} className={useLocalData ? "text-red-500" :"text-white"}>
+                            local데이터
+                        </button>
+                        <button onClick={()=>setUseLocalData(false)} className={!useLocalData ? "text-red-500" :"text-white"}>
+                            server데이터
                         </button>
                     </div>
                     <ul className="space-y-2">
