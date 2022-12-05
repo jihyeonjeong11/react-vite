@@ -91,7 +91,7 @@ const useFixedForm = (
                 }
             ];
             break;
-        case "subExamStep1":
+        case "SubExamStep1":
             _result = [
                 {
                     type: "text",

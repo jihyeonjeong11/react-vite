@@ -32,7 +32,7 @@ const SubExamDialog = () => {
                                 <p className="py-6">처리 중입니다.</p>
                             </div>
                         ) : (
-                            <FormRoot submit={submit} type={"subExamStep1"} something={false}>
+                            <FormRoot submit={submit} type={"SubExamStep1"}>
                                 <div>
                                     <button type="submit">저장</button>
                                     <button type="button">취소</button>

@@ -54,16 +54,16 @@ export type NewMainExam =  {
     mec_memo?: string; // 메인시험_설명
 }
 /** 서브 시험 단계 1: 추가 및 수정 */
-export type subExamStep1 = {
+export type SubExamStep1 = {
     ec_cd?: string; // 시험수업_코드
     mec_cd: string; // 메인시험수업_코드
     ec_name: string; // 시험수업_명
     e_type: "1" | "2" | "3" | "4"; // 시험종류 (1: CPX, 2: OSCE, 3: 한CPX, 4:한OSCE)
     e_pa_use: "0" | "1"; // 시험_방송_사용 (0: 미사용, 1: 사용)
 }
-type form_subExamStep1 = Omit<subExamStep1, "ec_cd"|"mec_cd">;
+type FormSubExamStep1 = Omit<subExamStep1, "ec_cd"|"mec_cd">;
 /** 서브 시험 단계 2: 그룹별 시나리오 */
-export type subExamStep2 = {
+export type SubExamStep2 = {
     exam_class_group_cd?: string; // 시험_수업_그룹_코드
     ec_cd: string; // 시험수업_코드
     mec_cd: string; // 메인시험수업_코드
@@ -75,7 +75,7 @@ export type subExamStep2 = {
     }[]
 }
 /** 서브 시험 단계 3: 대기학생 추가 */
-export type subExamStep3 = Omit<subExamStep2, "exam_class_group_row_data"> & {
+export type SubExamStep3 = Omit<SubExamStep2, "exam_class_group_row_data"> & {
     exam_wait_student_data: {
         student_cd: string; // 학생_코드
         student_id: string; // 학생_아이디
@@ -84,7 +84,7 @@ export type subExamStep3 = Omit<subExamStep2, "exam_class_group_row_data"> & {
     }[]
 }
 /** 서브 시험 단계 4: PA 등록 */
-export type subExamStep4 = Pick<subExamStep2, "ec_cd"|"mec_cd"> & {
+export type SubExamStep4 = Pick<SubExamStep2, "ec_cd"|"mec_cd"> & {
     pa_data: {
         pa_play_dt: string; // 방송_재생_시간
         exam_pa_mp3_cd: string; // 시험_방송_mp3_코드
@@ -93,8 +93,8 @@ export type subExamStep4 = Pick<subExamStep2, "ec_cd"|"mec_cd"> & {
     }
 }
 
-export type ExamForms = NewMainExam | form_subExamStep1 | subExamStep2 | subExamStep3 | subExamStep4;
-export type ExamFormNames = "NewMainExam" | "subExamStep1" | "subExamStep2" | "subExamStep3" | "subExamStep4";
+export type ExamForms = NewMainExam | FormSubExamStep1 | SubExamStep2 | SubExamStep3 | SubExamStep4;
+export type ExamFormNames = "NewMainExam" | "SubExamStep1" | "SubExamStep2" | "SubExamStep3" | "SubExamStep4";
 
 
 // api 별로 따로 끊어서, 후에 extends하여 사용할 것임.
