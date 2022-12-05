@@ -12,14 +12,16 @@ module.exports = {
                     100: "rgba(var(--deep-blue-100), <alpha-value>)",
                     200: "rgba(var(--deep-blue-200), <alpha-value>)"
                 },
-                "header-white": {
-                    100: "rgba(var(--header-white-100), <alpha-value>)",
+                "gray" : {
+                    25: "rgba(var(--gray-25), <alpha-value>)"
                 },
-                "header-text": {
-                    100: "rgba(var(--header-text-100), <alpha-value>)",
+                /** 배경 */
+                "surface": { 
+                    25: "rgba(var(--gray-25), <alpha-value>)"
                 },
-                "main": {
-                    100: "rgba(var(--main-100), <alpha-value>)",
+                /** 폰트 컬러: 일반 */
+                "basic" : {
+                    100: "rgba(var(--gray-700), <alpha-value>)"
                 },
                 // window
                 "window-header": "rgb(43, 43, 43)",

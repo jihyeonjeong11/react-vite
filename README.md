@@ -110,6 +110,10 @@ Timer 작업 중.(offscreencanvas, web worker 사용)
 
 11/29 components/clock에 타이머 작업.
 
+12/02 
+sessionContext -> 저장된 하위 시험이 담깁니다.
+subExamContext -> 작성중인 하위 시험이 담깁니다.
+
 
 # 실행법
 

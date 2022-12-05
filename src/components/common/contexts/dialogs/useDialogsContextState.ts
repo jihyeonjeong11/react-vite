@@ -10,7 +10,7 @@ export type DialogsContextState = {
     setLoading: (loading: boolean) => void;
 };
 
-const useDialogsContextState = (): DialogsContextState => {
+ const useDialogsContextState = (): DialogsContextState => {
     // 다이얼로그 로직 실행 중 상태
     const [loading, setLoading] = useSafeState<boolean>(false);
     
@@ -30,7 +30,6 @@ const useDialogsContextState = (): DialogsContextState => {
     // 다이얼로그 비활성화 처리
     const turnOff = useCallback(
         () => {
-            console.log("inacive")
             return setDialogType(
                 "inactive"
             );

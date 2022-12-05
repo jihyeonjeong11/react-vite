@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSearchParams, useOutletContext, Outlet } from "react-router-dom";
 import Stepper from "../stepper";
 
-const steps = ["basic", "hobbys", "social", "else", "someping", "stubs"];
+const steps = ["기본 정보", "그룹별 설정", "대기 학생", "PA 등록",];
 
 const RegistrationRoot = () => {
     let [searchParams, _] = useSearchParams();
@@ -13,7 +13,7 @@ const RegistrationRoot = () => {
 
     return (
         <>
-            <main className="w-[calc(100vw_-_16rem)]">
+            <main className="bg-white w-full">
                 <div className="container flex flex-col items-center">
                     <Stepper steps={steps} currentStep={idx} />
                     <div className="mb-10" />
@@ -32,7 +32,6 @@ const RegistrationRoot = () => {
                     >
                         이전
                     </div>
-                    <Outlet />
                 </div>
             </main>
         </>
