@@ -114,6 +114,10 @@ Timer 작업 중.(offscreencanvas, web worker 사용)
 sessionContext -> 저장된 하위 시험이 담깁니다.
 subExamContext -> 작성중인 하위 시험이 담깁니다.
 
+12/06
+session 이 아니라 dialogContext에 하위 시험을 담습니다.
+먼저 fakeClient를 작성하여 로컬에서 데이터흐름을 구현합니다.
+
 
 # 실행법
 

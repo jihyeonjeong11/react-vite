@@ -1,4 +1,3 @@
-
 /**
  * @param {Number} l - 배열 길이
  * @param {Any} v - 배열 값
@@ -19,7 +18,6 @@ export const viewWidth = (): number => window.innerWidth;
 export const pxToNum = (value: number | string = 0): number =>
     typeof value === "number" ? value : Number.parseFloat(value);
 
-
 /**
  * @param {isComponentTypeNeeded} boolean - 오브젝트 타입 표시여부
  * @param {objects} {}[] - 오브젝트 배열
@@ -37,3 +35,13 @@ export const mergeTwoObjects = (
         return next;
     });
 };
+
+// https://hackernoon.com/lets-compose-promises-309a63225f8a
+
+export const composePromise =
+    (...functions: any[]) =>
+    (initialValue: any) =>
+        functions.reduceRight(
+            (sum, fn) => Promise.resolve(sum).then(fn),
+            initialValue
+        );

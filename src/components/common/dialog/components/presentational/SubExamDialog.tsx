@@ -2,13 +2,16 @@ import { useDialogsContextState } from "@/components/common/contexts/dialogs/ind
 import FormRoot from "@/components/common/forms/container/FormRoot";
 import LoadingSpinner from "@/components/common/loading/components/LoadingSpinner";
 import type { FormSubExamStep1 } from "@/types/exam";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import ModalHeader from "../container/ModalHeader";
 import ModalWrapper from "../container/ModalWrapper";
 import Backdrop from "../Backdrop";
 
+import useNeededInfo from "../../hooks/useNeededInfo";
+
 const SubExamDialog = () => {
-    const { turnOff, loading, setLoading } = useDialogsContextState();
+    const { turnOff, loading, setLoading, neededInfo } = useDialogsContextState();
+
     const submit = async (data: FormSubExamStep1) => {
         setLoading(true);
         console.log(data);
@@ -34,6 +37,7 @@ const SubExamDialog = () => {
                     className="exam-modal"
                     onClick={(e) => e.stopPropagation()}
                 >
+                    {JSON.stringify(neededInfo)}
                     <ModalHeader modalHeading="시험 생성하기" close={close} />
                     <div className="modal-body bg-surface-25">
                         {loading ? (

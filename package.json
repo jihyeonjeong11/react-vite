@@ -19,7 +19,7 @@
         "formik": "^2.2.9",
         "framer-motion": "^7.6.7",
         "i18next": "^22.0.5",
-        "immer": "^9.0.15",
+        "immer": "^9.0.16",
         "localforage": "^1.10.0",
         "match-sorter": "^6.3.1",
         "path": "^0.12.7",
